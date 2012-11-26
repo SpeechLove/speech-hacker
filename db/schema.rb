@@ -10,6 +10,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
+
 ActiveRecord::Schema.define(:version => 20121126233733) do
 
   create_table "attendances", :force => true do |t|
@@ -20,22 +21,16 @@ ActiveRecord::Schema.define(:version => 20121126233733) do
   end
 
   create_table "meeting_roles", :force => true do |t|
-    t.integer  "meeting_id", :null => false
-    t.integer  "role_id",    :null => false
-    t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "meetings", :force => true do |t|
-    t.date     "meeting_date", :null => false
-    t.time     "meeting_time", :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
-    t.string   "title",      :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
