@@ -1,8 +1,7 @@
-class CreateMeetingRoles < ActiveRecord::Migration
+class CreateAttendances < ActiveRecord::Migration
   def change
-    create_table :meeting_roles do |t|
+    create_table :attendances do |t|
       t.references :meeting, :null => false
-      t.references :role, :null => false
       t.references :user, :null => false
 
       t.timestamps
