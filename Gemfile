@@ -26,7 +26,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
   gem 'quiet_assets'
-  gem 'capybara', "= 2.0.0"
+  gem 'capybara'
   gem 'fabrication'
 end
 
@@ -37,6 +37,7 @@ group :test do
   gem 'guard-spork'
   gem 'guard-jasmine'
   gem 'database_cleaner'
+  gem 'debugger'
 end
 
 gem 'jquery-rails'
