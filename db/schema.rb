@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(:version => 20121127011723) do
 
   create_table "attendances", :force => true do |t|
-    t.integer  "meeting_id", :null => false
-    t.integer  "user_id",    :null => false
-    t.integer  "role_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "meeting_id",      :null => false
+    t.integer  "user_id",         :null => false
+    t.integer  "meeting_role_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "meeting_roles", :force => true do |t|
