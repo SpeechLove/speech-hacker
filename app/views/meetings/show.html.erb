@@ -1,1 +1,2 @@
-<h1> Meeting on <%= @meeting.meeting_date %> at <%= @meeting.meeting_time%></h1>
+<h1> Meeting on <%= @meeting.meeting_date.strftime("%m/%d/%Y") %> at
+     <%= @meeting.meeting_time%></h1>

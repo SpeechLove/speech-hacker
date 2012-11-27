@@ -9,7 +9,7 @@
   <tbody>
     <% @meetings.each do |meeting| %>
     <tr>
-      <td><%= link_to meeting.meeting_date, meeting_path(meeting) %> at
+      <td>Meeting <%= link_to meeting.meeting_date.strftime("%m/%d/%Y"), meeting_path(meeting) %> at
           <%= meeting.meeting_time %></td>
     </tr>
     <% end %>

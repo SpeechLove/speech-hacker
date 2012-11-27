@@ -17,13 +17,17 @@
     <div class="controls">
       <%= f.text_field :meeting_date %>
     </div>
+    <i>Format: MM/DD/YYYY</i>
   </div>
+
+  <br />
 
   <div class="control-group">
     <%= f.label :meeting_time %>
     <div class="controls">
       <%= f.text_field :meeting_time %>
     </div>
+    <i>Format: 17:00 for 5pm</i>
   </div>
 
   <%= f.submit :class => 'btn btn-primary' %>
