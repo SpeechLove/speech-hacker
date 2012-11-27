@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+MeetingRole.create(:title => "Toastmaster")
+MeetingRole.create(:title => "Grammarian")
+MeetingRole.create(:title => "Timer")
+MeetingRole.create(:title => "Ah Counter")
+MeetingRole.create(:title => "General Evaluator")
+MeetingRole.create(:title => "Evaluator")
+MeetingRole.create(:title => "Speaker")
+MeetingRole.create(:title => "Table Topics Master")
