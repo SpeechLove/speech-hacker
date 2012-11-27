@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Users", :js => true do
+describe "Users#index", :js => true do
   include Warden::Test::Helpers
 
   context "as an admin" do
