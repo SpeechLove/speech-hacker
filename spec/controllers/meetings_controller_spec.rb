@@ -35,7 +35,24 @@ describe MeetingsController do
 
   describe '#destroy' do
     it "destroys the meeting object" do
-      # delete(:destroy, :id => 1)
+      delete(:destroy, :id => 1)
+      Meeting.all.length.should eq 0
+    end
+  end
+
+  describe '#edit' do
+    it "assigns meeting with the current meeting" do
+      get(:edit, :id => 1)
+      assigns(:meeting).should be_a(Meeting)
+      assigns(:meeting).should be_valid
+    end
+  end
+
+  describe '#update' do
+    it "updates the meeting" do
+      put(:update, :id => 1, :meeting => {:meeting_date => "11/02/1988", :meeting_time => "05:00"})
+      assigns(:meeting).should be_a(Meeting)
+      assigns(:meeting).meeting_date.strftime("%m/%d/%Y").should eq "11/02/1988"
     end
   end
 end
