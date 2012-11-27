@@ -20,6 +20,7 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
+    @attendance = Attendance.new
   end
 
   def destroy
