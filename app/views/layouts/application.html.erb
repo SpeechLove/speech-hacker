@@ -49,8 +49,9 @@
               <% if current_user %>
               <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete  %></li>
               <% else %>
-              <li><%= link_to "Sign in", new_user_session_path  %></li>
+              <li><%= link_to "Sign In", new_user_session_path  %></li>
               <% end  %>
+              <li><%= link_to "Create Meeting", new_meeting_path  %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -71,7 +72,7 @@
         </div><!--/row-->
 
       <footer>
-        <p>&copy; BKJY 2012</p>
+        <p>&copy; SpeechLove 2012</p>
       </footer>
 
     </div> <!-- /container -->

@@ -1,5 +1,5 @@
 class Meeting < ActiveRecord::Base
-  attr_accessible :meeting_date, :meeting_time
+  attr_accessible :meeting_date, :meeting_time, :description
 
   has_many :attendances
 
@@ -9,6 +9,7 @@ class Meeting < ActiveRecord::Base
   validates :meeting_time, :presence => true,
             :format => { :with => /\d{2}\:\d{2}/,
                          :message => "format should be HH:MM" }
+ validates_length_of :description, :maximum => 255, :allow_blank => true
 
   def parse_date
     # Given MM/DD/YYYY, translate to YYYY/MM/DD
