@@ -1,3 +1,10 @@
 class Attendance < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :meeting_id, :user_id, :role_id
+
+  belongs_to :meeting
+  belongs_to :user
+  belongs_to :role
+
+  validates :meeting_id, :presence => true
+  validates :user_id, :presence => true
 end
