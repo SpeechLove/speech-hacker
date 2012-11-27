@@ -1,2 +1,0 @@
-class MeetingRolesController < ApplicationController
-end
