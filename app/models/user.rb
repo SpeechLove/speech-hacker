@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
 
   def set_role
-    self.add_role :admin
+    # self.add_role :admin
   end
 end

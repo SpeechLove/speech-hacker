@@ -11,13 +11,17 @@ describe "Users", :js => true do
 
     it "can view the users" do
       visit users_path
-      page.should have_content("biff@example.com")
+      page.should have_content(@user.email)
+    end
+
+    it "can create meetings" do
+      visit users_path
+      page.should have_link("Create Meeting", :href => new_meeting_path)
     end
 
     it "can edit the user database" do
       visit users_path
-      click_link 'Edit Database'
-      page.should have_content("Search for user:")
+      page.should have_link("Edit Users", :href => users_path)
     end
   end
 
