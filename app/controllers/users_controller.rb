@@ -8,4 +8,8 @@ before_filter :authenticate_user!
       redirect_to root_path, :notice => "You are not authorized to access this page."
     end
   end
+
+  def edit
+
+  end
 end

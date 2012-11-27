@@ -13,6 +13,12 @@ describe "Users", :js => true do
       visit users_path
       page.should have_content("biff@example.com")
     end
+
+    it "can edit the user database" do
+      visit users_path
+      click_link 'Edit Database'
+      page.should have_content("Search for user:")
+    end
   end
 
   context "as a non-admin user" do
@@ -24,6 +30,12 @@ describe "Users", :js => true do
     it "cannot view the users" do
       visit users_path
       page.should have_content("You are not authorized to access this page.")
+    end
+
+    it "can edit the user's own profile" do
+      visit users_path
+      click_link 'Edit Profile'
+      page.should have_content("Cancel my account.")
     end
   end
 end
