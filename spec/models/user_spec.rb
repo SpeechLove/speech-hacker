@@ -9,7 +9,7 @@ describe User do
     end
 
     it "has a name" do
-      user.name.should eq user.name
+      user.name.should_not be_nil
     end
   end
 
