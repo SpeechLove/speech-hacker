@@ -3,6 +3,7 @@ class CreateAttendances < ActiveRecord::Migration
     create_table :attendances do |t|
       t.references :meeting, :null => false
       t.references :user, :null => false
+      t.references :role
 
       t.timestamps
     end
