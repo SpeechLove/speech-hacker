@@ -12,7 +12,11 @@
     <tr>
       <td><%= link_to meeting.meeting_date.strftime("%m/%d/%Y")+" Meeting", meeting_path(meeting) %></td>
       <td><%= meeting.meeting_time %></td>
-      <td><%= meeting.description.capitalize %></td>
+      <td>
+          <% if meeting.description %>
+            <%= meeting.description.capitalize %>
+          <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

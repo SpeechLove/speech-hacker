@@ -8,8 +8,8 @@ describe "Meetings", :js => true do
 
     it "shows meeting date and time for each meeting" do
       visit meetings_path
-      page.should have_link("11/12/2012")
-      page.should have_content("18:00")
+      page.should have_link "11/12/2012"
+      page.should have_content "18:00"
     end
   end
 
@@ -21,18 +21,18 @@ describe "Meetings", :js => true do
     it "creates a meeting" do
       # admin needs to be signed in
       visit new_meeting_path
-      fill_in('meeting_meeting_date', :with => "11/12/2012")
-      fill_in('meeting_meeting_time', :with => "18:00")
-      click_on("Create Meeting")
-      page.should have_content("18:00")
+      fill_in 'meeting_meeting_date', :with => "11/12/2012"
+      fill_in 'meeting_meeting_time', :with => "18:00"
+      click_button "Create Meeting"
+      page.should have_content "18:00"
     end
 
     it "edits a meeting" do
       # admin needs to be signed in
       visit edit_meeting_path(meeting.id)
-      fill_in('meeting_meeting_time', :with => "19:00")
-      click_on("Update Meeting")
-      page.should have_content("19:00")
+      fill_in 'meeting_meeting_time', :with => "19:00"
+      click_button "Update Meeting"
+      page.should have_content "19:00"
     end
   end
 end
