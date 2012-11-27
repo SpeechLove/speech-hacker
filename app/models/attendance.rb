@@ -3,7 +3,7 @@ class Attendance < ActiveRecord::Base
 
   belongs_to :meeting
   belongs_to :user
-  belongs_to :role
+  belongs_to :meeting_role
 
   validates :meeting_id, :presence => true
   validates :user_id, :presence => true
