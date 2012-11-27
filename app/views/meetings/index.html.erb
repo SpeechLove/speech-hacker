@@ -5,6 +5,7 @@
       <th>Meeting</th>
       <th>Start time</th>
       <th>Description</th>
+      <th>Edit</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,11 @@
       <td>
           <% if meeting.description %>
             <%= meeting.description.capitalize %>
+          <% end %>
+      </td>
+      <td>
+          <% if current_user && current_user.admin? %>
+            <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
           <% end %>
       </td>
     </tr>
