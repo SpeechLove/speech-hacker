@@ -36,6 +36,7 @@ group :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'guard-jasmine'
+  gem 'database_cleaner'
 end
 
 gem 'jquery-rails'

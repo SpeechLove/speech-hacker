@@ -1,1 +1,17 @@
 <h1> Meetings </h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>Meeting</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meetings.each do |meeting| %>
+    <tr>
+      <td><%= link_to meeting.meeting_date, meeting_path(meeting) %> at
+          <%= meeting.meeting_time %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
