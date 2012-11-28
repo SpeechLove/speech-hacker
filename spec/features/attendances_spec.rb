@@ -7,12 +7,14 @@ describe "Attendances", :js => true do
     context "when meeting hasn't occurred" do
       let!(:meeting) { Fabricate(:meeting, :meeting_date => "12/12/2050") }
 
-      it "shows the sign up header" do
-        visit meeting_path meeting
-        page.should have_content "Sign-up"
-      end
-
       context "Attendance form" do
+        it "shows the sign up header" do
+          @user = Fabricate(:user)
+          login_as @user, :scope => :user
+          visit meeting_path meeting
+          page.should have_content "Sign-up"
+        end
+
         it "allows user to confirm attendance with no role" do
           Fabricate(:attendee)
           @user = Fabricate(:user)
