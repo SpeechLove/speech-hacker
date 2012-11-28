@@ -1,18 +1,49 @@
 require 'spec_helper'
 
 describe "Attendances", :js => true do
+  include Warden::Test::Helpers
 
-  context "Future meeting" do
-    let!(:meeting) { Fabricate(:meeting, :meeting_date => "12/12/2050") }
+  describe "meetings#show" do
+    context "when meeting hasn't occurred" do
+      let!(:meeting) { Fabricate(:meeting, :meeting_date => "12/12/2050") }
 
-    it "shows the sign up header" do
-      visit meeting_path meeting
-      page.should have_content "Sign-up"
-    end
+      it "shows the sign up header" do
+        visit meeting_path meeting
+        page.should have_content "Sign-up"
+      end
 
-    context "Attendance form" do
-      it "shows the attendance confirmation selection"
+      context "Attendance form" do
+        it "allows user to confirm attendance with no role" do
+          Fabricate(:attendee)
+          @user = Fabricate(:user)
+          login_as @user, :scope => :user
+          visit meeting_path meeting
+          find(:css, "#attend_true").set(true)
+          click_button "Create Attendance"
+          page.should have_content("See you there!")
+        end
+
+        it "allows user to decline to attend" do
+          Fabricate(:absentee)
+          @user = Fabricate(:user)
+          login_as @user, :scope => :user
+          visit meeting_path meeting
+          find(:css, "#attend_false").set(true)
+          click_button "Create Attendance"
+          page.should have_content("Sorry you're not coming.")
+        end
+
+        it "allows user to confirm attendance with a role" do 
+          Fabricate(:toastmaster)
+          @user = Fabricate(:user)
+          login_as @user, :scope => :user
+          visit meeting_path meeting
+          find(:css, "#attend_true").set(true)
+          find(:css, "#attendance_meeting_role_id_1").set(true)
+          click_button "Create Attendance"
+          page.should have_content("See you there!")
+        end
+      end
     end
   end
-
 end

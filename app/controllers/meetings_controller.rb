@@ -1,4 +1,6 @@
 class MeetingsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index]
+  before_filter :admin_only, :only => [:destroy, :edit, :new, :create]
 
   def index
     @meetings = Meeting.all
