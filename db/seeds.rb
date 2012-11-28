@@ -15,12 +15,12 @@ MeetingRole.create(:title => "Absentee")
 
 # manuals
 Manual.create(:name => "Competent Communication")
-Manual.create(:name => "Advanced Communicator Bronze")
-Manual.create(:name => "Advanced Communicator Silver")
-Manual.create(:name => "Advanced Communicator Gold")
-Manual.create(:name => "Competent Leader")
-Manual.create(:name => "Advanced Leader Bronze")
-Manual.create(:name => "Advanced Leader Silver")
+Manual.create(:name => "The Entertaining Speaker")
+Manual.create(:name => "Speaking to Inform")
+Manual.create(:name => "Public Relations")
+Manual.create(:name => "Facilitating Discussion")
+Manual.create(:name => "Specialty Speeches")
+Manual.create(:name => "Speeches by Management")
 
 # projects
 
