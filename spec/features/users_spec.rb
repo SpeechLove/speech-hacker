@@ -3,30 +3,6 @@ require 'spec_helper'
 describe "Users", :js => true do
   include Warden::Test::Helpers
 
-  context "when user is an admin" do
-    before(:each) do
-      @user = Fabricate(:user_admin)
-      login_as @user, :scope => :user
-    end
-
-    describe "users#index" do
-      it "has information about each user" do
-        visit users_path
-        page.should have_content(@user.email)
-      end
-
-      it "has a 'Create Meetings' link" do
-        visit users_path
-        page.should have_link("Create Meeting", :href => new_meeting_path)
-      end
-
-      it "has an 'Edit Users' link" do
-        visit users_path
-        page.should have_link("Edit Users", :href => users_path)
-      end
-    end
-  end
-
   context "when user is a non-admin user" do
     before(:each) do
       @user = Fabricate(:user)
@@ -41,9 +17,55 @@ describe "Users", :js => true do
 
       it "has an 'Edit Profile' link" do
         visit users_path
-        page.should have_link("Edit Profile", :href => edit_user_registration_path)
-        click_link 'Edit Profile'
-        page.should have_content("Cancel my account.")
+        page.should have_link("#{@user.email}", :href => edit_user_registration_path)
+      end
+    end
+  end
+
+  context "when user is an admin" do
+    before(:each) do
+      @user = Fabricate(:user_admin)
+      login_as @user, :scope => :user
+    end
+
+    describe "users#index" do
+      before(:each) { visit users_path }
+      it "has information about each user" do
+        page.should have_content(@user.email)
+      end
+
+      it "has a 'Create Meetings' link" do
+        page.should have_link("Create Meeting", :href => new_meeting_path)
+      end
+
+      it "has an 'Edit Users' link" do
+        page.should have_link("Edit Users", :href => users_path)
+      end
+
+      it "should not have the Make Admin column" do
+        page.should_not have_content("Make admin?")
+      end
+    end
+  end
+
+  context "when user is a superadmin" do
+    before(:each) do
+      @user = Fabricate(:user_superadmin)
+      login_as @user, :scope => :user
+    end
+
+    describe "users#index" do
+      it "does not have a make admin checkbox column if only the superadmin is present" do
+        visit users_path
+        page.should have_content("Make admin?")
+        page.should_not have_css('.make-admin-option')
+      end
+
+      it "has a make admin checkbox column if other users are present" do
+        Fabricate(:user_admin)
+        visit users_path
+        page.should have_content("Make admin?")
+        page.should have_css('.make-admin-option')
       end
     end
   end
