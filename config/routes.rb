@@ -1,4 +1,6 @@
 SpeechHacker::Application.routes.draw do
+  resources :speeches
+
   root :to => "meetings#index"
   resources :meetings
   resources :attendances, :only => [:create]

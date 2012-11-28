@@ -1,0 +1,2 @@
+Fabricator(:speech) do
+end
