@@ -45,4 +45,9 @@ class MeetingsController < ApplicationController
       render action: "edit"
     end
   end
+
+  private
+  def admin_only
+    current_user.admin?
+  end
 end

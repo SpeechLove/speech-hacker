@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe MeetingsController do
   let!(:meeting) { Fabricate(:meeting) }
+  before(:each) { sign_in Fabricate(:user_admin) }
 
   describe "#index" do
     it "assigns a list of users" do

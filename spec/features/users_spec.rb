@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe "Users", :js => true do
-  describe "users#index" do
-    include Warden::Test::Helpers
+  include Warden::Test::Helpers
 
-    context "when user is an admin" do
-      before(:each) do
-        @user = Fabricate(:user_admin)
-        login_as @user, :scope => :user
-      end
+  context "when user is an admin" do
+    before(:each) do
+      @user = Fabricate(:user_admin)
+      login_as @user, :scope => :user
+    end
 
+    describe "users#index" do
       it "has information about each user" do
         visit users_path
         page.should have_content(@user.email)
@@ -25,13 +25,15 @@ describe "Users", :js => true do
         page.should have_link("Edit Users", :href => users_path)
       end
     end
+  end
 
-    context "when user is a non-admin user" do
-      before(:each) do
-        @user = Fabricate(:user)
-        login_as @user, :scope => :user
-      end
+  context "when user is a non-admin user" do
+    before(:each) do
+      @user = Fabricate(:user)
+      login_as @user, :scope => :user
+    end
 
+    describe "users#index" do
       it "puts up a flash notice forbidding access" do
         visit users_path
         page.should have_content("You are not authorized to access this page.")
