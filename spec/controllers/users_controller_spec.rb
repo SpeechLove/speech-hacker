@@ -1,24 +1,109 @@
 require 'spec_helper'
 
-
 describe UsersController do
+  let!(:user) { Fabricate(:user) }
+  let!(:user_admin) { Fabricate(:user_admin) }
+  let!(:user_superadmin) { Fabricate(:user_superadmin) }
+
   describe "#index" do
     context "when the current user is admin" do
       it "assigns a list of users" do
-        user = Fabricate(:user_admin)
-        sign_in user
+        sign_in user_admin
         get(:index)
-        assigns(:users).should eq [user]
+        assigns(:users).should eq [user, user_admin, user_superadmin]
       end
     end
 
     context "when the current user is not admin" do
       it "redirects to root" do
-        user = Fabricate(:user)
         sign_in user
         get(:index)
         response.should redirect_to root_path
       end
     end
   end
+
+  describe "#show" do
+    context "when the current user is admin" do
+      it "shows information about a user" do
+        sign_in user_admin
+        get(:show, :id => 1)
+        assigns(:user).should be_a(User)
+      end
+    end
+
+    context "when the current user is not admin" do
+      it "does not show information about a user" do
+        sign_in user
+        get(:show, :id => 1)
+        response.should redirect_to root_path
+      end
+    end
+  end
+
+  describe "#edit" do
+    context "when the current user is admin" do
+      it "shows information about a user" do
+        sign_in user_admin
+        get(:edit, :id => 1)
+        assigns(:user).should be_a(User)
+      end
+    end
+
+    context "when the current user is not admin" do
+      it "does not show information about a user" do
+        sign_in user
+        get(:edit, :id => 1)
+        response.should redirect_to root_path
+      end
+    end
+  end
+
+  describe "#update" do
+    context "when the current user is admin" do
+      it "shows information about a user" do
+        sign_in user_admin
+        put(:update, :id => 1, :user => {:name => "John Newname",
+                                         :email => "new@new.com"})
+        assigns(:user).should be_a(User)
+        assigns(:user).name.should eq "John Newname"
+        assigns(:user).email.should eq "new@new.com"
+      end
+    end
+
+    context "when the current user is not admin" do
+      it "does not show information about a user" do
+        sign_in user
+        post(:update, :id => 1)
+        response.should redirect_to root_path
+      end
+    end
+  end
+
+  describe "#make_admin" do
+    context "when the current user is super admin" do
+      it "shows information about a user" do
+        sign_in user_superadmin
+        get(:make_admin, :id => 1)
+        assigns(:user).should be_a(User)
+      end
+    end
+
+    context "when the current user is admin" do
+      it "does not show information about a user" do
+        sign_in user_admin
+        get(:make_admin, :id => 1)
+        response.should redirect_to root_path
+      end
+    end
+
+    context "when the current user is not admin" do
+      it "does not show information about a user" do
+        sign_in user
+        get(:make_admin, :id => 1)
+        response.should redirect_to root_path
+      end
+    end
+  end
+
 end

@@ -10,6 +10,7 @@ class Ability
       cannot :assign_roles, [User]
     else
       can :read, :all
+      cannot :read, [User]
     end
   end
 end
