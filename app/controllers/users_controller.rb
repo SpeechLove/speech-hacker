@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    # authorize! :assign_roles, current_user if assigning_roles?
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
@@ -28,36 +27,21 @@ class UsersController < ApplicationController
   end
 
   def make_admin
-    logger.info("------------ make admin ----------------")
-    should_be_admin = false
-    logger.info("these are params: #{params.inspect}")
-
+    authorize! :assign_roles, current_user
     @user = User.find(params[:id])
-    if params[:make_admin]
-      @user.add_role :admin
-      should_be_admin = true
-    else
-      @user.remove_role :admin
-    end
+    should_be_admin = @user.set_admin(params[:make_admin])
 
     respond_to do |format|
       format.json do
         if should_be_admin == @user.has_role?(:admin)
-          logger.info("success")
-          render :json => {
-                            :success => true
-                            #:user  => render_to_string(
-                            #              :locals => {:user => @user})
-                          }
+          render :json => { :success => true }
         else
-          logger.info("error")
           render :json => {
                             :errors => @user.errors.full_messages.join(', '),
                             :status => :unprocessable_entity
                           }
         end
       end
-    # render :index
     end
   end
 

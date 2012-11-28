@@ -10,11 +10,11 @@
       <th><%= model_class.human_attribute_name(:sign_in_count) %></th>
       <th><%= model_class.human_attribute_name(:current_sign_in_at) %></th>
       <th><%= model_class.human_attribute_name(:last_sign_in_at) %></th>
-      <th><%= model_class.human_attribute_name(:current_sign_in_ip) %></th>
-      <th><%= model_class.human_attribute_name(:last_sign_in_ip) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th>Action</th>
-      <th>Make admin?</th>
+      <% if current_user.super_admin? %>
+        <th>Make admin?</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -25,12 +25,16 @@
         <td><%= user.sign_in_count %></td>
         <td><%= user.current_sign_in_at %></td>
         <td><%= user.last_sign_in_at %></td>
-        <td><%= user.current_sign_in_ip %></td>
-        <td><%= user.last_sign_in_ip %></td>
         <td><%=l user.created_at %></td>
         <td><%= link_to "Edit user", edit_user_path(user.id) %></td>
-        <% is_admin = (user.admin? or user.super_admin?) %>
-        <td><%= check_box_tag 'make_admin', user.id, is_admin, :class => "make-admin-option" %></td>
+        <% if current_user.super_admin? %>
+          <% if !user.super_admin? %>
+            <% is_admin = (user.admin? or user.super_admin?) %>
+            <td><%= check_box_tag 'make_admin', user.id, is_admin, :class => "make-admin-option" %></td>
+          <% else%>
+            <td></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

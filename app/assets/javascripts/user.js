@@ -6,12 +6,11 @@ $(document).ready(function() {
         params = $self.serialize();
 
     $.ajax({
-      type: 'post',//$self.attr('post'),
-      url:  '/users/' + $self.val() + '/make_admin',//$self.attr('/' + $self.val() + '/make_admin'),
+      type: 'post',
+      url:  '/users/' + $self.val() + '/make_admin',
       dataType: 'json',
       data: params,
         success: function(data, status, xhr) {
-          console.log("ajax success");
           if ($self.attr('checked')) {
             $self.prop('checked', false);
           } else {
