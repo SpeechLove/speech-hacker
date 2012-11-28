@@ -80,6 +80,14 @@ describe UsersController do
     end
   end
 
+  describe '#destroy' do
+    it "destroys the user object" do
+      sign_in user_superadmin
+      delete(:destroy, :id => 1)
+      User.all.length.should eq 2
+    end
+  end
+
   describe "#make_admin" do
     context "when the current user is super admin" do
       it "shows information about a user" do

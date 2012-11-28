@@ -13,7 +13,6 @@ class Meeting < ActiveRecord::Base
 
   private
   def parse_date
-    # Given MM/DD/YYYY, translate to YYYY/MM/DD
     if (self.meeting_date.to_s =~ /\d{4}-\d{2}-\d{2}/) == nil
       self.errors.add :meeting_date,
               "format should be MM/DD/YYYY"

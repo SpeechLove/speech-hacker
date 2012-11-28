@@ -30,6 +30,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    redirect_to users_path
+  end
+
   def make_admin
     authorize! :assign_roles, current_user
     @user = User.find(params[:id])
