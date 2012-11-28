@@ -11,5 +11,4 @@ SpeechHacker::Application.routes.draw do
   put '/users/:id' => 'users#update', :as => 'user'
   get '/users/:id/edit' => 'users#edit', :as => 'edit_user'
   post '/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin_user'
-  # get '/users/:id/make_admin' => 'users#index'
 end

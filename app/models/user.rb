@@ -14,4 +14,14 @@ class User < ActiveRecord::Base
   def admin?
     has_role?(:admin)
   end
+
+  def set_admin(make_admin)
+    if make_admin
+      self.add_role :admin
+      true
+    else
+      self.remove_role :admin
+      false
+    end
+  end
 end
