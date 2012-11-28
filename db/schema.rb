@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(:version => 20121128005858) do
   end
 
   create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.integer  "project_number"
-    t.integer  "manual_id"
+    t.string   "name",           :null => false
+    t.integer  "project_number", :null => false
+    t.integer  "manual_id",      :null => false
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
