@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :admin_only, :only => [:index]
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, :alert => exception.message
+  end
+
   def index
     @users = User.all
   end
@@ -24,6 +28,13 @@ class UsersController < ApplicationController
     else
       render action: "edit"
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    redirect_to users_path
   end
 
   def make_admin
