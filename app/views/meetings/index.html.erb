@@ -5,7 +5,12 @@
       <th>Meeting</th>
       <th>Start time</th>
       <th>Description</th>
-      <th>Edit</th>
+      <th>
+      <% if current_user && current_user.admin? %>
+        <%="Edit"%>
+      <% end %>
+      </th>
+
     </tr>
   </thead>
   <tbody>
