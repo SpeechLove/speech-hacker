@@ -2,8 +2,9 @@ class Meeting < ActiveRecord::Base
   attr_accessible :meeting_date, :meeting_time, :description
 
   has_many :attendances
+  has_many :users, :through => :attendances
 
-  before_save :parse_date
+  before_validation :parse_date
 
   validates :meeting_date, :presence => true
   validates :meeting_time, :presence => true,
@@ -15,6 +16,8 @@ class Meeting < ActiveRecord::Base
   def parse_date
     # Given MM/DD/YYYY, translate to YYYY/MM/DD
     if (self.meeting_date.to_s =~ /\d{4}-\d{2}-\d{2}/) == nil
+      logger.info("----------------meeting_date------------------")
+      logger.info(self.meeting_date)
       self.errors.add :meeting_date,
               "format should be MM/DD/YYYY"
       return false
@@ -22,5 +25,7 @@ class Meeting < ActiveRecord::Base
 
     split_date = self.meeting_date.to_s.split('-')
     self.meeting_date = Date.parse("#{split_date[0]}-#{split_date[2]}-#{split_date[1]}")
+    logger.info("--------------------------------")
+    logger.info(self.meeting_date)
   end
 end

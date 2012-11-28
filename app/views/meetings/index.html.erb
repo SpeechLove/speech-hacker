@@ -10,8 +10,10 @@
         <%="Edit"%>
       <% end %>
       </th>
-      <th>Attending?</th>
-
+      <% unless !current_user %>
+        <th>Attending?</th>
+        <th>Meeting Role</th>
+      <% end %>
 
 
     </tr>
@@ -31,9 +33,14 @@
             <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
           <% end %>
       </td>
-      <td>
-        <%= current_user.attending?(meeting) ? "Yes" : "No" unless !current_user%>
-      </td>
+      <% unless !current_user %>
+        <td>
+          <%= current_user.attending?(meeting) ? "Yes" : "No" %>
+        </td>
+        <td>
+          <%= current_user.meeting_role(meeting).title if current_user.attending?(meeting) %>
+        </td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>

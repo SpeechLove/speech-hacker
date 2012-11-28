@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
+  has_many :meetings, :through => :attendances
+
   validates :name, :presence => true
 
   def super_admin?
@@ -27,10 +29,13 @@ class User < ActiveRecord::Base
 
   def attending?(meeting)
   	if meeting.attendances[0] != nil
-  		role = MeetingRole.find(meeting.attendances[0].meeting_role_id)
-  		return meeting.attendances[0].user_id == self.id && role.title != "Absentee"
+  		return meeting.attendances[0].user_id == self.id && meeting_role(meeting).title != "Absentee"
   	else
   		return false
   	end
+  end
+
+  def meeting_role(meeting)
+  	MeetingRole.find(meeting.attendances[0].meeting_role_id)
   end
 end
