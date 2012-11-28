@@ -23,3 +23,16 @@ Manual.create(:name => "Advanced Leader Bronze")
 Manual.create(:name => "Advanced Leader Silver")
 
 # projects
+
+# projects that belong to Competent Communication manual
+Project.create(:name => "Ice Breaker",           :number => 1,  :manual_id => 1)
+Project.create(:name => "Organize Your Speech",  :number => 2,  :manual_id => 1)
+Project.create(:name => "Get to the Point",      :number => 3,  :manual_id => 1)
+Project.create(:name => "How to Say It",         :number => 4,  :manual_id => 1)
+Project.create(:name => "Your Body Speaks",      :number => 5,  :manual_id => 1)
+Project.create(:name => "Vocal Variety",         :number => 6,  :manual_id => 1)
+Project.create(:name => "Research Your Topic",   :number => 7,  :manual_id => 1)
+Project.create(:name => "Get Comfortable with Visual Aids", :number => 8, :manual_id => 1)
+Project.create(:name => "Persuade with Power",   :number => 9,  :manual_id => 1)
+Project.create(:name => "Inspire Your Audience", :number => 10, :manual_id => 1)
+
