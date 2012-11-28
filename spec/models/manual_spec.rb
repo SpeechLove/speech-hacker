@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Manual do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let!(:manual) {Manual.create}
+  it { should have_many :projects }
 end
