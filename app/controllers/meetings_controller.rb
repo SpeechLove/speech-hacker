@@ -4,6 +4,7 @@ class MeetingsController < ApplicationController
 
   def index
     @meetings = Meeting.all
+    @attendance = Attendance.all
   end
 
   def new
@@ -22,7 +23,8 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
-    @attendance = Attendance.new
+    @attendance = @meeting.attendances.find_or_initialize_by_user_id(current_user.id)
+    @meeting_roles = MeetingRole.attendee_roles
   end
 
   def destroy

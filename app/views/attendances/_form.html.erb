@@ -6,15 +6,15 @@
 
 <%= form_for @attendance do |f| %>
   <div class="control-group">
-      <%= label_tag "Will you attend this meeting?", nil, :class => 'control-label' %>
+      <%= f.label "Will you attend this meeting?", nil, :class => 'control-label' %>
       <div class="controls">
         <label class="radio">
-          <%= radio_button_tag "attend", "true" %>
-          <%= label :attend_true, 'Yes' %>
+          <%= f.radio_button "attend", "true" %>
+          <%= f.label :attend_true, 'Yes' %>
         </label>
         <label class="radio">
-          <%= radio_button_tag "attend", "false" %>
-          <%= label :attend_false, 'No' %>
+          <%= f.radio_button "attend", "false" %>
+          <%= f.label :attend_false, 'No' %>
         </label>
     </div>
   </div>
@@ -24,25 +24,19 @@
   <div class="control-group">
     <%= label_tag "Sign up for a role", nil, :class => 'control-label' %>
     <div class="controls">
-    	<% roles = MeetingRole.all %>
-    	<% roles.each do |role| %>
-    		<% unless role.title == "Absentee" %>
-
-	    		<label class="radio">
-	    	  <%= radio_button_tag "attendance[meeting_role_id]", "#{role.id}" %>
-	    	  <%#= f.radio_button "attendance", :meeting_role_id, role.id %>
-	    	  <%= label role.title, role.title %>
-		    	</label>
-		    <% end %>
-    	<% end %>    	
+      <% @meeting_roles.each do |role| %>
+        <label class="radio">
+          <%= f.radio_button :meeting_role_id, role.id %>
+          <%= label role.title, role.title %>
+        </label>
+      <% end %>
     </div>
   </div>
 
   <hr class="bs-docs-separator">
 
-
-
-  <%= f.hidden_field :meeting_id, :value => @meeting.id %>
+  <%= hidden_field_tag :meeting_id, @meeting.id %>
 
   <%= f.submit 'Create Attendance', :class => "btn btn-primary" %>
 <% end %>
+

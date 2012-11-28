@@ -3,7 +3,7 @@ SpeechHacker::Application.routes.draw do
 
   root :to => "meetings#index"
   resources :meetings
-  resources :attendances, :only => [:create]
+  resources :attendances, :only => [:create, :update]
   devise_for :users
 
   get '/users' => 'users#index', :as => 'users'
