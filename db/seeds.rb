@@ -1,10 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# meeting roles
 MeetingRole.create(:title => "Toastmaster")
 MeetingRole.create(:title => "Grammarian")
 MeetingRole.create(:title => "Timer")
@@ -15,3 +12,14 @@ MeetingRole.create(:title => "Speaker")
 MeetingRole.create(:title => "Table Topics Master")
 MeetingRole.create(:title => "Attendee")
 MeetingRole.create(:title => "Absentee")
+
+# manuals
+Manual.create(:name => "Competent Communication")
+Manual.create(:name => "Advanced Communicator Bronze")
+Manual.create(:name => "Advanced Communicator Silver")
+Manual.create(:name => "Advanced Communicator Gold")
+Manual.create(:name => "Competent Leader")
+Manual.create(:name => "Advanced Leader Bronze")
+Manual.create(:name => "Advanced Leader Silver")
+
+# projects
