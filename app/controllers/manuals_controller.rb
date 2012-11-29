@@ -6,9 +6,11 @@ class ManualsController < ApplicationController
 
 	def show
 		@manual = Manual.find(params[:id])
-
-		#probably should be able to get these through speeches or something
-		@projects = Manual.completed_projects(current_user)
+		@speeches = current_user.speeches.select { |speech| speech.manual_id == @manual.id }
+		@speeches.each do |speech|
+			logger.info('-----------------speech projects------------------------')
+			logger.info(@speeches.inspect)
+		end
 	end
 
 

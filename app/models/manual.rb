@@ -4,7 +4,7 @@ class Manual < ActiveRecord::Base
   validates_presence_of :name
 
 
- def self.completed_projects(u_id)
+ def completed_projects(u_id)
     speeches = Speech.where({:user_id => u_id })
     #speeches = Speech.where("u_id")
     speeches = [speeches] if (speeches.class == Speech)
@@ -35,18 +35,18 @@ class Manual < ActiveRecord::Base
 #     #logger.info(speeches[0].project.inspect)
 
 #     projects = speeches.collect { |speech| speech.project }
-  
-     
+
+
 #     completed = Hash.new
 #     # puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
 #     # puts speeches
 #     # puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-#     # puts projects   
+#     # puts projects
 
 #     projects.each do |project|
 #     	logger.info('---------------')
-#     	logger.info(project.inspect) 
-#     	logger.info(project.speech.inspect) 
+#     	logger.info(project.inspect)
+#     	logger.info(project.speech.inspect)
 #       completed[project] = project.speech if project.speech
 #     end
 

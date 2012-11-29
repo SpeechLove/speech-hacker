@@ -1,19 +1,20 @@
-
-
-<% @projects.each do |m_id, projects| %>
-
   <h5><%= @manual.name %></h5>
+<% @speeches.each do |speech| %>
+
+
   <div>
-  <% projects.each do |p, speech| %>
-    <%= p.name.ljust(20) + ": " + speech.title %></br>
-  <% end %>
+
+    <%= speech.project.name.ljust(20) + ": " + speech.title %></br>
+
   </div>
-  <%= "Progress: " + projects.count.to_s + "/" + @manual.projects.count.to_s %></br></br>
-  <% percent_done = (projects.count * 100.0) / @manual.projects.count %>
+  <% end %>
+  <%= "Progress: " + @speeches.count.to_s + "/" + @manual.projects.count.to_s %></br></br>
+  <% percent_done = (@speeches.count * 100.0) / @manual.projects.count %>
   <div class="progress_bar">
     <div class="progress progress-info">
     <div class="bar" style="width: <%= percent_done.to_s %>%"></div>
 </div>
   </div>
 
-<% end %>
+
+

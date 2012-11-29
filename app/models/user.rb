@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
     puts speeches
     puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts projects   
+    puts projects
 
     projects.each do |p|
       completed[p] = speeches.find{ |s| s.project_id == p.id }
@@ -67,5 +67,10 @@ class User < ActiveRecord::Base
     puts completed.inspect
 
     completed.group_by{ |pair| pair[0].manual_id }
+  end
+
+  def manuals_in_progress
+    speeches = self.speeches
+    manuals = speeches.group_by
   end
 end

@@ -7,4 +7,8 @@ class Speech < ActiveRecord::Base
   belongs_to :meeting
 
   validates_presence_of :project_id, :meeting_id, :user_id, :evaluator_id
+
+  def manual_id
+  	self.project.manual_id
+  end
 end
