@@ -1,20 +1,28 @@
 class AttendancesController < ApplicationController
   def create
     @meeting = Meeting.find(params[:meeting_id])
-    @attendance = Attendance.new(params[:attendance].merge(:meeting => @meeting, :user => current_user))
-    params[:attendance][:attend] == "true" ? notice = "See you there!" : notice = "Sorry you won't be there."
+    params[:attendance].merge!(:meeting => @meeting, :user => current_user)
+    @attendance = Attendance.new(params[:attendance])
 
     if @attendance.save
-      redirect_to meetings_path(params[:attendance][:meeting_id]), :notice => notice
+      notice = @attendance.attend ? "See you there!" : "Sorry you won't be there."
+      redirect_to meetings_path(@meeting), :notice => notice
     else
-      redirect_to meetings_path, :alert => "Something went wrong!"
+      @meeting_roles = MeetingRole.attendee_roles
+      render "meetings/show", :alert => "Something went wrong!"
     end
   end
 
   def update
-    params[:attendance][:attend] == "true" ? notice = "See you there!" : notice = "Sorry you won't be there."
     @attendance = current_user.attendances.find(params[:id])
-    @attendance.update_attributes(params[:attendance])
-    redirect_to meetings_path, :notice => notice
+    if @attendance.update_attributes(params[:attendance])
+      notice = @attendance.attend ? "See you there!" : "Sorry you won't be there."
+      redirect_to meetings_path, :notice => notice
+    else
+      @meeting = @attendance.meeting
+      @meeting_roles = MeetingRole.attendee_roles
+      render "meetings/show", :alert => "Something went wrong!"
+    end
+
   end
 end

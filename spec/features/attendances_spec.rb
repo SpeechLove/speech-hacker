@@ -48,4 +48,7 @@ describe "Attendances", :js => true do
       end
     end
   end
+
+  after{ Warden.test_reset! }
+
 end
