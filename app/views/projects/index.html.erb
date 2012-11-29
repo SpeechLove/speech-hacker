@@ -1,0 +1,10 @@
+<h1>Projects#index</h1>
+
+<% @projects.each_key do |m_id| %>
+  <h3> Manual No. <%= m_id %></h3>
+  <% @projects[m_id].each do |p| %>
+    <%= p.name %>
+  <% end %>
+
+
+<p>Find me in app/views/projects/index.html.erb</p>
