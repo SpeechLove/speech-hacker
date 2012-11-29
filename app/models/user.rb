@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :meetings, :through => :attendances
+  has_many :speeches
 
   validates :name, :presence => true
 
