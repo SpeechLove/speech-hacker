@@ -14,6 +14,7 @@ MeetingRole.create(:title => "Attendee")
 MeetingRole.create(:title => "Absentee")
 
 # manuals
+
 manual_cc = Manual.create(:name => "Competent Communication")
 Manual.create(:name => "The Entertaining Speaker")
 Manual.create(:name => "Speaking to Inform")

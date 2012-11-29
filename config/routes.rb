@@ -3,6 +3,7 @@ SpeechHacker::Application.routes.draw do
   resources :meetings
   resources :attendances, :only => [:create, :update]
   devise_for :users
+
   resources :users
   resources :speeches
 
