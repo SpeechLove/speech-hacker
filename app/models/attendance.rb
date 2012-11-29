@@ -26,7 +26,7 @@ class Attendance < ActiveRecord::Base
     if @attend == "true"
       true
     else
-      meeting_role != MeetingRole.absentee && @attend != "false"
+      meeting_role != MeetingRole.absentee && @attend == "true"
     end
   end
 end
