@@ -11,15 +11,12 @@
       <% end %>
       </th>
       <th>Attending?</th>
-
-
-
     </tr>
   </thead>
   <tbody>
     <% @meetings.each do |meeting| %>
     <tr>
-      <td><%= link_to meeting.meeting_date.strftime("%m/%d/%Y")+" Meeting", meeting_path(meeting) %></td>
+      <td><%= link_to meeting.meeting_date.to_s + " Meeting", meeting_path(meeting) %></td>
       <td><%= meeting.meeting_time %></td>
       <td>
           <% if meeting.description %>

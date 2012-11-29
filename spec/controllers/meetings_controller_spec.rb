@@ -51,9 +51,9 @@ describe MeetingsController do
 
   describe '#update' do
     it "updates the meeting" do
-      put(:update, :id => 1, :meeting => {:meeting_date => "11/02/1988", :meeting_time => "05:00"})
+      put(:update, :id => 1, :meeting => {:meeting_date => "1988-11-22", :meeting_time => "05:00"})
       assigns(:meeting).should be_a(Meeting)
-      assigns(:meeting).meeting_date.strftime("%m/%d/%Y").should eq "11/02/1988"
+      assigns(:meeting).meeting_date.to_s.should eq "1988-11-22"
     end
   end
 end

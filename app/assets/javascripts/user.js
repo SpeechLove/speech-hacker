@@ -15,6 +15,7 @@ $(document).ready(function() {
         success: function(data, status, xhr) {
           if ($self.attr('checked')) {
             $self.prop('checked', false);
+
             $('.success-box').text('Admin privilege removed!');
           } else {
             $self.prop('checked', true);
@@ -34,4 +35,5 @@ $(document).ready(function() {
   function hide_success_box() {
     $('.success-box').hide();
   }
+
 });

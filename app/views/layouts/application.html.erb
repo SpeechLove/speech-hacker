@@ -28,14 +28,15 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if user_signed_in? %>
-              <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
-              <li><%= link_to current_user.email, edit_user_registration_path %></li>
+              <li><%= link_to "My Speeches", speeches_path %></li>
                 <% if can? :manage, Meeting %>
                 <li><%= link_to "Create Meeting", new_meeting_path  %></li>
                 <% end %>
                 <% if can? :manage, User %>
                 <li><%= link_to "Edit Users", users_path  %></li>
                 <% end  %>
+                <li><%= link_to current_user.email, edit_user_registration_path %></li>
+                <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
               <% else %>
               <li><%= link_to "Sign In", new_user_session_path  %></li>
               <% end  %>
