@@ -41,7 +41,7 @@ namespace :db do
     speech_6 = Speech.new({:project_id => 1, :meeting_id => 1, :title => "Je m'appelle Cruella De Ville", :user_id => 3, :evaluator_id => 1})
     speech_6.save
 
-    meeting = Meeting.create( {meeting_date: "2222-12-12", meeting_time: "17:00", description: "blah"} )
+    meeting = Meeting.create( {meeting_date: "2222-12-12", meeting_time: "17:00", description: "blah", location: "Conference room"} )
 
     project = Project.find_by_name("Ice Breaker")
     Speech.create( {:title => "My first speech", :project_id => project.id, :user_id => user.id,

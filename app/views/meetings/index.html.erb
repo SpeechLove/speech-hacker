@@ -4,6 +4,7 @@
     <tr>
       <th>Meeting</th>
       <th>Start time</th>
+      <th>Location</th>
       <th>Description</th>
       <th>
       <% if current_user && current_user.admin? %>
@@ -22,6 +23,9 @@
     <tr>
       <td><%= link_to meeting.meeting_date.to_s + " Meeting", meeting_path(meeting) %></td>
       <td><%= meeting.meeting_time %></td>
+      <td>
+        <%= meeting.location %>
+      </td>
       <td>
           <% if meeting.description %>
             <%= meeting.description.capitalize %>
