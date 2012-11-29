@@ -2,6 +2,7 @@ class Meeting < ActiveRecord::Base
   attr_accessible :meeting_date, :meeting_time, :description
 
   has_many :attendances
+  has_many :users, :through => :attendances
 
   before_save :verify_date
 

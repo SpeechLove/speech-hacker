@@ -42,7 +42,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.find(params[:id])
 
     if @meeting.update_attributes(params[:meeting])
-      redirect_to @meeting, notice: 'Meeting was successfully updated.'
+      redirect_to root_path, notice: 'Meeting was successfully updated.'
     else
       render action: "edit"
     end

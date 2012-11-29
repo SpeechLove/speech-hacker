@@ -12,6 +12,8 @@ class Attendance < ActiveRecord::Base
   validates :user_id, :uniqueness => { :scope => :meeting_id }
   before_validation :assign_meeting_role
 
+  delegate :absentee?, :to => :meeting_role
+
   def assign_meeting_role
     if attend == true && (meeting_role == MeetingRole.absentee || meeting_role.nil?)
       self.meeting_role = MeetingRole.attendee
