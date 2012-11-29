@@ -11,18 +11,14 @@ class Manual < ActiveRecord::Base
     speech_ids = speeches.collect{ |s| s.id }
     project_ids = speeches.collect{ |s| s.project_id }
     projects = Project.find(project_ids)
+
+    # speeches = current_user.speeches
+    # projects = speeches.collect { |speech| speech.project }
     completed = Hash.new
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts speeches
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts projects   
 
     projects.each do |p|
       completed[p] = speeches.find{ |s| s.project_id == p.id }
     end
-
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts completed.inspect
 
     completed.group_by{ |pair| pair[0].manual_id }
   end
