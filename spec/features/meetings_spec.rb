@@ -8,7 +8,7 @@ describe "Meeting", :js => true do
   context "when user is not an admin" do
     describe "meetings#index" do
       it "shows the meeting date for each meeting" do
-        page.should have_link meeting.meeting_date.strftime("%m/%d/%Y")
+        page.should have_link meeting.meeting_date.to_s
       end
 
       it "shows the start time for each meeting" do
