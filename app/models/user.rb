@@ -28,14 +28,16 @@ class User < ActiveRecord::Base
   end
 
   def attending?(meeting)
-  	if meeting.attendances[0] != nil
-  		return meeting.attendances[0].user_id == self.id && meeting_role(meeting).title != "Absentee"
-  	else
-  		return false
-  	end
+    if meeting.attendances[0] != nil
+      role = MeetingRole.find(meeting.attendances[0].meeting_role_id)
+      return meeting.attendances[0].user_id == self.id && role.title != "Absentee"
+      #return meeting.attendances[0].user_id == self.id && meeting_role(meeting).title != "Absentee"
+    else
+      return false
+    end
   end
 
   def meeting_role(meeting)
-  	MeetingRole.find(meeting.attendances[0].meeting_role_id)
+    MeetingRole.find(meeting.attendances[0].meeting_role_id)
   end
 end

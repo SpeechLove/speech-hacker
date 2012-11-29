@@ -4,7 +4,7 @@ class Meeting < ActiveRecord::Base
   has_many :attendances
   has_many :users, :through => :attendances
 
-  before_validation :parse_date
+  before_save :parse_date
 
   validates :meeting_date, :presence => true
   validates :meeting_time, :presence => true,
