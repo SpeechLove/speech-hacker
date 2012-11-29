@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def attending?(meeting)
-    !attendance_for_meeting(meeting).absentee?
+    attendance_for_meeting(meeting) && !attendance_for_meeting(meeting).absentee?
   end
 
   def attendance_for_meeting(meeting)
