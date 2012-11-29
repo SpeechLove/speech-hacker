@@ -1,3 +1,3 @@
 Fabricator(:manual) do
-  name "MyString"
+  name "AwesomeManual"
 end

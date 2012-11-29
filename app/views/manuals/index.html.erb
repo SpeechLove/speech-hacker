@@ -1,0 +1,21 @@
+<%- model_class = Manual -%>
+<div class="page-header">
+  <h1>My Progress</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @manuals.each do |manual| %>
+      <tr>
+        <td><%= link_to manual.name, user_manual_path(current_user, manual) %></td>
+        <td><%= "#{manual.speech_count(manual, current_user)}/#{manual.projects.count}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
