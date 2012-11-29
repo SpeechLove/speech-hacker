@@ -38,7 +38,7 @@
           <%= current_user.attending?(meeting) ? "Yes" : "No" %>
         </td>
         <td>
-          <%= current_user.meeting_role(meeting).title if current_user.attending?(meeting) %>
+          <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
         </td>
       <% end %>
     </tr>

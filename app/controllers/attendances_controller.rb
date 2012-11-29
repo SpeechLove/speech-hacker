@@ -10,9 +10,8 @@ class AttendancesController < ApplicationController
   end
 
   def update
-    @meeting = Meeting.find(params[:meeting_id])
-    @attendance = Attendance.find(params[:id])
-    @attendance.update_attributes(params[:attendance].merge(:meeting => @meeting, :user => current_user))
+    @attendance = current_user.attendances.find(params[:id])
+    @attendance.update_attributes(params[:attendance])
     redirect_to meetings_path, :notice => "Your information was updated."
   end
 end

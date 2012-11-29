@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
+  has_many :attendances
   has_many :meetings, :through => :attendances
 
   validates :name, :presence => true
@@ -27,20 +28,19 @@ class User < ActiveRecord::Base
     end
   end
 
-  def attending?(meeting)
-    if meeting.attendances[0] != nil
-      logger.info("----------------------does meeting attendances user id = self.id?------------------------")
-      logger.info(meeting.attendances[0].user_id == self.id)
-      logger.info(meeting.attendances[1].inspect)
-      logger.info(meeting.attendances[0].user_id)
-      logger.info(self.id)
-      return meeting.attendances[0].user_id == self.id && meeting_role(meeting).title != "Absentee"
-    else
-      return false
-    end
+  def responded_to?(meeting)
+    meetings.include? meeting
   end
 
   def meeting_role(meeting)
-    MeetingRole.find(meeting.attendances[0].meeting_role_id)
+    attendance_for_meeting(meeting).meeting_role
+  end
+
+  def attending?(meeting)
+    !attendance_for_meeting(meeting).absentee?
+  end
+
+  def attendance_for_meeting(meeting)
+    attendances.find_by_meeting_id(meeting.id)
   end
 end
