@@ -41,7 +41,6 @@ describe "Meeting", :js => true do
     describe "meetings#index" do
       it "shows the edit meeting column" do
         visit root_path
-        debugger
         page.should have_link("Edit Meeting", :href => edit_meeting_path(meeting))
       end
     end
