@@ -23,7 +23,6 @@ class UsersController < ApplicationController
   def progress
     @user = User.find(params[:id])
     @completed = completed_projects(@user.id)
-    logger.debug @completed
     @manuals = Manual.find(@completed.keys)
     @manuals = [@manuals] if @manuals.class == Manual
     respond_to do |format|
@@ -33,23 +32,15 @@ class UsersController < ApplicationController
 
   def completed_projects(u_id)
     speeches = Speech.where({:user_id => u_id })
-    #speeches = Speech.where("u_id")
     speeches = [speeches] if (speeches.class == Speech)
     speech_ids = speeches.collect{ |s| s.id }
     project_ids = speeches.collect{ |s| s.project_id }
     projects = Project.find(project_ids)
     completed = Hash.new
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts speeches
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts projects   
 
     projects.each do |p|
       completed[p] = speeches.find{ |s| s.project_id == p.id }
     end
-
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts completed.inspect
 
     completed.group_by{ |pair| pair[0].manual_id }
   end
