@@ -32,7 +32,7 @@ describe "Attendances", :js => true do
           visit meeting_path meeting
           find(:css, "#attendance_attend_false").set(true)
           click_button "Create Attendance"
-          page.should have_content("Sorry you're not coming.")
+          page.should have_content("Sorry you won't be there.")
         end
 
         it "allows user to confirm attendance with a role" do

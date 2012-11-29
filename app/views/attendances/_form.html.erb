@@ -9,19 +9,18 @@
       <%= f.label "Will you attend this meeting?", nil, :class => 'control-label' %>
       <div class="controls">
         <label class="radio">
-          <%= f.radio_button "attend", "true" %>
+          <%= f.radio_button "attend", "true", :class => "attend-option" %>
           <%= f.label :attend_true, 'Yes' %>
         </label>
         <label class="radio">
-          <%= f.radio_button "attend", "false" %>
+          <%= f.radio_button "attend", "false", :class => "attend-option" %>
           <%= f.label :attend_false, 'No' %>
         </label>
     </div>
   </div>
 
-  <hr class="bs-docs-separator">
-
-  <div class="control-group">
+  <div class="control-group role-sign-up">
+    <hr class="bs-docs-separator">
     <%= label_tag "Sign up for a role", nil, :class => 'control-label' %>
     <div class="controls">
       <% @meeting_roles.each do |role| %>
@@ -37,6 +36,6 @@
 
   <%= hidden_field_tag :meeting_id, @meeting.id %>
 
-  <%= f.submit 'Create Attendance', :class => "btn btn-primary" %>
+  <%= f.submit nil, :class => "btn btn-primary" %>
 <% end %>
 

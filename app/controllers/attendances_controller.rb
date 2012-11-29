@@ -2,6 +2,7 @@ class AttendancesController < ApplicationController
   def create
     @meeting = Meeting.find(params[:meeting_id])
     @attendance = Attendance.new(params[:attendance].merge(:meeting => @meeting, :user => current_user))
+    params[:attend] == true ? notice = "See you there!" : notice = "Sorry you won't be there."
     if @attendance.save
       redirect_to meetings_path(params[:attendance][:meeting_id]), :notice => notice
     else
