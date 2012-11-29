@@ -15,8 +15,6 @@ class Meeting < ActiveRecord::Base
   private
   def parse_date
     if (self.meeting_date.to_s =~ /\d{4}-\d{2}-\d{2}/) == nil
-      logger.info("----------------meeting_date------------------")
-      logger.info(self.meeting_date)
       self.errors.add :meeting_date,
               "format should be MM/DD/YYYY"
       return false
@@ -24,7 +22,5 @@ class Meeting < ActiveRecord::Base
 
     split_date = self.meeting_date.to_s.split('-')
     self.meeting_date = Date.parse("#{split_date[0]}-#{split_date[2]}-#{split_date[1]}")
-    logger.info("--------------------------------")
-    logger.info(self.meeting_date)
   end
 end
