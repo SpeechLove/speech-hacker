@@ -3,6 +3,8 @@ class Speech < ActiveRecord::Base
 
   belongs_to :user, :class_name => "User"
   belongs_to :evaluator, :class_name => "User"
+  belongs_to :project
+  belongs_to :meeting
 
   validates_presence_of :project_id, :meeting_id, :user_id, :evaluator_id
 end

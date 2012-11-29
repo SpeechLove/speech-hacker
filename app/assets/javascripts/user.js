@@ -2,7 +2,6 @@ $(document).ready(function() {
   hide_success_box();
 
   $('.make-admin-option').on('click', function(e) {
-    console.log("heloooo");
     e.preventDefault();
     var $self = $(this),
         params = $self.serialize();
@@ -24,10 +23,7 @@ $(document).ready(function() {
           $('.success-box').show();
         },
         error: function(xhr, status, error) {
-          console.log("ajax error");
-        },
-        complete: function(xhr, status) {
-          console.log("ajax complete");
+
         }
     }); // ajax
   }); // on make_admin_option

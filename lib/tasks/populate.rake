@@ -1,18 +1,16 @@
 namespace :db do
   desc "Add junk data to database"
   task :populate => :environment do
-    user = User.new( {:name => "Super Admin", :email => "super@super.com", :password => "master" })
-    user.add_role(:super_admin)
-    user.save
+    user_superadmin = User.new( {:name => "Super Admin", :email => "super@super.com", :password => "master" })
+    user_superadmin.add_role(:super_admin)
+    user_superadmin.save
 
-    user = User.new( {:name => "Regular Admin", :email => "admin@admin.com", :password => "master" })
-    user.add_role(:admin)
-    user.save
+    user_admin = User.new( {:name => "Regular Admin", :email => "admin@admin.com", :password => "master" })
+    user_admin.add_role(:admin)
+    user_admin.save
 
     user = User.new( {:name => "Member", :email => "member@member.com", :password => "master" })
     user.save
-
-    Meeting.create( {meeting_date: "2222-12-12", meeting_time: "17:00", description: "blah"} )
 
     manual_1 = Manual.new({ :name => "First Manual" })
     manual_1.save
@@ -43,5 +41,10 @@ namespace :db do
     speech_6 = Speech.new({:project_id => 1, :meeting_id => 1, :title => "Je m'appelle Cruella De Ville", :user_id => 3, :evaluator_id => 1})
     speech_6.save
 
+    meeting = Meeting.create( {meeting_date: "2222-12-12", meeting_time: "17:00", description: "blah"} )
+
+    project = Project.find_by_name("Ice Breaker")
+    Speech.create( {:title => "My first speech", :project_id => project.id, :user_id => user.id,
+                    :evaluator_id => user_admin.id, :meeting_id => meeting.id })
   end
 end
