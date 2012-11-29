@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe "Meeting", :js => true do
   include Warden::Test::Helpers
+
   let!(:meeting) { Fabricate(:meeting) }
-  before(:each) { visit meetings_path }
 
   context "when user is not an admin" do
+    before(:each) { visit meetings_path }
+
     describe "meetings#index" do
       it "shows the meeting date for each meeting" do
         page.should have_link meeting.meeting_date.to_s
@@ -38,7 +40,8 @@ describe "Meeting", :js => true do
 
     describe "meetings#index" do
       it "shows the edit meeting column" do
-        visit meetings_path
+        visit root_path
+        debugger
         page.should have_link("Edit Meeting", :href => edit_meeting_path(meeting))
       end
     end
@@ -62,4 +65,6 @@ describe "Meeting", :js => true do
       end
     end
   end
+
+  after{ Warden.test_reset! }
 end
