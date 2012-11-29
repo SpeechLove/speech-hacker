@@ -13,43 +13,32 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-
-    <!-- For third-generation iPad with high-resolution Retina display: -->
-    <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
-
-    <!-- For iPhone with high-resolution Retina display: -->
-    <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
-
-    <!-- For first- and second-generation iPad: -->
-    <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
-
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
-
-    <!-- For all other devices -->
-    <!-- Size should be 32 x 32 pixels -->
   </head>
   <body>
 
     <%= render 'layouts/header' %>
 
     <div class="container">
-      <div class="row">
-        <div class="span9">
-          <% if notice %>
-            <p class="notice"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-            <p class="alert"><%= alert %></p>
-          <% end %>
-           <%= yield %>
-        </div>
-      </div><!--/row-->
+        <div class="row">
+          <div class="span9">
+            <div class="alert alert-success success-box"></div>
 
+            <% if notice %>
+              <div class="alert alert-info notice-box">
+                  <p class="notice"><%= notice %></p>
+              </div>
+            <% end %>
+
+            <% if alert %>
+              <div class="alert alert-error alert-box">
+                  <p class="alert"><%= alert %></p>
+              </div>
+            <% end %>
+
+            <%= yield %>
+            <%= debug params%>
+          </div>
+        </div><!--/row-->
       <footer>
         <p>&copy; SpeechLove 2012</p>
       </footer>

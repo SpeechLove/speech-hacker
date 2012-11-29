@@ -10,13 +10,17 @@
         <%="Edit"%>
       <% end %>
       </th>
+      <% unless !current_user %>
+        <th>Attending?</th>
+        <th>Meeting Role</th>
+      <% end %>
 
     </tr>
   </thead>
   <tbody>
     <% @meetings.each do |meeting| %>
     <tr>
-      <td><%= link_to meeting.meeting_date.strftime("%m/%d/%Y")+" Meeting", meeting_path(meeting) %></td>
+      <td><%= link_to meeting.meeting_date.to_s + " Meeting", meeting_path(meeting) %></td>
       <td><%= meeting.meeting_time %></td>
       <td>
           <% if meeting.description %>
@@ -28,6 +32,14 @@
             <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
           <% end %>
       </td>
+      <% unless !current_user %>
+        <td>
+          <%= current_user.attending?(meeting) ? "Yes" : "No" %>
+        </td>
+        <td>
+          <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
+        </td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>

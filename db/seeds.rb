@@ -14,25 +14,26 @@ MeetingRole.create(:title => "Attendee")
 MeetingRole.create(:title => "Absentee")
 
 # manuals
-Manual.create(:name => "Competent Communication")
-Manual.create(:name => "Advanced Communicator Bronze")
-Manual.create(:name => "Advanced Communicator Silver")
-Manual.create(:name => "Advanced Communicator Gold")
-Manual.create(:name => "Competent Leader")
-Manual.create(:name => "Advanced Leader Bronze")
-Manual.create(:name => "Advanced Leader Silver")
+
+manual_cc = Manual.create(:name => "Competent Communication")
+Manual.create(:name => "The Entertaining Speaker")
+Manual.create(:name => "Speaking to Inform")
+Manual.create(:name => "Public Relations")
+Manual.create(:name => "Facilitating Discussion")
+Manual.create(:name => "Specialty Speeches")
+Manual.create(:name => "Speeches by Management")
 
 # projects
 
 # projects that belong to Competent Communication manual
-Project.create(:name => "Ice Breaker",           :number => 1,  :manual_id => 1)
-Project.create(:name => "Organize Your Speech",  :number => 2,  :manual_id => 1)
-Project.create(:name => "Get to the Point",      :number => 3,  :manual_id => 1)
-Project.create(:name => "How to Say It",         :number => 4,  :manual_id => 1)
-Project.create(:name => "Your Body Speaks",      :number => 5,  :manual_id => 1)
-Project.create(:name => "Vocal Variety",         :number => 6,  :manual_id => 1)
-Project.create(:name => "Research Your Topic",   :number => 7,  :manual_id => 1)
-Project.create(:name => "Get Comfortable with Visual Aids", :number => 8, :manual_id => 1)
-Project.create(:name => "Persuade with Power",   :number => 9,  :manual_id => 1)
-Project.create(:name => "Inspire Your Audience", :number => 10, :manual_id => 1)
+Project.create(:name => "Ice Breaker",           :project_number => 1,  :manual_id => manual_cc.id)
+Project.create(:name => "Organize Your Speech",  :project_number => 2,  :manual_id => manual_cc.id)
+Project.create(:name => "Get to the Point",      :project_number => 3,  :manual_id => manual_cc.id)
+Project.create(:name => "How to Say It",         :project_number => 4,  :manual_id => manual_cc.id)
+Project.create(:name => "Your Body Speaks",      :project_number => 5,  :manual_id => manual_cc.id)
+Project.create(:name => "Vocal Variety",         :project_number => 6,  :manual_id => manual_cc.id)
+Project.create(:name => "Research Your Topic",   :project_number => 7,  :manual_id => manual_cc.id)
+Project.create(:name => "Get Comfortable with Visual Aids", :project_number => 8, :manual_id => manual_cc.id)
+Project.create(:name => "Persuade with Power",   :project_number => 9,  :manual_id => manual_cc.id)
+Project.create(:name => "Inspire Your Audience", :project_number => 10, :manual_id => manual_cc.id)
 

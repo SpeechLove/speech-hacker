@@ -1,24 +1,18 @@
 class AttendancesController < ApplicationController
-	def create
-		if (params[:attend] == "false") 
-			user_meeting_role_id = MeetingRole.find_by_title("Absentee").id
-			notice = "Sorry you're not coming."
-		else
-			if params[:attendance][:meeting_role_id]
-				user_meeting_role_id = params[:attendance][:meeting_role_id].to_i
-			else
-			  user_meeting_role_id = MeetingRole.find_by_title("Attendee").id
-			end
-			notice = "See you there!"
-		end
-		attendance_params = params[:attendance]
-		attendance_params[:user_id] = current_user.id
-		attendance_params[:meeting_role_id] = user_meeting_role_id
-		@attendance = Attendance.new(attendance_params )
-		if @attendance.save
-			redirect_to meetings_path(params[:attendance][:meeting_id]), :notice => notice
-		else
-			render 'index', :alert => "Something went wrong!"
-		end
-	end
+  def create
+    @meeting = Meeting.find(params[:meeting_id])
+    @attendance = Attendance.new(params[:attendance].merge(:meeting => @meeting, :user => current_user))
+    params[:attend] == true ? notice = "See you there!" : notice = "Sorry you won't be there."
+    if @attendance.save
+      redirect_to meetings_path(params[:attendance][:meeting_id]), :notice => notice
+    else
+      redirect_to meetings_path, :alert => "Something went wrong!"
+    end
+  end
+
+  def update
+    @attendance = current_user.attendances.find(params[:id])
+    @attendance.update_attributes(params[:attendance])
+    redirect_to meetings_path, :notice => "Your information was updated."
+  end
 end
