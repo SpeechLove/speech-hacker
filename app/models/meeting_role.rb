@@ -1,5 +1,5 @@
 class MeetingRole < ActiveRecord::Base
-  attr_accessible :title, :null => false, :unique => true
+  attr_accessible :title, :description, :null => false, :unique => true
 
   scope :attendee_roles, where("title != 'Absentee'")
 

@@ -1,0 +1,26 @@
+<h1> Meeting Roles </h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>
+      <% if current_user && current_user.super_admin? %>
+        <%="Edit"%>
+      <% end %>
+      </th>
+ 
+    </tr>
+  </thead>
+  <tbody>
+    <% @meeting_roles.each do |meeting_role| %>
+    <tr>
+      <td><%= link_to meeting_role.title, meeting_role_path(meeting_role) %></td>
+      <td>
+          <% if current_user && current_user.super_admin? %>
+            <%= link_to "Edit Meeting Role", edit_meeting_role_path(meeting_role) %>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
