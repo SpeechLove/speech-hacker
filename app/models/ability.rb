@@ -8,9 +8,11 @@ class Ability
     elsif user.admin?
       can :manage, :all
       cannot :assign_roles, [User]
+      cannot :read, [MeetingRole]
     else
       can :read, :all
       cannot :read, [User]
+      cannot :read, [MeetingRole]
     end
   end
 end
