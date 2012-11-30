@@ -6,7 +6,7 @@
       <th>Start time</th>
       <th>Description</th>
       <th>
-      <% if current_user && current_user.admin? %>
+      <% if current_user && (can? :update, @meeting)%>
         <%="Edit"%>
       <% end %>
       </th>
@@ -28,7 +28,7 @@
           <% end %>
       </td>
       <td>
-          <% if current_user && current_user.admin? %>
+          <% if current_user && (can? :update, @meeting) %>
             <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
           <% end %>
       </td>
