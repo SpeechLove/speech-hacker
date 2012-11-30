@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :meetings, :through => :attendances
+  has_many :speeches
 
   validates :name, :presence => true
 
@@ -44,4 +45,5 @@ class User < ActiveRecord::Base
   def attendance_for_meeting(meeting)
     attendances.find_by_meeting_id(meeting.id)
   end
+
 end

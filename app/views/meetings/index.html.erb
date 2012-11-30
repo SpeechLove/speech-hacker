@@ -10,6 +10,7 @@
         <%="Edit"%>
       <% end %>
       </th>
+      <th>Location</th>
       <% if current_user %>
         <th>Attending?</th>
         <th>Meeting Role</th>
@@ -31,6 +32,7 @@
           <% if current_user && (can? :update, @meeting) %>
             <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
           <% end %>
+        <%= meeting.location %>
       </td>
       <% if current_user %>
         <td>

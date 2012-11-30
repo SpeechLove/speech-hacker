@@ -35,11 +35,12 @@ ActiveRecord::Schema.define(:version => 20121130021248) do
   end
 
   create_table "meetings", :force => true do |t|
-    t.date     "meeting_date", :null => false
-    t.string   "meeting_time", :null => false
+    t.date     "meeting_date",                 :null => false
+    t.string   "meeting_time",                 :null => false
     t.string   "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "location",     :default => "", :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -66,7 +67,7 @@ ActiveRecord::Schema.define(:version => 20121130021248) do
     t.integer  "meeting_id",   :null => false
     t.string   "title"
     t.integer  "user_id",      :null => false
-    t.integer  "evaluator_id", :null => false
+    t.integer  "evaluator_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
