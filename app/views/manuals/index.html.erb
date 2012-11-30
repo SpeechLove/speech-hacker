@@ -13,7 +13,7 @@
     <div id= <%="collapse#{index}" %> class="accordion-body collapse out">
       <% @speeches[manual].each do |speech| %>
         <div class="accordion-inner">
-          <div class="indentation"><%= speech.project.name.ljust(20) + ": " + speech.title %></br>
+          <div class="indentation"><%= speech.project.name.ljust(20) + ": " + speech.title %><span class="right"><%=speech.meeting.meeting_date%><span></br>
           </div>
         </div>
       <% end %>
