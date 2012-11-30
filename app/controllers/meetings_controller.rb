@@ -5,6 +5,7 @@ class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all
     @attendance = Attendance.all
+    #render "calendar"
   end
 
   def new

@@ -5,11 +5,17 @@ class Speech < ActiveRecord::Base
   belongs_to :evaluator, :class_name => "User"
   belongs_to :project
   belongs_to :meeting
+  delegate :manual, :to => :project
 
   validates :project, :meeting, :user, :presence => true
   accepts_nested_attributes_for :project
 
   def manual_id
     self.project.manual.id
+  end
+
+  def self.for_manual(manual)
+  	#sql query for joining manual and project tables on the manual id //from Robert!
+  	joins(:project).where("projects.manual_id = ?", [manual.id])
   end
 end

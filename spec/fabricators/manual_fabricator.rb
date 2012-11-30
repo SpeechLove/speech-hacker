@@ -1,3 +1,5 @@
 Fabricator(:manual) do
-  name "MyString"
+  name { Faker::Lorem.sentence }
 end
+
+
