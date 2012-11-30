@@ -32,22 +32,22 @@ namespace :db do
     project_6 = Project.new({:manual_id => 2, :name => "How to Speak French", :project_number => 6 })
     project_6.save
 
-    speech_1 = Speech.new({:project => project_1, :meeting => meeting, :title => "I'm New In Town", :user => user_admin, :evaluator => user})
+    speech_1 = Speech.new({:project_id => project_1.id, :meeting => meeting, :title => "I'm New In Town", :user_id => user_admin.id, :evaluator => user})
     speech_1.save
-    speech_2 = Speech.new({:project => project_2, :meeting => meeting, :title => "Pancake Frisbee", :user => user_admin, :evaluator => user})
+    speech_2 = Speech.new({:project_id => project_2.id, :meeting => meeting, :title => "Pancake Frisbee", :user_id => user_admin.id, :evaluator => user})
     speech_2.save
-    speech_3 = Speech.new({:project => project_3, :meeting => meeting, :title => "Heroes are Overrated", :user => user_admin, :evaluator => user})
+    speech_3 = Speech.new({:project_id => project_3.id, :meeting => meeting, :title => "Heroes are Overrated", :user_id => user_admin.id, :evaluator => user})
     speech_3.save
-    speech_4 = Speech.new({:project => project_4, :meeting => meeting, :title => "Jury Duty Day", :user => user_admin, :evaluator => user})
+    speech_4 = Speech.new({:project_id => project_4.id, :meeting => meeting, :title => "Jury Duty Day", :user_id => user_admin.id, :evaluator => user})
     speech_4.save
-    speech_5 = Speech.new({:project => project_5, :meeting => meeting, :title => "I don't know my neighbors", :user => user_admin, :evaluator => user})
+    speech_5 = Speech.new({:project_id => project_5.id, :meeting => meeting, :title => "I don't know my neighbors", :user_id => user_admin.id, :evaluator => user})
     speech_5.save
-    speech_6 = Speech.new({:project => project_6, :meeting => meeting, :title => "I speak great French", :user => user_admin, :evaluator => user})
+    speech_6 = Speech.new({:project_id => project_6.id, :meeting => meeting, :title => "I speak great French", :user_id => user_admin.id, :evaluator => user})
     speech_6.save
 
 
     project = Project.find_by_name("Ice Breaker")
-    Speech.create( {:title => "My first speech", :project => project_1, :user => user,
+    Speech.create( {:title => "My first speech", :project_id => project_1.id, :user_id => user.id,
                     :evaluator => user_admin, :meeting => meeting })
   end
 end
