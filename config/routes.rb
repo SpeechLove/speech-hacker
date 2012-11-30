@@ -7,6 +7,7 @@ SpeechHacker::Application.routes.draw do
   resources :users
   resources :speeches
   get "/users/:id/progress" => "users#progress", :as => "user_progress"
+  get "/manuals/:id/projects" => "projects#projects_by_manual"
 
   post '/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin_user'
 end

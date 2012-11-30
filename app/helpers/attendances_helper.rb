@@ -1,5 +1,2 @@
 module AttendancesHelper
-	
 end
-
- 

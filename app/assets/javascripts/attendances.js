@@ -10,12 +10,34 @@ $(document).ready(function() {
   });
 
   $('.role-option').on('click', function(e) {
-    console.log("this val:" + $(this).val());
-    console.log("speaker-option val:" + $('.Speaker-option').val());
     if ($(this).val() == $('.Speaker-option').val())
       $('.speech-fields').fadeIn('fast');
     else
       $('.speech-fields').fadeOut('fast');
+  });
+
+  $('.manual-select').change(function(){
+    console.log("this val:" + $(this).val());
+
+    var params = "manual_id="+$(this).val();
+
+    console.log("params: " + params);
+
+    $.ajax({
+      type: 'get',
+      url:  '/manuals/' + $(this).val() + '/projects/',
+      dataType: 'json',
+      data: params,
+        success: function(data, status, xhr) {
+          console.log("ajax success");
+          for (var i = 0; i < data["projects"].length; i++) {
+            console.log(data["projects"][i].name);
+          }
+        },
+        error: function(xhr, status, error) {
+
+        }
+    }); // ajax
   });
 
   function show_hide_role_sign_up() {

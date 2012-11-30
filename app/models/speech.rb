@@ -8,4 +8,8 @@ class Speech < ActiveRecord::Base
 
   validates :project, :meeting, :user, :presence => true
   accepts_nested_attributes_for :project
+
+  def manual_id
+    self.project.manual.id
+  end
 end
