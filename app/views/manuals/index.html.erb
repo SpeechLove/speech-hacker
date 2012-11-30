@@ -3,19 +3,34 @@
   <h1>My Progress</h1>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @manuals.each do |manual| %>
-      <tr>
-        <td><%= link_to manual.name, user_manual_path(current_user, manual) %></td>
-        <td><%= "#{manual.speech_count(manual, current_user)}/#{manual.projects.count}" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @manuals.each_with_index do |manual, index| %>
+<div class="accordion accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href=<%="#collapse#{index}" %> >
+        <%= manual.name %>
+      </a>
+    </div>
+    <div id= <%="collapse#{index}" %> class="accordion-body collapse out">
+      <% @speeches[manual].each do |speech| %>
+        <div class="accordion-inner">
+          <div class="indentation"><%= speech.project.name.ljust(20) + ": " + speech.title %></br>
+          </div>
+        </div>
+      <% end %>
+      <div class="accordion-inner">
+      </div>
+      <div class="progress-indent">
+        <strong><%="Progress: " + @speeches[manual].count.to_s + "/" + manual.projects.count.to_s %></strong></br></br>
+        <% percent_done = (@speeches[manual].count * 100.0) / manual.projects.count %>
+        <div class="progress_bar">
+          <div class="progress progress-info">
+            <div class="bar" style="width: <%= percent_done.to_s %>%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+<% end %>
+
 
