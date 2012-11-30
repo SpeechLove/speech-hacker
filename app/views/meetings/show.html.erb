@@ -2,9 +2,13 @@
      <%= @meeting.meeting_time%></h1>
 
 <p>
+	<%= @meeting.location %>
+</p>
+
+<p>
   <% if @meeting.description %>
     <%= @meeting.description.capitalize %>
   <% end %>
 </p>
 
-<%= render :partial => 'attendances/form' %>
+<%= render 'attendances/form' %>

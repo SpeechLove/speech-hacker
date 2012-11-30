@@ -1,5 +1,5 @@
 class Speech < ActiveRecord::Base
-  attr_accessible :project_id, :meeting_id, :title, :user_id, :evaluator_id
+  attr_accessible :project_id, :meeting, :title, :user_id, :evaluator
 
   belongs_to :user, :class_name => "User"
   belongs_to :evaluator, :class_name => "User"
@@ -7,10 +7,13 @@ class Speech < ActiveRecord::Base
   belongs_to :meeting
   delegate :manual, :to => :project
 
-  validates_presence_of :project_id, :meeting_id, :user_id, :evaluator_id
+  validates :project, :meeting, :user, :presence => true
+  accepts_nested_attributes_for :project
+
 
   def self.for_manual(manual)
   	#sql query for joining manual and project tables on the manual id //from Robert!
   	joins(:project).where("projects.manual_id = ?", [manual.id])
   end
+
 end

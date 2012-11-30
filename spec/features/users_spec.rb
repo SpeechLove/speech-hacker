@@ -15,9 +15,19 @@ describe "Users", :js => true do
         page.should have_content("You are not authorized to access this page.")
       end
 
+      it "has a 'My Speeches' link" do
+        visit users_path
+        page.should have_link("My Speeches", :href => speeches_path)
+      end
+
       it "has an 'Edit Profile' link" do
         visit users_path
-        page.should have_link("#{@user.email}", :href => edit_user_registration_path)
+        page.should have_link("Edit Profile", :href => edit_user_registration_path)
+      end
+
+      it "has an 'Edit Profile' link" do
+        visit users_path
+        page.should have_link("My Progress", :href => user_progress_path(@user))
       end
     end
   end
@@ -69,4 +79,6 @@ describe "Users", :js => true do
       end
     end
   end
+  after{ Warden.test_reset! }
+
 end

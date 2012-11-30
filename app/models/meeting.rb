@@ -1,16 +1,20 @@
 class Meeting < ActiveRecord::Base
-  attr_accessible :meeting_date, :meeting_time, :description
+  attr_accessible :meeting_date, :meeting_time, :description, :location, :speeches_attributes
 
   has_many :attendances
   has_many :users, :through => :attendances
+  has_many :speeches
 
   before_save :verify_date
 
-  validates :meeting_date, :presence => true
   validates :meeting_time, :presence => true,
             :format => { :with => /\d{2}\:\d{2}/,
                          :message => "format should be HH:MM" }
+  validates_presence_of :meeting_date, :location
   validates_length_of :description, :maximum => 255, :allow_blank => true
+  validates_length_of :location, :maximum => 255, :allow_blank => false
+  
+  accepts_nested_attributes_for :speeches
 
   private
   def verify_date
