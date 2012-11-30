@@ -14,13 +14,13 @@
         <th>Attending?</th>
         <th>Meeting Role</th>
       <% end %>
-
     </tr>
   </thead>
+
   <tbody>
     <% @meetings.each do |meeting| %>
     <tr>
-      <td><%= link_to meeting.meeting_date.to_s + " Meeting", meeting_path(meeting) %></td>
+      <td><%= meeting.formatted_date%><%= link_to meeting.meeting_date.to_s + " Meeting", meeting_path(meeting) %></td>
       <td><%= meeting.meeting_time %></td>
       <td>
           <% if meeting.description %>

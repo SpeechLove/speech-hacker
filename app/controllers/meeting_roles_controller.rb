@@ -16,7 +16,7 @@ class MeetingRolesController < ApplicationController
     @meeting_role = MeetingRole.new(params[:meeting_role])
 
     if @meeting_role.save
-      redirect_to @meeting_role, :notice => "Meeting role was successfully created."
+      redirect_to meeting_roles_path, :notice => "Meeting role was successfully created."
     else
       render 'new', alert: "Meeting could not be created."
     end
