@@ -6,11 +6,7 @@ class ManualsController < ApplicationController
 
 	def show
 		@manual = Manual.find(params[:id])
-		@speeches = current_user.speeches.select { |speech| speech.manual_id == @manual.id }
-		@speeches.each do |speech|
-			logger.info('-----------------speech projects------------------------')
-			logger.info(@speeches.inspect)
-		end
+		@speeches = current_user.speeches.for_manual(@manual) # this accesses the class method in Speech that queries the database.
 	end
 
 

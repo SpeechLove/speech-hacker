@@ -1,9 +1,5 @@
 Fabricator(:manual) do
-  name "AwesomeManual"
-  id 1
+  name { Faker::Lorem.sentence }
 end
 
-Fabricator(:manual_two, :from => :manual) do
-	name "ManualTwo"
-	id 2
-end
+

@@ -2,34 +2,37 @@ require 'spec_helper'
 
 describe ManualsController do
 	let!(:manual) { Fabricate(:manual) }
+	let(:mr_user) { Fabricate(:user_testing) }
+	# let!(:manual_two_speech) { Fabricate(:manual_two_speech) }
 
 	describe 'index' do
 		it "assigns a list of manuals" do
-      get(:index)
-      assigns(:manuals).should eq [manual]
+			get(:index, :user_id => mr_user.id)
+			assigns(:manuals).should eq [manual]
     end
 	end
 
 	describe 'show' do
-		let(:speech) { Fabricate(:manual_one_speech) }
-		let(:manual_two_speech) { Fabricate(:manual_two_speech) }
-
 		it "assigns a current manual" do
-			get(:show)
+			controller.stub(:current_user).and_return(mr_user)
+			get(:show, :user_id => mr_user.id, :id => manual.id)
 			assigns(:manual).should eq manual
 		end
 
+
 		it "assigns a list of the current user's speeches from the current manual" do
-			get(:show)
-			user.speeches.each { |speech| Manual.findspeech.project_id}
-			assigns(:speeches).should eq manual.speeches
+			sign_in mr_user
+			speech = Fabricate(:speech, :user => mr_user)
+			get(:show, :user_id => mr_user.id, :id => speech.manual.id)
+			assigns(:speeches).first.should eq speech
 		end
 
 		it "doesn't include speeches from other manuals in the speeches list" do
-			#let(:manual_two) {Fabricate(:manual_two) }
-			let(:project_from_other_manual) { Fabricate(:other_project) }
-
-
+			sign_in mr_user
+			speech1 = Fabricate(:speech, :user => mr_user)
+			speech2 = Fabricate(:speech, :user => mr_user)
+			get(:show, :user_id => mr_user.id, :id => speech1.manual.id)
+			assigns(:speeches).should eq [speech1]
 		end
 	end
 

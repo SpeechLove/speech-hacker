@@ -29,6 +29,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'capybara'
   gem 'fabrication'
+  gem 'faker'
 end
 
 group :test do
