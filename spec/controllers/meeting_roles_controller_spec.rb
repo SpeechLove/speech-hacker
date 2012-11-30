@@ -39,4 +39,20 @@ describe MeetingRolesController do
       assigns(:meeting_role).should be_a(MeetingRole)
     end
   end
+
+  describe '#update' do
+    it "updates a meeting role object" do
+      put(:update, :id => meeting_role.id, :meeting_role => {:title => "YoungMaster", :description => "Master of the Universe"})
+      assigns(:meeting_role).should be_a(MeetingRole)
+      assigns(:meeting_role).title.should eq "YoungMaster"
+    end
+  end
+
+  describe '#destroy' do
+    it "destroys a meeting role object" do
+      id_num = meeting_role.id
+      delete(:destroy, :id => meeting_role.id)
+      expect{ MeetingRole.find(id_num) }.to raise_error
+    end
+  end
 end

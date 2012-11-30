@@ -3,14 +3,13 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>
       <% if current_user && current_user.super_admin? %>
-        <%="Edit"%>
+        <th> <%="Edit"%> </th>
+        <th> <%="Delete"%> </th>
       <% end %>
-      </th>
- 
     </tr>
   </thead>
+
   <tbody>
     <% @meeting_roles.each do |meeting_role| %>
     <tr>
@@ -20,7 +19,14 @@
             <%= link_to "Edit Meeting Role", edit_meeting_role_path(meeting_role) %>
           <% end %>
       </td>
+      <td>
+          <% if current_user && current_user.super_admin? %>
+            <%= link_to "Destroy Role", meeting_role_path(meeting_role), :method => :delete %>
+          <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= button_to('Create New Role', new_meeting_role_path, :class => 'btn btn-primary', :method => :get) %>
