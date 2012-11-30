@@ -5,17 +5,15 @@
       <th>Meeting</th>
       <th>Start time</th>
       <th>Location</th>
-      <th>Description</th>
-      <th>
-      <% if current_user && current_user.admin? %>
-        <%="Edit"%>
-      <% end %>
-      </th>
       <% if current_user %>
         <th>Attending?</th>
         <th>Meeting Role</th>
       <% end %>
-
+      <th>
+        <% if current_user && current_user.admin? %>
+          Edit
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -26,22 +24,17 @@
       <td>
         <%= meeting.location %>
       </td>
-      <td>
-          <% if meeting.description %>
-            <%= meeting.description.capitalize %>
-          <% end %>
-      </td>
-      <td>
-          <% if current_user && current_user.admin? %>
-            <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
-          <% end %>
-      </td>
       <% if current_user %>
         <td>
           <%= current_user.attending?(meeting) ? "Yes" : "No" %>
         </td>
         <td>
           <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
+        </td>
+        <td>
+            <% if current_user && current_user.admin? %>
+              <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
+            <% end %>
         </td>
       <% end %>
     </tr>

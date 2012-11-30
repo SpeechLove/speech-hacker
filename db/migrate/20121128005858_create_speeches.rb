@@ -5,7 +5,7 @@ class CreateSpeeches < ActiveRecord::Migration
       t.references :meeting, :null => false
       t.string     :title
       t.belongs_to :user, :null => false
-      t.belongs_to :evaluator, :null => false
+      t.belongs_to :evaluator
 
       t.timestamps
     end
