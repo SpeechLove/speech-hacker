@@ -20,7 +20,9 @@ describe MeetingsController do
 
   describe "#create" do
     it "creates a new meeting and saves it to the database" do
-      post(:create, :meeting => {:meeting_date => meeting.meeting_date, :meeting_time => meeting.meeting_time})
+      post(:create, :meeting => {:meeting_date => meeting.meeting_date,
+                                 :meeting_time => meeting.meeting_time,
+                                 :location => meeting.location})
       assigns(:meeting).should be_a(Meeting)
       assigns(:meeting).should be_valid
     end
