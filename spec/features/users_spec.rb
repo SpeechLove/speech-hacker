@@ -24,8 +24,9 @@ describe "Users", :js => true do
         visit users_path
         page.should have_link("Edit Profile", :href => edit_user_registration_path)
       end
-
+      #link was removed need to check at merge
       it "has an 'Edit Profile' link" do
+        pending
         visit users_path
         page.should have_link("My Progress", :href => user_progress_path(@user))
       end

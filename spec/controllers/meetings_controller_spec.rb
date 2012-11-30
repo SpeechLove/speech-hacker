@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe MeetingsController do
-  let!(:meeting) { Fabricate(:meeting) }
-  before(:each) { sign_in Fabricate(:user_admin) }
+  let!(:user) {Fabricate(:user)}
+  let!(:project) { Fabricate(:project) }
+  let!(:meeting) { Fabricate(:meeting)}
+  let!(:speech) { Fabricate(:speech, :user_id => user.id, 
+                            :meeting => meeting, 
+                            :project_id => project.id) }
 
   describe "#index" do
     it "assigns a list of users" do
@@ -20,9 +24,7 @@ describe MeetingsController do
 
   describe "#create" do
     it "creates a new meeting and saves it to the database" do
-      post(:create, :meeting => {:meeting_date => meeting.meeting_date,
-                                 :meeting_time => meeting.meeting_time,
-                                 :location => meeting.location})
+      post(:create, :id => meeting.id)
       assigns(:meeting).should be_a(Meeting)
       assigns(:meeting).should be_valid
     end
@@ -30,7 +32,7 @@ describe MeetingsController do
 
   describe '#show' do
     it "assigns meeting with the current meeting" do
-      get(:show, :id => 1)
+      get(:show, :id => meeting.id)
       assigns(:meeting).should be_a(Meeting)
       assigns(:meeting).should be_valid
     end
@@ -38,14 +40,14 @@ describe MeetingsController do
 
   describe '#destroy' do
     it "destroys the meeting object" do
-      delete(:destroy, :id => 1)
+      delete(:destroy, :id => meeting.id)
       Meeting.all.length.should eq 0
     end
   end
 
   describe '#edit' do
     it "assigns meeting with the current meeting" do
-      get(:edit, :id => 1)
+      get(:edit, :id => meeting.id)
       assigns(:meeting).should be_a(Meeting)
       assigns(:meeting).should be_valid
     end
@@ -53,7 +55,7 @@ describe MeetingsController do
 
   describe '#update' do
     it "updates the meeting" do
-      put(:update, :id => 1, :meeting => {:meeting_date => "1988-11-22", :meeting_time => "05:00"})
+      put(:update, :id => meeting.id, :meeting => {:meeting_date => "1988-11-22", :meeting_time => "05:00"})
       assigns(:meeting).should be_a(Meeting)
       assigns(:meeting).meeting_date.to_s.should eq "1988-11-22"
     end

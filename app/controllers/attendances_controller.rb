@@ -24,6 +24,5 @@ class AttendancesController < ApplicationController
       @meeting_roles = MeetingRole.attendee_roles
       render "meetings/show", :alert => "Something went wrong!"
     end
-
   end
 end
