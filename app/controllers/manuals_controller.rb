@@ -9,7 +9,9 @@ class ManualsController < ApplicationController
     #@speeches_test = current_user.speeches
     #current_user # => User.find(session[:user_id])
     @manuals.each do |manual|
-      @speeches[manual] = user.speeches.for_manual(manual)
+      @speeches[manual] = user.speeches.for_manual(manual).sort_by do |speech|
+        speech.project.project_number
+      end
     end
   end
 

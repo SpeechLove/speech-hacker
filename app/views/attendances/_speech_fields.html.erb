@@ -4,9 +4,7 @@
   Manual: <%= collection_select :manual, :manual_id, Manual.all, :id, :name,
                                 {}, :class => "manual-select" %>
 
-  <% current_manual = current_speech(@meeting) ? current_speech(@meeting).project.manual : Manual.first %>
-
-  Project: <%= speech_fields.collection_select :project_id, Project.find_all_by_manual_id(current_manual.id),
+  Project: <%= speech_fields.collection_select :project_id, Project.find_all_by_manual_id(current_manual(@meeting).id),
    																	           :id, :name,
                                                { :selected => current_project(@meeting) },
                                                :class => "project-select" %>

@@ -30,15 +30,22 @@ $(document).ready(function() {
       data: params,
         success: function(data, status, xhr) {
           console.log("ajax success");
-          for (var i = 0; i < data["projects"].length; i++) {
-            console.log(data["projects"][i].name);
-          }
+          replace_projects(data["projects"]);
         },
         error: function(xhr, status, error) {
 
         }
     }); // ajax
   });
+
+  function replace_projects(projects) {
+    var $select_elem = $(".project-select");
+    $select_elem.empty(); // remove old options
+    for (var i = 0; i < projects.length; i++) {
+      $select_elem.append($("<option></option>")
+         .attr("value", projects[i].id).text(projects[i].name));
+    }
+  }
 
   function show_hide_role_sign_up() {
     if ($('#attendance_attend_true').attr('checked')) {
