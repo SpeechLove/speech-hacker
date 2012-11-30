@@ -46,31 +46,4 @@ class User < ActiveRecord::Base
     attendances.find_by_meeting_id(meeting.id)
   end
 
-  def self.completed_projects(u_id)
-    speeches = Speech.where({:user_id => u_id })
-    #speeches = Speech.where("u_id")
-    speeches = [speeches] if (speeches.class == Speech)
-    speech_ids = speeches.collect{ |s| s.id }
-    project_ids = speeches.collect{ |s| s.project_id }
-    projects = Project.find(project_ids)
-    completed = Hash.new
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts speeches
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts projects
-
-    projects.each do |p|
-      completed[p] = speeches.find{ |s| s.project_id == p.id }
-    end
-
-    puts "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
-    puts completed.inspect
-
-    completed.group_by{ |pair| pair[0].manual_id }
-  end
-
-  def manuals_in_progress
-    speeches = self.speeches
-    manuals = speeches.group_by
-  end
 end

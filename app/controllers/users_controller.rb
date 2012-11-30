@@ -20,17 +20,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def progress
-    @user = User.find(params[:id])
-    @completed = User.completed_projects(@user.id)
-    logger.debug @completed
-    @manuals = Manual.find(@completed.keys)
-    @manuals = [@manuals] if @manuals.class == Manual
-    respond_to do |format|
-      format.html
-    end
-  end
-
   def update
     @user = User.find(params[:id])
 

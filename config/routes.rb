@@ -9,9 +9,5 @@ SpeechHacker::Application.routes.draw do
   	resources :speeches, :only => [:index]
   end
   
-
-  
-  get "/users/:id/progress" => "users#progress", :as => "user_progress"
-
   post '/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin_user'
 end
