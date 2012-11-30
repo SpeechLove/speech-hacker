@@ -12,6 +12,12 @@ class Meeting < ActiveRecord::Base
                          :message => "format should be HH:MM" }
   validates_length_of :description, :maximum => 255, :allow_blank => true
 
+  def formatted_date
+    month = Date::MONTHNAMES[meeting_date.month]
+    day_of_week = Date::DAYNAMES[meeting_date.strftime("%u").to_i - 1]
+    "#{day_of_week}, #{month} #{meeting_date.day}, #{meeting_date.year}"
+  end
+
   private
   def verify_date
     if (self.meeting_date.to_s =~ /\d{4}-\d{2}-\d{2}/) == nil
