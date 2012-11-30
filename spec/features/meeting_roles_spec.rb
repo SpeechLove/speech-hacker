@@ -67,6 +67,13 @@ describe "MeetingRole", :js => true do
       end
     end
 
+    describe "meeting_roles#create" do
+      it "creates a new role and saves it" do
+        visit meeting_roles_path
+        page.should have_button("Create New Role")
+      end
+    end
+
     describe "meeting_roles#show" do
       it "shows the meeting roles show page" do
         visit meeting_role_path(meeting_role)
@@ -88,6 +95,14 @@ describe "MeetingRole", :js => true do
         fill_in 'meeting_role_description', :with => toastmaster.description
         click_button("Update Meeting role")
         page.should have_content(toastmaster.title)
+      end
+    end
+
+    describe "meeting_roles#destroy" do
+      it "destroys a meeting role" do
+        visit meeting_roles_path
+        click_link("Destroy Role")
+        page.should have_content("The Meeting Role was destroyed.")
       end
     end
   end
