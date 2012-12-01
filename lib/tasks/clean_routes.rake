@@ -42,6 +42,7 @@ task :clean_routes => :environment do
 
   grouped_routes.each_key do |controller|
     if controller
+      puts ""
       puts controller_name(controller)
     else
       puts "NO NAME"
