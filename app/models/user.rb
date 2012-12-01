@@ -49,4 +49,5 @@ class User < ActiveRecord::Base
   def meeting_speech(meeting)
     self.speeches.where(:meeting_id => meeting.id).first
   end
+
 end

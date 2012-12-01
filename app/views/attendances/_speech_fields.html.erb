@@ -1,19 +1,14 @@
-<%= m.fields_for :speeches, @attendance.meeting.speeches.build do |speech_fields| %>
-	<%
-		if current_speech(@meeting)
-		  title = current_speech(@meeting).title
-		else
-			title = ""
-		end
-	%>
-  Speech Title: <%= speech_fields.text_field :title, :class => "speech-title", :value => title %>
+<%= m.fields_for :speeches, current_speech(@meeting) do |speech_fields| %>
+
+  Speech Title: <%= speech_fields.text_field :title, :class => "speech-title" %>
   <br />
   Manual: <%= collection_select :manual, :manual_id, Manual.all, :id, :name,
                                 {}, :class => "manual-select" %>
 
-  Project: <%= speech_fields.collection_select :project_id, Project.find_all_by_manual_id(current_manual(@meeting).id),
+  Project: <%= speech_fields.collection_select :project_id,
+  																				     project_select(@meeting),
    																	           :id, :name,
-                                               { :selected => current_project(@meeting) },
+                                               {},
                                                :class => "project-select" %>
 
   <%= speech_fields.hidden_field :user_id, :value => current_user.id %>
