@@ -5,7 +5,7 @@ describe MeetingsController do
   before(:each) { sign_in Fabricate(:user_admin) }
 
   describe "#index" do
-    it "assigns a list of users" do
+    it "assigns a list of meetings" do
       get(:index)
       assigns(:meetings).should eq [meeting]
     end
