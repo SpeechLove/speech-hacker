@@ -14,7 +14,19 @@ class Meeting < ActiveRecord::Base
   validates_length_of :description, :maximum => 255, :allow_blank => true
   validates_length_of :location, :maximum => 255, :allow_blank => false
   
-  accepts_nested_attributes_for :speeches
+  accepts_nested_attributes_for :speeches, :reject_if => proc { |attributes| attributes['title'].blank? }
+
+
+  def roles_taken
+    self.attendances.reduce(Hash.new{ |hash, key| hash[key] = [] }) do |roles, attendance|
+      roles[attendance.meeting_role_id] << attendance.user.name
+      roles
+    end
+  end
+
+  def register(user)
+    self.attendances.find_or_initialize_by_user_id(user.id)
+  end
 
   def formatted_date
     month = Date::MONTHNAMES[meeting_date.month]

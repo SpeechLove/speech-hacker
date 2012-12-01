@@ -24,10 +24,10 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
-    @projects = Manual.first.projects.collect {|p| [ p.name, p.id ] }
-    @attendance = @meeting.attendances.find_or_initialize_by_user_id(current_user.id)
+    @attendance = @meeting.register(current_user)
     @meeting_roles = MeetingRole.attendee_roles
-    @user_attending = current_user.attending?(@meeting)
+    @roles_taken = @meeting.roles_taken
+    @attendance.meeting.speeches.build
   end
 
   def destroy
