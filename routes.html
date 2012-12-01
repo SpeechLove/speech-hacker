@@ -1,0 +1,48 @@
+<html><head><title>Rails 3 Routes</title></head><body><table border=1>
+<tr><th>Name</th><th>Verb</th><th>Path</th><th>Requirements</th></tr>
+<tr><td></td><td>(?-mix:)</td><td>#<Journey::Path::Pattern:0x007fa41c6a5d20></td><td></td></tr>
+<tr><td>root</td><td>(?-mix:)</td><td>#<Journey::Path::Pattern:0x007fa41bb3ad78></td><td>{:controller=>"meetings", :action=>"index"}</td></tr>
+<tr><td>meetings</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41bb6a208></td><td>{:action=>"index", :controller=>"meetings"}</td></tr>
+<tr><td></td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41c637b90></td><td>{:action=>"create", :controller=>"meetings"}</td></tr>
+<tr><td>new_meeting</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41c321028></td><td>{:action=>"new", :controller=>"meetings"}</td></tr>
+<tr><td>edit_meeting</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41c684ee0></td><td>{:action=>"edit", :controller=>"meetings"}</td></tr>
+<tr><td>meeting</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41c474218></td><td>{:action=>"show", :controller=>"meetings"}</td></tr>
+<tr><td></td><td>(?-mix:^PUT$)</td><td>#<Journey::Path::Pattern:0x007fa41c6c0710></td><td>{:action=>"update", :controller=>"meetings"}</td></tr>
+<tr><td></td><td>(?-mix:^DELETE$)</td><td>#<Journey::Path::Pattern:0x007fa41c575e78></td><td>{:action=>"destroy", :controller=>"meetings"}</td></tr>
+<tr><td>attendances</td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41c29b7c0></td><td>{:action=>"create", :controller=>"attendances"}</td></tr>
+<tr><td>attendance</td><td>(?-mix:^PUT$)</td><td>#<Journey::Path::Pattern:0x007fa41c2f0068></td><td>{:action=>"update", :controller=>"attendances"}</td></tr>
+<tr><td>new_user_session</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41baf6808></td><td>{:action=>"new", :controller=>"devise/sessions"}</td></tr>
+<tr><td>user_session</td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41bb03a80></td><td>{:action=>"create", :controller=>"devise/sessions"}</td></tr>
+<tr><td>destroy_user_session</td><td>(?-mix:^DELETE$)</td><td>#<Journey::Path::Pattern:0x007fa41bb14448></td><td>{:action=>"destroy", :controller=>"devise/sessions"}</td></tr>
+<tr><td>user_password</td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41f069cb0></td><td>{:action=>"create", :controller=>"devise/passwords"}</td></tr>
+<tr><td>new_user_password</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41c563228></td><td>{:action=>"new", :controller=>"devise/passwords"}</td></tr>
+<tr><td>edit_user_password</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f730418></td><td>{:action=>"edit", :controller=>"devise/passwords"}</td></tr>
+<tr><td></td><td>(?-mix:^PUT$)</td><td>#<Journey::Path::Pattern:0x007fa41f4baaa8></td><td>{:action=>"update", :controller=>"devise/passwords"}</td></tr>
+<tr><td>cancel_user_registration</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f719c90></td><td>{:action=>"cancel", :controller=>"devise/registrations"}</td></tr>
+<tr><td>user_registration</td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41f034b78></td><td>{:action=>"create", :controller=>"devise/registrations"}</td></tr>
+<tr><td>new_user_registration</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f036680></td><td>{:action=>"new", :controller=>"devise/registrations"}</td></tr>
+<tr><td>edit_user_registration</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f7d9748></td><td>{:action=>"edit", :controller=>"devise/registrations"}</td></tr>
+<tr><td></td><td>(?-mix:^PUT$)</td><td>#<Journey::Path::Pattern:0x007fa41f7e2f78></td><td>{:action=>"update", :controller=>"devise/registrations"}</td></tr>
+<tr><td></td><td>(?-mix:^DELETE$)</td><td>#<Journey::Path::Pattern:0x007fa41f293d88></td><td>{:action=>"destroy", :controller=>"devise/registrations"}</td></tr>
+<tr><td>meeting_roles</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f298e78></td><td>{:action=>"index", :controller=>"meeting_roles"}</td></tr>
+<tr><td></td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41f2a65c8></td><td>{:action=>"create", :controller=>"meeting_roles"}</td></tr>
+<tr><td>new_meeting_role</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f2acb58></td><td>{:action=>"new", :controller=>"meeting_roles"}</td></tr>
+<tr><td>edit_meeting_role</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f0a2100></td><td>{:action=>"edit", :controller=>"meeting_roles"}</td></tr>
+<tr><td>meeting_role</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f7a6230></td><td>{:action=>"show", :controller=>"meeting_roles"}</td></tr>
+<tr><td></td><td>(?-mix:^PUT$)</td><td>#<Journey::Path::Pattern:0x007fa41f0ddf98></td><td>{:action=>"update", :controller=>"meeting_roles"}</td></tr>
+<tr><td></td><td>(?-mix:^DELETE$)</td><td>#<Journey::Path::Pattern:0x007fa41f043cb8></td><td>{:action=>"destroy", :controller=>"meeting_roles"}</td></tr>
+<tr><td>user_progress</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f137e30></td><td>{:controller=>"users", :action=>"progress"}</td></tr>
+<tr><td>user_manuals</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41c5d0788></td><td>{:action=>"index", :controller=>"manuals"}</td></tr>
+<tr><td>user_manual</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41c30be80></td><td>{:action=>"show", :controller=>"manuals"}</td></tr>
+<tr><td>users</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f108b58></td><td>{:action=>"index", :controller=>"users"}</td></tr>
+<tr><td></td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41f1ec5d8></td><td>{:action=>"create", :controller=>"users"}</td></tr>
+<tr><td>new_user</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41c44abe8></td><td>{:action=>"new", :controller=>"users"}</td></tr>
+<tr><td>edit_user</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f6435f0></td><td>{:action=>"edit", :controller=>"users"}</td></tr>
+<tr><td>user</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f6455a8></td><td>{:action=>"show", :controller=>"users"}</td></tr>
+<tr><td></td><td>(?-mix:^PUT$)</td><td>#<Journey::Path::Pattern:0x007fa41f463a78></td><td>{:action=>"update", :controller=>"users"}</td></tr>
+<tr><td></td><td>(?-mix:^DELETE$)</td><td>#<Journey::Path::Pattern:0x007fa41f0a5ee0></td><td>{:action=>"destroy", :controller=>"users"}</td></tr>
+<tr><td>speeches</td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41f187d18></td><td>{:action=>"index", :controller=>"speeches"}</td></tr>
+<tr><td></td><td>(?-mix:^GET$)</td><td>#<Journey::Path::Pattern:0x007fa41e607c68></td><td>{:controller=>"projects", :action=>"projects_by_manual"}</td></tr>
+<tr><td>make_admin_user</td><td>(?-mix:^POST$)</td><td>#<Journey::Path::Pattern:0x007fa41e6c1280></td><td>{:controller=>"users", :action=>"make_admin"}</td></tr>
+<tr><td>rails_info_properties</td><td>(?-mix:)</td><td>#<Journey::Path::Pattern:0x007fa41f7c28b8></td><td>{:controller=>"rails/info", :action=>"properties"}</td></tr>
+</table></body></html>
