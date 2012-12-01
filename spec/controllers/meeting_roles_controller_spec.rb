@@ -22,7 +22,6 @@ describe MeetingRolesController do
     it "creates a new meeting role object" do
       post(:create, :meeting_role => {:title => meeting_role.title, :description => meeting_role.description})
       assigns(:meeting_role).title.should eq meeting_role.title
-      assigns(:meeting_role).should be_valid
     end
   end
 
