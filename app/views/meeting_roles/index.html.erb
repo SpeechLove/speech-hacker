@@ -4,8 +4,9 @@
     <tr>
       <th>Title</th>
       <% if current_user && current_user.super_admin? %>
-        <th> <%="Edit"%> </th>
-        <th> <%="Delete"%> </th>
+        <th> Edit </th>
+        <th> Description </th>
+        <th> Delete </th>
       <% end %>
     </tr>
   </thead>
@@ -14,16 +15,9 @@
     <% @meeting_roles.each do |meeting_role| %>
     <tr>
       <td><%= link_to meeting_role.title, meeting_role_path(meeting_role) %></td>
-      <td>
-          <% if current_user && current_user.super_admin? %>
-            <%= link_to "Edit Meeting Role", edit_meeting_role_path(meeting_role) %>
-          <% end %>
-      </td>
-      <td>
-          <% if current_user && current_user.super_admin? %>
-            <%= link_to "Destroy Role", meeting_role_path(meeting_role), :method => :delete %>
-          <% end %>
-      </td>
+      <td><%= link_to "Edit", edit_meeting_role_path(meeting_role) %></td>
+      <td><%= meeting_role.description %></td>
+      <td><%= link_to "Destroy", meeting_role_path(meeting_role), :method => :delete %></td>
     </tr>
     <% end %>
   </tbody>

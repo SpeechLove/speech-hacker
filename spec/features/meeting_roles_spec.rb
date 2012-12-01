@@ -4,7 +4,7 @@ describe "MeetingRole", :js => true do
   include Warden::Test::Helpers
   let!(:meeting_role) { Fabricate(:meeting_role )}
 
-  context "when user is not an admin" do
+  context "when user is not a superadmin" do
     before(:each) do
       @user = Fabricate(:user)
       login_as @user, :scope => :user
@@ -48,7 +48,7 @@ describe "MeetingRole", :js => true do
     describe "meeting_roles#index" do
       it "shows the meeting roles index page" do
         visit meeting_roles_path
-        page.should have_content("Meeting Roles")
+        page.should have_content("Description")
       end
     end
 
@@ -101,7 +101,7 @@ describe "MeetingRole", :js => true do
     describe "meeting_roles#destroy" do
       it "destroys a meeting role" do
         visit meeting_roles_path
-        click_link("Destroy Role")
+        click_link("Destroy")
         page.should have_content("The Meeting Role was destroyed.")
       end
     end
