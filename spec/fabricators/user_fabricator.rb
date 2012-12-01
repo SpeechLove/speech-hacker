@@ -16,3 +16,8 @@ Fabricator(:user_superadmin, :from => :user) do
     u.add_role :super_admin
   end
 end
+
+Fabricator(:user_testing, :from => :user) do
+  id 1
+  name "Test User"
+end

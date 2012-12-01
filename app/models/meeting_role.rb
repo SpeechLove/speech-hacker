@@ -14,6 +14,10 @@ class MeetingRole < ActiveRecord::Base
   end
 
   def absentee?
-    title == "Absentee"
+    self.title == "Absentee"
+  end
+
+  def speaker?
+    self.title == "Speaker"
   end
 end
