@@ -15,6 +15,7 @@
         <label class="radio">
           <%= f.radio_button :meeting_role_id, role.id, :class => "#{role.title}-option role-option" %>
           <%= label role.title, role.title %>
+          <strong><%= @roles_taken[role.id].join(", ") %></strong>
 
           <% if role.speaker? %>
             <div class="speech-fields">

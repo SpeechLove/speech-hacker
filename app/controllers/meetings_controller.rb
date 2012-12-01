@@ -27,6 +27,11 @@ class MeetingsController < ApplicationController
     @projects = Manual.first.projects.collect { |p| [p.name, p.id] }
     @attendance = @meeting.attendances.find_or_initialize_by_user_id(current_user.id)
     @meeting_roles = MeetingRole.attendee_roles
+    @attendances = Attendance.find_all_by_meeting_id(params[:id])
+    @roles_taken = Hash.new{ |hash, key| hash[key] = [] }
+    @attendances.each do |attendance|
+      @roles_taken[attendance.meeting_role_id] << attendance.user.name
+    end
   end
 
   def destroy

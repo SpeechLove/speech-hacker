@@ -15,6 +15,7 @@ class AttendancesController < ApplicationController
 
   def update
     @attendance = current_user.attendances.find(params[:id])
+
     if @attendance.update_attributes(params[:attendance])
       # if role changed from speaker to non-speaker, remove db record
 

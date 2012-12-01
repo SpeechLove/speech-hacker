@@ -9,22 +9,23 @@ describe MeetingsController do
                             :project_id => project.id) }
 
   describe "#index" do
-    it "assigns a list of users" do
+    it "assigns a list of meetings" do
       get(:index)
       assigns(:meetings).should eq [meeting]
     end
   end
 
-  describe "#new" do
-    it "creates a new meeting" do
-      get(:new)
-      assigns(:meeting).should be_a(Meeting)
-    end
-  end
-
   describe "#create" do
     it "creates a new meeting and saves it to the database" do
-      post(:create, :id => meeting.id)
+      meeting_attrs = {}
+      meeting_attrs["meeting_date"] = meeting.meeting_date
+      meeting_attrs["meeting_time"] = meeting.meeting_time
+      meeting_attrs["location"] = meeting.location
+
+      expect do
+        post(:create, :meeting => meeting_attrs )
+      end.to change{ Meeting.count }.by(1)
+      
       assigns(:meeting).should be_a(Meeting)
       assigns(:meeting).should be_valid
     end
