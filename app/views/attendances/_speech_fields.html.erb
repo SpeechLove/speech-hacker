@@ -1,6 +1,7 @@
 <%= m.fields_for :speeches, current_speech(@meeting) do |speech_fields| %>
 
   Speech Title: <%= speech_fields.text_field :title, :class => "speech-title" %>
+
   <br />
   Manual: <%= collection_select :manual, :manual_id, Manual.all, :id, :name,
                                 {}, :class => "manual-select" %>

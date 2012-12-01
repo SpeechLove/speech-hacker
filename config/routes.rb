@@ -3,7 +3,8 @@ SpeechHacker::Application.routes.draw do
   resources :meetings
   resources :attendances, :only => [:create, :update]
   devise_for :users
-
+  resources :meeting_roles
+  get "/users/:id/progress" => "users#progress", :as => "user_progress"
   resources :users do
   	resources :manuals, :only => [:index, :show]
   end
