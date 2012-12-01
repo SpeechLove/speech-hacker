@@ -12,7 +12,7 @@
 
           <ul class="nav pull-right">
             <li><%= link_to "Current Meetings", meetings_path  %></li>
-              <% if can? :manage, Meeting %>
+            <% if can? :manage, Meeting %>
             <li><%= link_to "Create Meeting", new_meeting_path  %></li>
             <% end %>
             <% if can? :manage, User %>

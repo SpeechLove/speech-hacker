@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(:version => 20121130021248) do
     t.integer  "meeting_id",   :null => false
     t.string   "title"
     t.integer  "user_id",      :null => false
-    t.integer  "evaluator_id", :null => false
+    t.integer  "evaluator_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
