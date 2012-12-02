@@ -9,12 +9,6 @@
  * Licensed under the MIT license
  */
 
-
-
-
-// the semi-colon before the function invocation is a safety
-// net against concatenated scripts and/or other plugins
-// that are not closed properly.
 ;(function ( $, window, document, undefined ) {
 
     // undefined is used here as the undefined global
@@ -63,17 +57,9 @@
     // The actual plugin constructor
     function Plugin( element, options ) {
         this.element = $(element);
-
-        // jQuery has an extend method that merges the
-        // contents of two or more objects, storing the
-        // result in the first object. The first object
-        // is generally empty because we don't want to alter
-        // the default options for future instances of the plugin
         this.options = $.extend( {}, defaults, options) ;
-
         this._defaults = defaults;
         this._name = pluginName;
-
         this.init();
     }
 
@@ -114,31 +100,39 @@
     };
 
     Plugin.prototype.renderEvents = function (events, elem) {
+        all_events = [];
         var live_date = this.live_date;
         var msg_evnts_hdr = this.msg_events_hdr;
         for(var i=1; i<=daysInMonth[live_date.getMonth()]; i++){
+
             $.each(events.event, function(){
                 var year = 1900 + live_date.getYear();
                 var month = live_date.getMonth();
 
                 var view_date = new Date(year, month, i, 0,0,0,0);
                 var event_date = new Date(this.date);
+                
 
                 if( event_date.getDate() == view_date.getDate()
                     && event_date.getMonth() == view_date.getMonth()
                     && event_date.getFullYear() == view_date.getFullYear()
 
+
                 ){
+                    //console.log(this.date);
+                    all_events.push(this.date);
+
+
                     elem.parent('div:first').find('#day_' + i)
                     .removeClass("day")
                     .addClass('holiday')
                     .empty()
                     .append('<span class="weekday">' +i+ '</span>')
-                    .popover({
-                        'title': this.location,
-                        'content': this.time,
-                        'delay': { 'show': 250, 'hide': 250 }
-                    });
+                    // .popover({
+                    //     'title': this.location,
+                    //     'content': this.time,
+                    //     'delay': { 'show': 250, 'hide': 250 }
+                    // });
                 }
             });
         }
@@ -277,6 +271,45 @@
                             var month = parseInt(target.attr('month'), 10)||1;
                             var year = parseInt(target.attr('year'), 10)||1;
 
+                            //grab the list of meetings and trim it to the correct meeting
+
+                            //build the date and send and ajax query to find that object.
+
+
+
+
+
+                            meetingInfoDisplay(day, month, year);
+
+                            // console.log("target" + target.attr());
+                            // console.log(target.attr('day'));
+                            // console.log("this " + this.attr());
+
+                            // if($('#meeting-info').hasClass('hide')) {
+                            //     $('#meeting-info').removeClass('hide');
+                            //     populateWindows(month, day);
+                            //     $('#meeting-info')[0].innerHTML = "glorp";
+                            // } else {
+                            //     $('#meeting-info').addClass('hide');                                
+                            // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             this.element.trigger({
                                 type: 'onEvent',
                                 day: day,
@@ -370,6 +403,37 @@
             }
         });
     }
+
+    var populateWindows = function(month, day) {
+        console.log(all_events);
+
+    };
+
+    var meetingInfoDisplay = function(day, month, year) {
+    var $meeting = $('#meeting-info');
+    var $list = $('#meeting-list');
+
+    if($meeting.hasClass('hide')) {
+        $meeting.removeClass('hide');
+        $meeting.attr("day", day);
+        $list.addClass('hide');
+        populateWindows(month, day);
+        $meeting[0].innerHTML = "Details about this meeting on "
+         + month + "/" + day + "/" + year;
+    } 
+    else if($meeting.attr('day') != day) {
+        //get info for new meeting 
+        $meeting[0].innerHTML = "Details about this meeting on "
+         + month + "/" + day + "/" + year;
+        $meeting.attr("day", day);
+    } 
+    else {
+        $meeting.addClass('hide'); 
+        $meeting.removeAttr('day');  
+        $list.removeClass('hide');                     
+    } 
+  }; 
+
 
 })( jQuery, window, document );
 

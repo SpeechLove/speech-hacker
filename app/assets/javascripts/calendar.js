@@ -19,4 +19,16 @@ $(document).ready(function(){
     });
   }
 
+
+  // $('.holiday').on('click', function() {
+  //   console.log(this.day);
+  // });
+
+
+
+
+
+
 });
+
+
