@@ -43,9 +43,11 @@
         },
 
         template =  ''+
-                        '<h1 class="year"></h1>'+
-                        '<h3 class="month"></h3>'+
-                        '<table class="calendar" id="calendar">'+
+                        '<div class="span9" style="margin-bottom: 10px;">' +
+                            '<h3 class="month" style="min-height: 100%; line-height: 100%; color: #317EAC; display: inline;"></h3>' +
+                            '<h3 class="year" style="min-height: 100%; line-height: 100%; text-align: right; float: right; display: inline;"></h3>'+
+                        '</div>' +
+                        '<table class="calendar span9" id="calendar">'+
                             '<thead class="calendar-header"></thead>'+
                             '<tbody class="calendar-body"></tbody>'+
                             '<tfoot>'+
