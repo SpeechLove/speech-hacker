@@ -11,12 +11,12 @@ describe AttendancesController do
   describe "#create" do
     it "assigns a meeting" do
       post(:create, :meeting_id => meeting.id, :attendance => attendance_params)
-      assigns(:meeting).should eq meeting
+      assigns(:meeting).should eq(meeting)
     end
 
     it "creates a new attendance" do
       post(:create, :meeting_id => meeting.id, :attendance => attendance_params)
-      assigns(:attendance).meeting_role.should eq absentee_role
+      assigns(:attendance).meeting_role should eq absentee_role
     end
   end
 
@@ -31,3 +31,6 @@ describe AttendancesController do
 
   end
 end
+
+
+# attendance attributes :meeting_role_id, :attend, :user, :meeting, :meeting_attributes
