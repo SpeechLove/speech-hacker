@@ -10,7 +10,7 @@ describe "Meeting", :js => true do
 
     describe "meetings#index" do
       it "shows the meeting date for each meeting" do
-        page.should have_link meeting.meeting_date.to_s
+        page.should have_link meeting.formatted_date
       end
 
       it "shows the start time for each meeting" do

@@ -1,71 +1,13 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Date and Time</title>
-  <meta name="description" content="Just a simple calendar and clock.">
-  <meta name="author" content="Joshua Miller - joshuamil@gmail.com">
-  
-  <!-- HTML5 shim, for IE6-8 support of HTML elements -->
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  
-
-  <!-- Favorite/Touch icons -->
-  <link rel="shortcut icon" type="image/x-icon" href="lib/img/ico/favicon.ico">
-  <link rel="apple-touch-icon" href="lib/img/ico/datetime-apple-57x57.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="lib/img/ico/datetime-apple-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="lib/img/ico/datetime-apple-114x114.png">
-  
-  <!-- Google Analytics -->
-  // <script type="text/javascript">
-
-  //   var _gaq = _gaq || [];
-  //   _gaq.push(['_setAccount', 'UA-27804390-1']);
-  //   _gaq.push(['_trackPageview']);
-  
-  //   (function() {
-  //   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  //   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  //   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  //   })();
-  
-  // </script>
-
-</head>
-
-<body>
-
   <div class="container">
-  
-    <div class="row">
-      <div class="span12 offset2">
-      
-        <h1 class="year"></h1>
-        
-        <h2 class="time"></h2>
-      
-        <h3 class="month"></h3>
-      
-        <table id="calendar" class="calendar">
-          <thead>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-        
-        <input type="button" name="last" id="last" value="Previous" class="btn">
-        <input type="button" name="current" id="current" value="Current" class="btn">
-        <input type="button" name="next" id="next" value="Next" class="btn">
-        
-      </div>
+    <div class="row cal-row">
+      <div class="span8" id="calendar"></div>
     </div>
-  
-  </div>
+  </div> <!-- /container -->
 
-</body>
-</html>
-
-
+  <% @meetings.each do |meeting| %>
+    <div>
+      <p><%= link_to meeting.meeting_date.to_s + " Meeting", meeting_path(meeting) %>
+        <%= meeting.meeting_time %>
+        <%= meeting.location %></p>
+    </div>
+  <% end %>
