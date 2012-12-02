@@ -1,5 +1,5 @@
 class Attendance < ActiveRecord::Base
-  attr_accessible :meeting_role_id, :attend, :user, :meeting, :meeting_attributes
+  attr_accessible :meeting_role_id, :attend, :user, :meeting, :meeting_attributes, :meeting_role
   attr_accessor :attend
 
   belongs_to :meeting

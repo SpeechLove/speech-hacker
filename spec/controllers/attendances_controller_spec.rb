@@ -16,7 +16,7 @@ describe AttendancesController do
 
     it "creates a new attendance" do
       post(:create, :meeting_id => meeting.id, :attendance => attendance_params)
-      assigns(:attendance).meeting_role.should eq absentee_role
+      assigns(:attendance).meeting_role.title.should eq absentee_role.title
     end
   end
 
