@@ -18,6 +18,9 @@
             <% if can? :manage, User %>
             <li><%= link_to "Edit Users", users_path  %></li>
             <% end  %>
+            <% if can? :read, MeetingRole %>
+            <li><%= link_to "Meeting Roles", meeting_roles_path  %></li>
+            <% end  %>
 
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
