@@ -2,6 +2,55 @@
 # rake routes, except that it's formatted and grouped by controller.
 # you can call this task with the command 'rake clean_routes'
 
+task :clean_routes => :environment do
+  print_routes
+end
+
+def print_routes
+  grouped_routes.each_key do |controller|
+    puts controller_name(controller)
+
+    grouped_routes[controller].each do |route|
+      print left_indent(route[:name])
+      puts ["#{route[:name].to_s}".ljust(25),
+            "#{route[:verb].to_s}".ljust(10),
+            "#{route[:path].to_s}".ljust(35),
+            "#{route[:reqs][:controller]}##{route[:reqs][:action]}".ljust(30)].join
+    end
+  end
+end
+
+def grouped_routes
+  g_routes = get_all_routes.set.collect do |route|
+    {:name => route.name,
+     :verb => verb_action(route.verb),
+     :path => route.path.spec,
+     :reqs => route_reqs(route)
+   }
+  end.group_by { |r| r[:reqs][:controller] }
+  g_routes
+end
+
+def get_all_routes
+  if all_routes = ENV['CONTROLLER']
+    all_routes = SpeechHacker::Application.routes.select do |route|
+      route.defaults[:controller] == ENV['CONTROLLER']
+    end
+  else
+    all_routes = SpeechHacker::Application.routes
+  end
+  all_routes
+end
+
+def verb_action(verb)
+  verb.to_s.delete "mix\$\^\:\?\(\)\-"
+end
+
+def route_reqs(route)
+  route.requirements.empty? ? reqs = "" : reqs = route.requirements.inspect
+  reqs_to_hash(reqs)
+end
+
 def reqs_to_hash(reqs)
   if reqs.include?("=>")
     r_params = (reqs.delete "\\\"{},:").split(" ")
@@ -16,50 +65,20 @@ def reqs_to_hash(reqs)
 end
 
 def controller_name(controller)
-  controller.split("_").collect do |name|
-    name.capitalize
-  end.join("_").split("/").collect do |name|
-    name.capitalize
-  end.join("/")
+  controller ? name = controller : name = "no name"
+  capitalized_name(name)
 end
 
-task :clean_routes => :environment do
-  if all_routes = ENV['CONTROLLER']
-    all_routes = SpeechHacker::Application.routes.select do |route|
-      route.defaults[:controller] == ENV['CONTROLLER']
-    end
-  else
-    all_routes = SpeechHacker::Application.routes
+def capitalized_name(name)
+  c_name = name
+  ["/", "_"].each do |separator|
+    c_name = c_name.split(separator).each do |n|
+      n[0] = n[0].upcase
+    end.join(separator)
   end
-  routes = all_routes.set.collect do |route|
-    reqs = route.requirements.empty? ? "" : route.requirements.inspect
-    {:name => route.name, :verb => route.verb, :path => route.path, :reqs => reqs}
-  end
+  c_name
+end
 
-  grouped_routes = routes.each do |r|
-    r[:reqs] = reqs_to_hash(r[:reqs])
-    r[:verb] = r[:verb].to_s.delete "mix\$\^\:\?\(\)\-"
-    r[:path] = r[:path].spec
-  end.group_by { |r| r[:reqs][:controller] }
-
-  grouped_routes.each_key do |controller|
-    if controller
-      puts ""
-      puts controller_name(controller)
-    else
-      puts "NO NAME"
-    end
-    grouped_routes[controller].each do |route|
-      if route[:name]
-        print "|- "
-      else
-        print "|  "
-      end
-      puts ["#{route[:name].to_s}".ljust(25),
-            "#{route[:verb].to_s}".ljust(10),
-            "#{route[:path].to_s}".ljust(35),
-            "#{route[:reqs][:controller]}##{route[:reqs][:action]}".ljust(30)].join
-    end
-  end
-
+def left_indent(has_name)
+  has_name ? "|- " : "|  "
 end
