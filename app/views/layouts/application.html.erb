@@ -21,7 +21,7 @@
 
     <div class="container">
         <div class="row">
-          <div class="span9">
+          <div class="wrap">
             <div class="alert alert-success success-box"></div>
 
             <% if notice %>
@@ -37,7 +37,9 @@
             <% end %>
 
             <%= yield %>
-            <%= debug params%>
+            <div class="debug">
+              <%= debug params%>
+            </div>
           </div>
         </div><!--/row-->
       <footer>

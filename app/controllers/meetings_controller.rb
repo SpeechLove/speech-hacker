@@ -5,22 +5,12 @@ class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all
     @attendance = Attendance.all
-
-    json_meetings = @meetings.collect do |meeting|
-      date = meeting.meeting_date.to_s.gsub(/(\d{4})-(\d{2})-(\d{2})/, '\2/\3/\1')
-      { "date" => date,
-        "title" => "1" }
-    end
-
-    temp = { "event" => json_meetings.reverse }
-    logger.info('-----json-----------------')
-    logger.info(temp.inspect)
+    json_meetings = Meeting.to_json(@meetings)
 
     respond_to do |format|
       format.html
-      format.json { render :json => { :meetings => temp } }
+      format.json { render :json => { :meetings => json_meetings} }
     end
-    #render "calendar"
   end
 
   def new

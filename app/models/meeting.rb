@@ -16,6 +16,22 @@ class Meeting < ActiveRecord::Base
   
   accepts_nested_attributes_for :speeches
 
+
+  def to_hash
+      date = meeting_date.to_s.gsub(/(\d{4})-(\d{2})-(\d{2})/, '\2/\3/\1')
+      hashed_meeting = { "date" => date,
+                        "time" => meeting_time,
+                        "location" => location }
+  end
+
+  def self.to_json(meetings)
+    formatted_meetings = meetings.collect do |meeting|
+      meeting.to_hash
+    end
+    json_meetings = { "event" => formatted_meetings }
+  end
+
+
   private
   def verify_date
     if (self.meeting_date.to_s =~ /\d{4}-\d{2}-\d{2}/) == nil

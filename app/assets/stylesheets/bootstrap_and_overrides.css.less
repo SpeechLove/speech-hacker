@@ -29,19 +29,82 @@
 //
 // Example:
 // @linkColor: #ff0000;
+
+.list-wrapper {
+  background-color: #52C8A8;
+  padding: 20px;
+}
+a {
+  color: #96FCEC;
+}
+a:hover {
+  text-decoration: none;
+}
+
+.navbar .brand {
+  color: white;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
+  margin-left: 200px;
+}
+.navbar-inner {
+  padding-left: 200px;
+  background: #52C8A8;
+}
+
+.navbar .nav.pull-right {
+  margin-right: 200px;
+}
+.navbar .nav > li > a {
+  color: white;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
+
+}
+.navbar .nav > li > a:hover {
+  color: #0A5F47;
+  /*text-shadow: 0 1px 0 rgba(0, 0, 0, .3);*/
+
+}
+
 p {font-size: 16px}
+
+.container {
+  display: inline;
+  margin: auto;
+}
+.row {
+  display: inline;
+  margin: auto;
+}
+
+.wrap {
+  padding: 60px;
+}
+#sidebar {
+  width: 300px;
+  float: left;
+  /*display: inline;*/
+}
 
 body {
   padding-top: 60px;
+  background-color: #1F9272;
+  color: #444;  
+  /*width: 1300px;*/
+  /*margin: auto;*/
+  margin-left: 200px;
+  display: inline-block;
 }
-@media (max-width: 979px) {
+/*@media (max-width: 979px) {
   body {
     padding-top: 0px;
   }
-}
+}*/
 
 h1{ padding-bottom: 15px}
-.table {font-size: 16px}
+.table {
+  font-size: 16px;
+  float: right;
+}
 td{ text-align:center}
 
 .indentation {
@@ -61,4 +124,12 @@ td{ text-align:center}
 .right {
 	float: right;
 	margin-right: 5em;
+}
+
+footer {
+  clear: both;
+}
+
+.debug {
+  clear: both;
 }

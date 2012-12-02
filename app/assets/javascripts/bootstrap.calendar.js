@@ -135,8 +135,8 @@
                     .empty()
                     .append('<span class="weekday">' +i+ '</span>')
                     .popover({
-                        'title': msg_evnts_hdr,
-                        'content': 'Time: 5pm',
+                        'title': this.location,
+                        'content': this.time,
                         'delay': { 'show': 250, 'hide': 250 }
                     });
                 }

@@ -5,28 +5,43 @@
  * Licensed under the MIT license
  *
  */
+/*.cal-container {
+     float: left;
+     width: 700px;
+     background-color: #FFF;
+     display: inline-block;
 
-.calendar body {
-     background-color: #FFFFFF;
-     position: relative;
+}*/
+
+#calendar {
+     float: left;
+     /*display: inline;*/
+     width: 600px;
+     margin: auto;
+     padding: 20px;
+     background-color: #52C8A8;
+}
+#calendar body {
+     /*background-color: #FFFFFF;*/
+     /*position: relative;*/
 }
 
 .year {
-     color: rgba(0, 0, 0, 0.3);
+     color: rgba(0, 0, 0, 0.4);
      font-size: 4em;
      margin: 0px 0px 0px 0px;
 }
 
 .month {
-     color: rgba(0, 0, 0, 0.3);
+     color: rgba(0, 0, 0, 0.4);
      font-size: 3em;
      margin: -27px 0px 10px 155px;
 }
 
-.calendar {
+/*.calendar {
      table-layout:fixed;
      padding-top: 100px;
-}
+}*/
 
 .calendar TH {
      width: 50px;
@@ -34,14 +49,14 @@
 
      font-size: 1.8em;
      font-weight: bold;
-     color: rgba(0, 0, 0, 0.3);
+     color: rgba(0, 0, 0, 0.4);
      text-align: center;
 
      -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
      -moz-transition: background 0.2s linear 0s;
 
-     border-color: rgba(0, 0, 0, 0.1);
-     border: 1px solid rgba(0, 0, 0, 0.1);
+     border-color: rgba(0, 0, 0, 0.2);
+     border: 1px solid rgba(0, 0, 0, 0.2);
      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 }
 
@@ -51,31 +66,31 @@
 
      font-size: 32px;
      font-weight: bold;
-     color: rgba(0, 0, 0, 0.3);
+     color: rgba(0, 0, 0, 0.4);
      text-align: center;
 
      -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
      -moz-transition: background 0.2s linear 0s;
 
-     border: 1px solid rgba(0, 0, 0, 0.1);
-     border-color: rgba(0, 0, 0, 0.1);
+     border: 1px solid rgba(0, 0, 0, 0.2);
+     border-color: rgba(0, 0, 0, 0.2);
      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 }
 
 .calendar TD.day:hover{
      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025) inset, 0 0 10px rgba(0, 0, 0, 0.1);
-     background: rgba(0, 0, 0, 0.1);
+     background: rgba(0, 0, 0, 0.2);
      outline: 0 none;
      cursor: pointer;
      color: #FFFFFF;
 }
 
 .calendar TD.weekend {
-     color: rgba(0, 0, 0, 0.1);
+     color: rgba(0, 0, 0, 0.2);
 }
 
 .calendar TD.today {
-     border: 2px solid red;
+     border: 2px solid #555;
      color: rgba(0, 0, 0, 0.60);
 }
 
@@ -96,7 +111,7 @@
 }
 
 .calendar TD SPAN.weekday{
-     background-color: rgba(0, 0, 0, 0.1);
+     background-color: rgba(0, 0, 0, 0.2);
      border-radius: 14%;
      color: #FFFFFF;
      font-size: 32px;
@@ -115,22 +130,22 @@
 
      font-size: 28px;
      font-weight: bold;
-     color: rgba(0, 0, 0, 0.3);
+     color: rgba(0, 0, 0, 0.4);
      text-align: center;
 
      -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
      -moz-transition: background 0.2s linear 0s;
 
-     border: 1px solid rgba(0, 0, 0, 0.1);
-     border-color: rgba(0, 0, 0, 0.1);
+     border: 1px solid rgba(0, 0, 0, 0.2);
+     border-color: rgba(0, 0, 0, 0.2);
      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 
      cursor:pointer;
 }
 
 .calendar TFOOT TR TH.sel:hover {
-     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025) inset, 0 0 10px rgba(0, 0, 0, 0.1);
-     background: rgba(0, 0, 0, 0.1);
+     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025) inset, 0 0 10px rgba(0, 0, 0, 0.2);
+     background: rgba(0, 0, 0, 0.2);
      outline: 0 none;
      cursor: pointer;
      color: #FFFFFF;
@@ -142,4 +157,5 @@
 
 .cal-row {
      padding-top: 50px;
+     display: inline-block;
 }

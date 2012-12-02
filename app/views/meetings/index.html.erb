@@ -1,8 +1,11 @@
-<h1> Meetings </h1>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Meeting</th>
+<h1> Calendar </h1>
+
+<div class="span6" id="calendar"></div>
+
+<div class="span6 list-wrapper">
+  <div>
+
+<!--       <th>Meeting</th>
       <th>Start time</th>
       <th>Location</th>
       <% if current_user %>
@@ -14,37 +17,28 @@
           Edit
         <% end %>
       </th>
-    </tr>
-  </thead>
-  <tbody>
+ -->
+  </div>
+  <div>
     <% @meetings.each do |meeting| %>
-    <tr>
-      <td><%= link_to meeting.meeting_date.to_s + " Meeting", meeting_path(meeting) %></td>
-      <td><%= meeting.meeting_time %></td>
-      <td>
-        <%= meeting.location %>
-      </td>
-      <% if current_user %>
-        <td>
-          <%= current_user.attending?(meeting) ? "Yes" : "No" %>
-        </td>
-        <td>
+    <p>
+      <%= link_to meeting.meeting_date.to_s, meeting_path(meeting) %> |
+      <%= meeting.meeting_time %> |
+
+        <%= meeting.location %> |
+
+      <% if current_user %> 
+
+<!--           <%= current_user.attending?(meeting) ? "Yes" : "No" %> -->
           <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
-        </td>
-        <td>
             <% if current_user && current_user.admin? %>
-              <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
+              <%= link_to "Edit", edit_meeting_path(meeting) %>
             <% end %>
-        </td>
       <% end %>
-    </tr>
+    </p>
     <% end %>
-  </tbody>
-</table>
-  <div class="container">
-    <div class="row cal-row">
-      <div class="span8" id="calendar"></div>
-    </div>
-  </div> <!-- /container -->
+  </div>
+</div>
+  
 
 
