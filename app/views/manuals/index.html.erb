@@ -6,8 +6,9 @@
 <% @manuals.each_with_index do |manual, index| %>
 <div class="accordion accordion-group">
     <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= index %>" >
-        <%= manual.name %>
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href=<%="#collapse#{index}" %> >
+        <strong> <%= manual.name%></strong>
+        <span><%= @speeches[manual].count.to_s + "/" + manual.projects.count.to_s %></span>
       </a>
     </div>
     <div id="collapse<%= index %>" class="accordion-body collapse out">
@@ -34,7 +35,6 @@
         </div>
       </div>
     </div>
-
 </div>
 <% end %>
 
