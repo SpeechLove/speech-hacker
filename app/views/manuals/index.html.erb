@@ -11,16 +11,28 @@
       </a>
     </div>
     <div id="collapse<%= index %>" class="accordion-body collapse out">
-      <% @speeches[manual].each do |speech| %>
+      <div class="accordion-inner">
+        <div class="indentation">
+          <strong>Project title</strong>
+          <span class="right"><strong>Completed Date</strong></span>
+        </div>
+      </div>
+
+      <% manual.projects.each do |project| %>
         <div class="accordion-inner">
           <div class="indentation">
-            #<%= speech.project.project_number %>
-            <%= speech.project.name.ljust(20) + ": " + speech.title %>
-            <span class="right"><%=speech.meeting.meeting_date%></span>
-            <br />
+            <%= project.project_number %>)
+            <%= project.name.ljust(20) %>
+            <% @user.speeches.each do |speech| %>
+              <% if speech.project_id == project.id %>
+                <%= ": " + speech.title %>
+                <span class="right"><%= speech.meeting.meeting_date.strftime("%b %-d, %Y") %></span><br />
+              <% end %>
+            <% end %>
           </div>
         </div>
       <% end %>
+
       <div class="accordion-inner">
       </div>
       <div class="progress-indent">

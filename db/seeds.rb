@@ -36,4 +36,3 @@ Project.create(:name => "Research Your Topic",   :project_number => 7,  :manual_
 Project.create(:name => "Get Comfortable with Visual Aids", :project_number => 8, :manual_id => manual_cc.id)
 Project.create(:name => "Persuade with Power",   :project_number => 9,  :manual_id => manual_cc.id)
 Project.create(:name => "Inspire Your Audience", :project_number => 10, :manual_id => manual_cc.id)
-
