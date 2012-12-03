@@ -47,12 +47,17 @@ class MeetingRolesController < ApplicationController
   end
 
   def update
+    @meeting_roles = MeetingRole.all
     @meeting_role = MeetingRole.find(params[:id])
-    if @meeting_role.update_attributes(params[:meeting_role])
-      redirect_to @meeting_role, :notice => "The Meeting role is updated."
-    else
-      render 'edit', alert: "The Meeting Role was not updated."
+
+    respond_to do |format|
+      format.html { redirect_to @meeting_role, :notice => "The Meeting role is updated." }
+      format.js { render 'update.js.erb', :locals => { :meeting_role_title => @meeting_role.title,
+                                                       :meeting_role_description => @meeting_role.description,
+                                                       :meeting_role_params => params[:meeting_role] }}
     end
+
+    @meeting_role.update_attributes(params[:meeting_role])
   end
 
   def destroy
@@ -61,8 +66,7 @@ class MeetingRolesController < ApplicationController
     respond_to do |format|
       if @meeting_role.destroy
         format.html { redirect_to meeting_roles_path, :notice => "The Meeting Role was destroyed." }
-        format.js { render 'destroy.js.erb', :locals => { :meeting_role_title => @meeting_role.title,
-                                                          :meeting_role_total => @meeting_roles.length }}
+        format.js { render 'destroy.js.erb', :locals => { :meeting_role_title => @meeting_role.title }}
       else
         render 'index', alert: "The Meeting Role stubbornly refused to be destroyed. Please try again."
       end

@@ -1,1 +1,2 @@
-$('tr:contains(<%= meeting_role_title %>').after("<tr><td>blah</td></tr>");
+$('#new_role_button').hide()
+$('#meeting_roles_table').after('<%= j render("create") %>');
