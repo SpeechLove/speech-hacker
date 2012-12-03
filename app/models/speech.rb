@@ -7,7 +7,7 @@ class Speech < ActiveRecord::Base
   belongs_to :meeting
   delegate :manual, :to => :project
 
-  validates :project, :meeting, :user, :presence => true
+  validates :project_id, :meeting, :user_id, :presence => true
   accepts_nested_attributes_for :project
 
   def self.for_manual(manual)

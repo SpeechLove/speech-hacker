@@ -13,7 +13,8 @@ describe MeetingsController do
   describe "#index" do
     it "assigns a list of meetings" do
       get(:index)
-      assigns(:meetings).should eq [meeting]
+      puts Meeting.all.inspect
+      assigns(:meetings)[0].should eq(meeting)
     end
   end
 

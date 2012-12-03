@@ -1,5 +1,5 @@
 Fabricator(:project) do
-  name      { Faker::Lorem.sentence }
-  project_number    1
-  manual
+  name      		{ Faker::Lorem.sentence }
+  project_number    { 1 }
+  manual			{ Fabricate(:manual) }
 end
