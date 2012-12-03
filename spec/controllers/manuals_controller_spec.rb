@@ -1,56 +1,17 @@
 require 'spec_helper'
 
 describe ManualsController do
-  let!(:manual) { Fabricate(:manual) }
-  let(:mr_user) { Fabricate(:user_testing) }
-  let(:ms_speaky) { Fabricate(:user_speaksalot) }
-  # let!(:manual_two_speech) { Fabricate(:manual_two_speech) }
+  let!(:speech) { Fabricate(:speech) }
 
-  before(:each) { sign_in mr_user }
+    describe 'mr_user assignment' do
 
-  describe 'index' do
-
-    it "assigns a list of manuals" do
-      get(:index, :user_id => mr_user.id)
-      assigns(:manuals).should eq [manual]
-    end
-
-  # describe 'show' do
-    # it "assigns a current manual" do
-    #   controller.stub(:current_user).and_return(mr_user)
-    #   get(:show, :user_id => mr_user.id, :id => manual.id)
-    #   assigns(:manual).should eq manual
-    # end
-
-    # it "assigns a list of the current user's speeches from the current manual" do
-    #   #sign_in mr_user
-    #   speech = Fabricate(:speech, :user => mr_user)
-    #
-    #   get(:index, :user_id => mr_user.id, :id => speech.manual.id)
-    #   assigns(:speeches_test).first.should eq speech
-    # end
-
-    # it "doesn't include speeches from other manuals in the speeches list" do
-    #   #sign_in mr_user
-    #   speech1 = Fabricate(:speech, :user => mr_user)
-    #   speech2 = Fabricate(:speech, :user => mr_user)
-    #   puts('---------speech---------')
-    #   puts(speech1.inspect)
-    #   puts(Speech.all)
-    #   get(:index, :user_id => mr_user.id, :id => speech1.manual.id)
-    #   assigns(:speeches_test).should eq [speech1]
-    # end
-    #
-    it "creates a list of speeches for the current user grouped by manuals" do
-      get(:index, :user_id => ms_speaky.id)
-      speakys_speeches = ms_speaky.speeches.group_by { |s| s.manual }
-      speakys_speeches.values.each do |m_speeches|
-        m_speeches = m_speeches.sort_by{ |s| s.project.project_number}
-        debugger
+      it "assigns a list of manuals" do
+        sign_in speech.user
+        get(:index, :user_id => speech.user.id)
+        assigns(:manuals).should eq [speech.manual]
       end
-      assigns(:speeches).should eq speakys_speeches
-    end
 
+    end
 
     it "can be accessed by the user for the records"
 
@@ -58,6 +19,12 @@ describe ManualsController do
 
     it "cannot be accessed by a non-admin for someone else's files"
 
-  end
-
 end
+
+
+
+
+
+
+
+

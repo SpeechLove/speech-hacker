@@ -21,11 +21,3 @@ Fabricator(:user_testing, :from => :user) do
   id 1
   name "Test User"
 end
-
-Fabricator(:user_speaksalot, :from => :user) do
-  after_create do |u|
-    speeches = Hash.new([])
-    20.times { speeches[u] << Fabricate(:speech, user: u) }
-    speeches = speeches[u]
-  end
-end

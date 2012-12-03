@@ -4,14 +4,10 @@ class ManualsController < ApplicationController
 
   def index
     @manuals = Manual.all
-    @speeches = Hash.new
-    user = User.find(params[:user_id])
-    #@speeches_test = current_user.speeches
-    #current_user # => User.find(session[:user_id])
-    @manuals.each do |manual|
-      @speeches[manual] = user.speeches.for_manual(manual).sort_by do |speech|
-        speech.project.project_number
-      end
+    if current_user.superadmin?
+      @user = User.find(params[:user_id])
+    else
+      @user = current_user
     end
   end
 
