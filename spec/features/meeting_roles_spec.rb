@@ -68,26 +68,26 @@ describe "MeetingRole", :js => true do
         page.should have_content(meeting_role.title)
       end
 
-      it "allows the user to destroy a meeting role" do
-        click_link("Destroy")
-        page.should_not have_content(meeting_role.title)
-      end
-    end
-
-    describe "meeting_roles#edit" do
-      let!(:toastmaster) { Fabricate(:toastmaster) }
-
-      it "shows the meeting roles edit page" do
-        visit edit_meeting_role_path(meeting_role.id)
-        page.should have_content(meeting_role.title)
+      it "has a link called 'Edit'" do
+        page.should have_link("Edit", :href => edit_meeting_role_path(meeting_role))
       end
 
-      it "has a link called 'Edit Meeting role'" do
-        visit edit_meeting_role_path(meeting_role.id)
+      it "updates the meeting role if it is edited" do
+        toastmaster = Fabricate(:toastmaster)
+
+        within_table('meeting_roles_table') do
+          click_link("Edit")
+        end
+
         fill_in 'meeting_role_title', :with => toastmaster.title
         fill_in 'meeting_role_description', :with => toastmaster.description
         click_button("Update Meeting role")
         page.should have_content(toastmaster.title)
+      end
+
+      it "allows the user to destroy a meeting role" do
+        click_link("Destroy")
+        page.should_not have_content(meeting_role.title)
       end
     end
   end
