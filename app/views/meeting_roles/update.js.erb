@@ -1,4 +1,4 @@
 $("td.role_title:contains(<%= meeting_role_title %>)").text("<%= meeting_role_params[:title] %>");
 $("td.role_description:contains(<%= meeting_role_description %>)").text("<%= meeting_role_params[:description] %>");
-$("form.edit_meeting_role").hide();
+$("form.edit_meeting_role").remove();
 $('#new_role_button').show();
