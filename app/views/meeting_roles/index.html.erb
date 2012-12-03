@@ -1,5 +1,5 @@
 <h1> Meeting Roles </h1>
-<table class="table table-hover">
+<table class="table table-hover" id="meeting_roles_table">
   <thead>
     <tr>
       <th>Title</th>
@@ -14,13 +14,15 @@
   <tbody>
     <% @meeting_roles.each do |meeting_role| %>
     <tr>
-      <td><%= link_to meeting_role.title, meeting_role_path(meeting_role) %></td>
+      <td><%= meeting_role.title %></td>
       <td><%= link_to "Edit", edit_meeting_role_path(meeting_role) %></td>
       <td><%= meeting_role.description %></td>
-      <td><%= link_to "Destroy", meeting_role_path(meeting_role), :method => :delete %></td>
+      <td><%= link_to "Destroy", meeting_role_path(meeting_role), :method => :delete, :remote => true %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= button_to('Create New Role', new_meeting_role_path, :class => 'btn btn-primary', :method => :get) %>
+<div id="new_role_button">
+  <%= button_to('Create New Role', new_meeting_role_path, :class => 'btn btn-primary', :method => :get, :remote => true) %>
+</div>
