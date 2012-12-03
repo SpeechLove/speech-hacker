@@ -268,43 +268,7 @@
                             var month = parseInt(target.attr('month'), 10)||1;
                             var year = parseInt(target.attr('year'), 10)||1;
 
-                            //grab the list of meetings and trim it to the correct meeting
-
-                            //build the date and send and ajax query to find that object.
-
-
-
-
-
                             meetingInfoDisplay(day, month, year);
-
-                            // console.log("target" + target.attr());
-                            // console.log(target.attr('day'));
-                            // console.log("this " + this.attr());
-
-                            // if($('#meeting-info').hasClass('hide')) {
-                            //     $('#meeting-info').removeClass('hide');
-                            //     populateWindows(month, day);
-                            //     $('#meeting-info')[0].innerHTML = "glorp";
-                            // } else {
-                            //     $('#meeting-info').addClass('hide');                                
-                            // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                             this.element.trigger({
