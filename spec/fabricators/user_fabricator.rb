@@ -25,6 +25,7 @@ end
 Fabricator(:user_speaksalot, :from => :user) do
   after_create do |u|
     speeches = Hash.new([])
-    20.times { speeches[user] << Fabricate(:speech, user: u) }
+    20.times { speeches[u] << Fabricate(:speech, user: u) }
+    speeches = speeches[u]
   end
 end

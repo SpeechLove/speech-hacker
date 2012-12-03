@@ -3,16 +3,16 @@ require 'spec_helper'
 describe ManualsController do
   let!(:manual) { Fabricate(:manual) }
   let(:mr_user) { Fabricate(:user_testing) }
+  let(:ms_speaky) { Fabricate(:user_speaksalot) }
   # let!(:manual_two_speech) { Fabricate(:manual_two_speech) }
 
   before(:each) { sign_in mr_user }
 
   describe 'index' do
-    let(:ms_speaky) { Fabricate(:user_speaksalot) }
 
     it "assigns a list of manuals" do
       get(:index, :user_id => mr_user.id)
-      assigns(:manuals).should eq Manual.all
+      assigns(:manuals).should eq [manual]
     end
 
   # describe 'show' do
@@ -40,12 +40,14 @@ describe ManualsController do
     #   get(:index, :user_id => mr_user.id, :id => speech1.manual.id)
     #   assigns(:speeches_test).should eq [speech1]
     # end
-
+    #
     it "creates a list of speeches for the current user grouped by manuals" do
       get(:index, :user_id => ms_speaky.id)
       speakys_speeches = ms_speaky.speeches.group_by { |s| s.manual }
       speakys_speeches.values.each do |m_speeches|
-        m_speeches.sort_by{ |s| s.project.project_number}
+        m_speeches = m_speeches.sort_by{ |s| s.project.project_number}
+        debugger
+      end
       assigns(:speeches).should eq speakys_speeches
     end
 
