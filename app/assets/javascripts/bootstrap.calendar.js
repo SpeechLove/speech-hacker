@@ -100,7 +100,6 @@
     };
 
     Plugin.prototype.renderEvents = function (events, elem) {
-        all_events = [];
         var live_date = this.live_date;
         var msg_evnts_hdr = this.msg_events_hdr;
         for(var i=1; i<=daysInMonth[live_date.getMonth()]; i++){
@@ -119,9 +118,6 @@
 
 
                 ){
-                    //console.log(this.date);
-                    all_events.push(this.date);
-
 
                     elem.parent('div:first').find('#day_' + i)
                     .removeClass("day")
@@ -136,6 +132,7 @@
                 }
             });
         }
+        this.monthlyList( events );
     };
 
     Plugin.prototype.loadEvents = function () {
@@ -404,35 +401,58 @@
         });
     }
 
-    var populateWindows = function(month, day) {
-        console.log(all_events);
 
-    };
 
     var meetingInfoDisplay = function(day, month, year) {
-    var $meeting = $('#meeting-info');
-    var $list = $('#meeting-list');
+        var $meeting = $('#meeting-info');
+        var $list = $('#meeting-list');
 
-    if($meeting.hasClass('hide')) {
-        $meeting.removeClass('hide');
-        $meeting.attr("day", day);
-        $list.addClass('hide');
-        populateWindows(month, day);
-        $meeting[0].innerHTML = "Details about this meeting on "
-         + month + "/" + day + "/" + year;
-    } 
-    else if($meeting.attr('day') != day) {
-        //get info for new meeting 
-        $meeting[0].innerHTML = "Details about this meeting on "
-         + month + "/" + day + "/" + year;
-        $meeting.attr("day", day);
-    } 
-    else {
-        $meeting.addClass('hide'); 
-        $meeting.removeAttr('day');  
-        $list.removeClass('hide');                     
-    } 
-  }; 
+        if($meeting.hasClass('hide')) {
+            $meeting.removeClass('hide');
+            $meeting.attr("day", day);
+            $list.addClass('hide');
+           
+            $meeting[0].innerHTML = "Details about this meeting on "
+             + month + "/" + day + "/" + year;
+        } 
+        else if($meeting.attr('day') != day) {
+            //get info for new meeting 
+            $meeting[0].innerHTML = "Details about this meeting on "
+             + month + "/" + day + "/" + year;
+            $meeting.attr("day", day);
+        } 
+        else {
+            $meeting.addClass('hide'); 
+            $meeting.removeAttr('day');  
+            $list.removeClass('hide');                     
+        } 
+    }; 
+
+    Plugin.prototype.monthlyList = function(events) {
+        $('#meeting-list div')[1].innerHTML = "";
+        var month = this.mm + 1;
+        var counter = 0;
+        $.each(events.event, function(){
+            if( month == this.month ) {
+                $('#meeting-list div')[1].innerHTML += '<div class="accordion accordion-group"><div class="accordion-heading">' +
+                    '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse' + counter + '">' + 
+                    '<strong>' + this.date + '</strong>' + " | " + this.time + " | " + this.location + " " + 
+                    '</a></div><div id="collapse' + counter + '" class="accordion-body collapse out">' + 
+                    '<div class="accordion-inner"><div class="indentation">' + 
+
+                    'details about this meeting' +
+                    //this.attending + "\n" +
+                    //this.meeting_role + "\n" 
+                    
+                    '</br></div></div></div></div>';
+                //$('#monthly-list')[1].innerHTML += "<strong>" + this.date + " " + "</strong>" + this.time + " " + this.location + "</p>";
+                counter += 1;
+            }
+            
+        });
+    };
+
+
 
 
 })( jQuery, window, document );

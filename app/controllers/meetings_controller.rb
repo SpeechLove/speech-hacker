@@ -5,7 +5,7 @@ class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all
     @attendance = Attendance.all
-    json_meetings = Meeting.to_json(@meetings)
+    json_meetings = Meeting.to_json(@meetings, current_user)
 
     respond_to do |format|
       format.html

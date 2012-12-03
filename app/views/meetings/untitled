@@ -19,7 +19,6 @@
       </th>
  -->
   </div>
-
   <div>
     <% @meetings.each_with_index do |meeting, index| %>
 
@@ -34,6 +33,7 @@
           <div class="accordion-inner">
             <div class="indentation">
               details about meeting.
+
             </br>
             </div>
           </div>
@@ -45,31 +45,9 @@
   </div>
 
 
+   
+<!-- <div class="span4 list-wrapper hide" id="meeting-info"> 
 
 
-<!-- 
-  <div>
-    <% @meetings.each do |meeting| %>
-    <p>
-      <%= link_to meeting.meeting_date.to_s, meeting_path(meeting) %> |
-      <%= meeting.meeting_time %> |
-
-
-      <% if current_user %> 
-
-
-            <% if current_user && current_user.admin? %>
-              <%= link_to "Edit", edit_meeting_path(meeting) %>
-            <% end %>
-      <% end %>
-    </p>
-    <% end %>
-  </div> -->
-</div>
-<div class="span4 list-wrapper hide" id="meeting-info"> 
-
-
-</div>
+</div> -->
   
-
-

@@ -17,16 +17,20 @@ class Meeting < ActiveRecord::Base
   accepts_nested_attributes_for :speeches
 
 
-  def to_hash
+  def to_hash(user)
       date = meeting_date.to_s.gsub(/(\d{4})-(\d{2})-(\d{2})/, '\2/\3/\1')
       hashed_meeting = { "date" => date,
                         "time" => meeting_time,
-                        "location" => location }
+                        "location" => location,
+                        "month" => $2, 
+                        "attending" => user.attending?(self),
+                        #"meeting_role" => user.meeting_role(self),
+                        "admin" => user.admin? }
   end
 
-  def self.to_json(meetings)
+  def self.to_json(meetings, user)
     formatted_meetings = meetings.collect do |meeting|
-      meeting.to_hash
+      meeting.to_hash(user)
     end
     json_meetings = { "event" => formatted_meetings }
   end
