@@ -1,4 +1,4 @@
-if ($('td.role_title:contains(<%= meeting_role_title %>)').next().children().attr('href') !== undefined) {
+if ($('td.role_title').filter(function(index) {return $(this).text() == '<%= meeting_role_title %>'}).next().children().attr('href') !== undefined) {
   $('td.role_title').next().bind("click", true);
   $("form.edit_meeting_role").remove();
   $("form.new_meeting_role").remove();
