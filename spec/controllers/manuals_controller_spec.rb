@@ -10,7 +10,7 @@ describe ManualsController do
   describe 'index' do
     it "assigns a list of manuals" do
       get(:index, :user_id => mr_user.id)
-      assigns(:manuals).should eq [manual]
+      assigns(:manuals).should eq Manual.all
     end
 
   # describe 'show' do
