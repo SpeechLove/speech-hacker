@@ -1,0 +1,2 @@
+$("form.edit_meeting_role").remove();
+$('td.role_title').filter(function(index) {return $(this).text() == '<%= meeting_role_title %>'}).parent().remove();

@@ -1,11 +1,12 @@
 <h1> Meeting Roles </h1>
-<table class="table table-hover">
+<table class="table table-hover" id="meeting_roles_table">
   <thead>
     <tr>
       <th>Title</th>
       <% if current_user && current_user.super_admin? %>
-        <th> <%="Edit"%> </th>
-        <th> <%="Delete"%> </th>
+        <th> Edit </th>
+        <th> Description </th>
+        <th> Delete </th>
       <% end %>
     </tr>
   </thead>
@@ -13,20 +14,15 @@
   <tbody>
     <% @meeting_roles.each do |meeting_role| %>
     <tr>
-      <td><%= link_to meeting_role.title, meeting_role_path(meeting_role) %></td>
-      <td>
-          <% if current_user && current_user.super_admin? %>
-            <%= link_to "Edit Meeting Role", edit_meeting_role_path(meeting_role) %>
-          <% end %>
-      </td>
-      <td>
-          <% if current_user && current_user.super_admin? %>
-            <%= link_to "Destroy Role", meeting_role_path(meeting_role), :method => :delete %>
-          <% end %>
-      </td>
+      <td class="role_title"><%= meeting_role.title %></td>
+      <td class="role_edit"><%= link_to "Edit", edit_meeting_role_path(meeting_role), :remote => true %></td>
+      <td class="role_description"><%= meeting_role.description %></td>
+      <td class="role_destroy"><%= link_to "Destroy", meeting_role_path(meeting_role), :method => :delete, :remote => true %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= button_to('Create New Role', new_meeting_role_path, :class => 'btn btn-primary', :method => :get) %>
+<div id="new_role_button">
+  <%= button_to('Create New Role', new_meeting_role_path, :class => 'btn btn-primary', :method => :get, :remote => true) %>
+</div>

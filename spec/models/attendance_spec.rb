@@ -5,7 +5,7 @@ describe Attendance do
 
   it { should validate_presence_of :meeting }
   it { should validate_presence_of :user }
-  it { should validate_presence_of :meeting_role }
+  it { should validate_presence_of :meeting_role_id }
   it { should validate_uniqueness_of(:user_id).scoped_to(:meeting_id) }
 
   [:meeting, :user, :meeting_role].each do |object|

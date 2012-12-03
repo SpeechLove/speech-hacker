@@ -20,8 +20,8 @@ describe MeetingRolesController do
 
   describe "#create" do
     it "creates a new meeting role object" do
-      post(:create, :meeting_role => {:title => meeting_role.title, :description => meeting_role.description})
-      assigns(:meeting_role).title.should eq meeting_role.title
+      post(:create, :meeting_role => {:title => "NewRole", :description => "NewDescription"})
+      assigns(:meeting_role).title.should eq "NewRole"
     end
   end
 

@@ -1,5 +1,5 @@
 class Attendance < ActiveRecord::Base
-  attr_accessible :meeting_role_id, :attend, :user, :meeting, :meeting_attributes
+  attr_accessible :meeting_role_id, :attend, :user, :meeting, :meeting_attributes, :meeting_role
   attr_accessor :attend
 
   belongs_to :meeting
@@ -8,7 +8,7 @@ class Attendance < ActiveRecord::Base
 
   validates :meeting, :presence => true
   validates :user, :presence => true
-  validates :meeting_role, :presence => true
+  validates :meeting_role_id, :presence => true
   validates :user_id, :uniqueness => { :scope => :meeting_id }
   before_validation :assign_meeting_role
 
