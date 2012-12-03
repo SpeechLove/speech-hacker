@@ -13,7 +13,7 @@ class Meeting < ActiveRecord::Base
   validates_presence_of :meeting_date, :location
   validates_length_of :description, :maximum => 255, :allow_blank => true
   validates_length_of :location, :maximum => 255, :allow_blank => false
-  
+
   accepts_nested_attributes_for :speeches
 
 
@@ -22,10 +22,12 @@ class Meeting < ActiveRecord::Base
       hashed_meeting = { "date" => date,
                         "time" => meeting_time,
                         "location" => location,
-                        "month" => $2, 
-                        "attending" => user.attending?(self),
-                        #"meeting_role" => user.meeting_role(self),
-                        "admin" => user.admin? }
+                        "month" => $2,
+                        "year" => $1
+                        # "attending" => user.attending?(self),
+                        # #"meeting_role" => user.meeting_role(self),
+                        # "admin" => user.admin?
+                      }
   end
 
   def self.to_json(meetings, user)
