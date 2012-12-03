@@ -1,0 +1,11 @@
+<%= form_for @meeting_role, :remote => true do |f| %>
+  <table>
+    <th align="left"><%= f.label :title, 'Title' %></th>
+    <th align="left"><%= f.label :description, 'Description' %></th>
+    <tr>
+      <td><%= f.text_field :title %></td>
+      <td><%= f.text_field :description %></td>
+    </tr>
+  </table>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>

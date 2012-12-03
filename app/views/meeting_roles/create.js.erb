@@ -1,0 +1,6 @@
+$('form.new_meeting_role').hide();
+$('#new_role_button').show();
+$('#meeting_roles_table tr:last').after('<tr><td><%= meeting_role_title %></td><td><%= link_to "Edit", edit_meeting_role_path(meeting_role_id) %></td><td><%= meeting_role_description %><td><%= link_to "Destroy", meeting_role_path(meeting_role_id), :method => :delete, :remote => true %></td></tr>');
+
+
+
