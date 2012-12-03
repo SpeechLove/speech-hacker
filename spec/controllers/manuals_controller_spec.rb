@@ -8,6 +8,8 @@ describe ManualsController do
   before(:each) { sign_in mr_user }
 
   describe 'index' do
+    let(:ms_speaky) { Fabricate(:user_speaksalot) }
+
     it "assigns a list of manuals" do
       get(:index, :user_id => mr_user.id)
       assigns(:manuals).should eq Manual.all
@@ -39,7 +41,13 @@ describe ManualsController do
     #   assigns(:speeches_test).should eq [speech1]
     # end
 
-    it "creates a list of speeches for the current user grouped by manuals"
+    it "creates a list of speeches for the current user grouped by manuals" do
+      get(:index, :user_id => ms_speaky.id)
+      speakys_speeches = ms_speaky.speeches.group_by { |s| s.manual }
+      speakys_speeches.values.each do |m_speeches|
+        m_speeches.sort_by{ |s| s.project.project_number}
+      assigns(:speeches).should eq speakys_speeches
+    end
 
 
     it "can be accessed by the user for the records"
