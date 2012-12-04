@@ -1,9 +1,15 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.sorted_by_manual
+    @projects = Manual.projects
+    @user_count = User.count
     respond_to do |format|
       format.html
     end
+  end
+
+  def edit
+    @project = params[:project]
+    render :partial => 'form'
   end
 
   def projects_by_manual

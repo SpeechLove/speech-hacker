@@ -1,10 +1,38 @@
 <h1>Projects#index</h1>
 
-<% @projects.each_key do |m_id| %>
-  <h3> Manual No. <%= m_id %></h3>
-  <% @projects[m_id].each do |p| %>
-    <%= p.name %>
-  <% end %>
+<% @projects.each do |manual, projects_in_manual| %>
+<div class="accordion accordion-group">
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= manual.id.to_s %>" >
+      <%= manual.name %>
+    </a>
+  </div>
+  <div id="collapse<%= manual.id.to_s %>" class="accordion-body collapse out">
+    <% projects_in_manual.each do |project| %>
+      <div class="accordion-inner">
+        <div class="indentation">
+          #<%= project.project_number.to_s.ljust(5) + ": " + project.name %>
+          <strong>
+            <%="Members' Completion: " + project.speeches.count.to_s + "/" + @user_count.to_s %>
+          </strong><br /><br />
+            <% percent_users_done = (project.speeches.count * 100.0) / @user_count %>
+          <!-- <div class="progress_bar">
+            <div class="progress progress-info">
+              <div class="bar" style="width: <%= percent_users_done.to_s %>%"></div>
+            </div>
+          </div> -->
+          <span class="right" id="edit_project_#{project.id}">
+            <%= link_to :edit %>
+          </span><br />
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+
+
 
 
 <p>Find me in app/views/projects/index.html.erb</p>

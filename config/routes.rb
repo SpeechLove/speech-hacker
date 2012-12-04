@@ -10,6 +10,7 @@ SpeechHacker::Application.routes.draw do
   end
   resources :speeches, :only => [:index]
 
-  get "/manuals/:id/projects" => "projects#projects_by_manual"
+  resources :projects, :only => [:index]
+
   post '/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin_user'
 end

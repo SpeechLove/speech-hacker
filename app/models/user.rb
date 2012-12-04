@@ -50,4 +50,8 @@ class User < ActiveRecord::Base
     self.speeches.where(:meeting_id => meeting.id).first
   end
 
+  def self.count
+    User.all.count
+  end
+
 end
