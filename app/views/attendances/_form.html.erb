@@ -1,8 +1,4 @@
-<% if @meeting.meeting_date >= DateTime.now %>
-  <h2>Meeting Sign-up</h2>
-<% else %>
-  <h2>Meeting agenda</h2>
-<% end %>
+<h2>Meeting Sign-up</h2>
 
 <%= form_for @attendance do |f| %>
   <%= render 'attendances/attendance_fields', :f => f %>
@@ -15,7 +11,7 @@
         <label class="radio">
           <%= f.radio_button :meeting_role_id, role.id, :class => "#{role.title}-option role-option" %>
           <%= label role.title, role.title %>
-          <strong><%= @roles_taken[role.id].join(", ") %></strong>
+          <strong><%= @roles_taken[role.id].map{ |id| User.find(id).name }.join(", ") %></strong>
 
           <% if role.speaker? %>
             <div class="speech-fields">

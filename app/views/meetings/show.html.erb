@@ -2,13 +2,19 @@
      <%= @meeting.meeting_time%></h1>
 
 <p>
-	<%= @meeting.location %>
+  <i>Location: <%= @meeting.location %></i>
 </p>
 
 <p>
   <% if @meeting.description %>
-    <%= @meeting.description.capitalize %>
+    Description: <%= @meeting.description.capitalize %>
   <% end %>
 </p>
 
-<%= render 'attendances/form' %>
+<% if @meeting.meeting_date < DateTime.now and can? :manage, Meeting %>
+  <%= render 'attendances/post_meeting_update' %>
+<% elsif @meeting.meeting_date < DateTime.now %>
+  <%= render 'attendances/post_meeting_members_show'%>
+<% else %>
+  <%= render 'attendances/form' %>
+<% end %>

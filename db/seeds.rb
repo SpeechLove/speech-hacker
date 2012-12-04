@@ -2,10 +2,10 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 # meeting roles
-MeetingRole.create(:title => "Toastmaster", :description => "oversees meeting")
+MeetingRole.create(:title => "Toastmaster", :description => "oversees the meeting")
 MeetingRole.create(:title => "Grammarian", :description => "checks grammar")
-MeetingRole.create(:title => "Timer", :description => "keeps time")
-MeetingRole.create(:title => "Ah Counter", :description => "counts ahs")
+MeetingRole.create(:title => "Timer", :description => "measures time")
+MeetingRole.create(:title => "Ah Counter", :description => "counts ahs and other filler words")
 MeetingRole.create(:title => "General Evaluator", :description => "provides general evaluation")
 MeetingRole.create(:title => "Evaluator", :description => "evaluates speaker")
 MeetingRole.create(:title => "Speaker", :description => "gives speech")

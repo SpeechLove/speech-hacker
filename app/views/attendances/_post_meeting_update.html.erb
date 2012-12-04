@@ -1,0 +1,54 @@
+<h2>Update Past Meeting</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Meeting Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meeting_roles.each do |role| %>
+      <tr>
+        <% next if role.attendee? %>
+        <td><%= role.title %></td>
+        <td>
+            <% # If no one has taken the role, let admins be able to choose one %>
+            <% if @roles_taken[role.id].count == 0 %>
+              <select class="attendance-role-select">
+                <option value="" selected="selected">Select a member...</option>
+                <% User.all.each do |user| %>
+                    <option value="<%= user.id %>"><%= user.name %></option>
+                <% end %>
+              </select>
+            <% else %>
+              <% # The role has been taken by one or more members. Let admins be able to change members. %>
+
+              <% @roles_taken[role.id].each do |role_user_id| %>
+                <select class="attendance-role-select">
+                  <% User.all.each do |user| %>
+                    <% if user.id == role_user_id %>
+                      <option value="<%= user.id %>" selected="selected">
+                    <% else %>
+                      <option value="<%= user.id %>">
+                    <% end %>
+                        <%= user.name %>
+                      </option>
+                  <% end %>
+                </select>
+                <%= button_to "Delete Role", "#",
+                              :class => "btn btn-warning",
+                              :method => :get %>
+                <br />
+              <% end %>
+            <% end %>
+          </select>
+        </td>
+        <td>
+          <%= button_to "Add Role", "#",
+                        :class => "btn btn-inverse",
+                        :method => :get %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -28,6 +28,7 @@ class MeetingsController < ApplicationController
     @meeting_roles = MeetingRole.attendee_roles
     @roles_taken = @meeting.roles_taken
     @attendance.meeting.speeches.build
+    @meeting_attendances = @meeting.attendances
   end
 
   def destroy

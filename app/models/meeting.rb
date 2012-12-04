@@ -13,13 +13,13 @@ class Meeting < ActiveRecord::Base
   validates_presence_of :meeting_date, :location
   validates_length_of :description, :maximum => 255, :allow_blank => true
   validates_length_of :location, :maximum => 255, :allow_blank => false
-  
+
   accepts_nested_attributes_for :speeches, :reject_if => proc { |attributes| attributes['title'].blank? }
 
 
   def roles_taken
     self.attendances.reduce(Hash.new{ |hash, key| hash[key] = [] }) do |roles, attendance|
-      roles[attendance.meeting_role_id] << attendance.user.name
+      roles[attendance.meeting_role_id] << attendance.user.id
       roles
     end
   end
