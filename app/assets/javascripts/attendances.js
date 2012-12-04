@@ -21,9 +21,15 @@ $(document).ready(function() {
       data: params,
         success: function(data, status, xhr) {
           console.log("ajax success");
+          $('.notice-box').html('Your update has been made successfully!');
+          $('.alert-box').hide();
+          $('.notice-box').fadeIn('fast');
         },
         error: function(xhr, status, error) {
           console.log("ajax error");
+          $('.alert-box').html('Something is wrong! Your update did not go through!');
+          $('.notice-box').hide();
+          $('.alert-box').fadeIn('fast');
         }
     }); // ajax
   });
@@ -50,12 +56,11 @@ $(document).ready(function() {
     var params = "manual_id="+$(this).val();
 
     $.ajax({
-      type: 'get',
+      type: 'post',
       url:  '/manuals/' + $(this).val() + '/projects/',
       dataType: 'json',
       data: params,
         success: function(data, status, xhr) {
-          console.log("ajax success");
           replace_projects(data["projects"]);
         },
         error: function(xhr, status, error) {

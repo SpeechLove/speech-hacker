@@ -33,15 +33,18 @@ class AttendancesController < ApplicationController
     logger.info(params)
 
     @meeting = Meeting.find(params[:id])
-    @user = User.find(params[:user_id])
     @role = MeetingRole.find(params[:role_id])
 
     if params[:old_user_id] == ""
       success = add_new_attendance(@meeting, @user, @role)
-    else
+    elsif params[:old_user_id] != "" && params[:user_id] == ""
+      # Change old_user to Attendee
       @old_user = User.find(params[:old_user_id])
-      @attendance = @meeting.attendances.where(:user_id => @old_user.id).first
-      success = @attendance.update_attributes(:attend => "true", :user => @user)
+      success = update_attendance(@meeting, @old_user, @old_user, MeetingRole.attendee)
+    else
+      @user = User.find(params[:user_id])
+      @old_user = User.find(params[:old_user_id])
+      success = update_attendance(@meeting, @old_user, @user, @role)
     end
 
     respond_to do |format|
@@ -49,9 +52,9 @@ class AttendancesController < ApplicationController
         if success
           render :json => { :success => true }
         else
-          logger.info(@attendance.errors.full_messages)
+          # TODO: get errors from the correc object
           render :json => {
-                            :errors => @attendance.errors.full_messages.join(', '),
+                            :errors => success.errors.full_messages.join(', '),
                             :status => :unprocessable_entity
                           }
         end
@@ -64,5 +67,11 @@ class AttendancesController < ApplicationController
   def add_new_attendance(meeting, user, role)
     Attendance.create(:attend => "true", :user => user, :meeting_role => role,
                       :meeting => meeting)
+  end
+
+  def update_attendance(meeting, old_user, user, meeting_role)
+    attendance = meeting.attendances.where(:user_id => old_user.id).first
+    attendance.update_attributes(:attend => "true", :user => user, :meeting_role => meeting_role,
+                                 :meeting_role_id => meeting_role.id)
   end
 end
