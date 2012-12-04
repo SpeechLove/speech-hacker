@@ -48,7 +48,7 @@ gem "less-rails"
 gem 'devise'
 gem 'cancan'
 gem 'rolify'
-#gem 'pry-rails'
+gem 'pry-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
