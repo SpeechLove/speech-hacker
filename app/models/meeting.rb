@@ -23,10 +23,12 @@ class Meeting < ActiveRecord::Base
                         "time" => meeting_time,
                         "location" => location,
                         "month" => $2,
-                        "year" => $1
-                        # "attending" => user.attending?(self),
-                        # #"meeting_role" => user.meeting_role(self),
-                        # "admin" => user.admin?
+                        "year" => $1,
+                        "description" => description,
+                        "attending" => user.attending?(self),
+                        "meeting_role" => user.meeting_role(self),
+                        "admin" => user.admin?,
+                        "meeting_id" => id
                       }
   end
 

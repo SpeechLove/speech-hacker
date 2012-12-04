@@ -1,3 +1,4 @@
+
 /*!
  * bootstrap-calendar plugin
  * Original author: @ahmontero
@@ -367,30 +368,30 @@
 
 
 
-    var meetingInfoDisplay = function(day, month, year) {
-        var $meeting = $('#meeting-info');
-        var $list = $('#meeting-list');
+    // var meetingInfoDisplay = function(day, month, year) {
+    //     var $meeting = $('#meeting-info');
+    //     var $list = $('#meeting-list');
 
-        if($meeting.hasClass('hide')) {
-            $meeting.removeClass('hide');
-            $meeting.attr("day", day);
-            $list.addClass('hide');
+    //     if($meeting.hasClass('hide')) {
+    //         $meeting.removeClass('hide');
+    //         $meeting.attr("day", day);
+    //         $list.addClass('hide');
 
-            $meeting[0].innerHTML = "Details about this meeting on "
-             + month + "/" + day + "/" + year;
-        }
-        else if($meeting.attr('day') != day) {
-            //get info for new meeting
-            $meeting[0].innerHTML = "Details about this meeting on "
-             + month + "/" + day + "/" + year;
-            $meeting.attr("day", day);
-        }
-        else {
-            $meeting.addClass('hide');
-            $meeting.removeAttr('day');
-            $list.removeClass('hide');
-        }
-    };
+    //         $meeting[0].innerHTML = "Details about this meeting on "
+    //          + month + "/" + day + "/" + year;
+    //     }
+    //     else if($meeting.attr('day') != day) {
+    //         //get info for new meeting
+    //         $meeting[0].innerHTML = "Details about this meeting on "
+    //          + month + "/" + day + "/" + year;
+    //         $meeting.attr("day", day);
+    //     }
+    //     else {
+    //         $meeting.addClass('hide');
+    //         $meeting.removeAttr('day');
+    //         $list.removeClass('hide');
+    //     }
+    // };
 
     Plugin.prototype.monthlyList = function(events) {
         $('#meeting-list div')[1].innerHTML = "";
@@ -399,15 +400,27 @@
         var counter = 0;
         $.each(events.event, function(){
             if( month == this.month && year == this.year) {
+
+
                 $('#meeting-list div')[1].innerHTML += '<div class="accordion accordion-group"><div class="accordion-heading">' +
                     '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse' + counter + '">' +
                     '<strong>' + this.date + '</strong>' + " | " + this.time + " | " + this.location + " " +
                     '</a></div><div id="collapse' + counter + '" class="accordion-body collapse out">' +
                     '<div class="accordion-inner"><div class="indentation">' +
 
-                    'details about this meeting' +
-                    //this.attending + "\n" +
-                    //this.meeting_role + "\n"
+                    //date
+                    //time
+                    //location
+                    //link to sign up for meeting
+                    //attending or not
+                    //user's meeting role
+                    //all meeting roles?
+                    // 'date = ' + this.date + "<br/>" +
+                    // 'time = ' + this.time + "<br/>" +
+                    // 'location = ' + this.location + "<br/>" +
+                    '<em>' + this.description + '</em>' + '<br/>' +
+                    attendingOrNot(this.attending, this.meeting_role.title) + "<br/>" +
+                    '<a href="meetings/' + this.meeting_id  + '">Change Status</a>' +
 
                     '</br></div></div></div></div>';
                 //$('#monthly-list')[1].innerHTML += "<strong>" + this.date + " " + "</strong>" + this.time + " " + this.location + "</p>";
@@ -416,6 +429,15 @@
 
         });
     };
+
+    function attendingOrNot(status, role) {
+      if (status) {
+        return "You are currently attending as " + role.toLowerCase() + ".";
+      } else {
+        return "You are not currently attending this meeting.";
+      };
+    };
+
 
 
 

@@ -34,12 +34,17 @@ class User < ActiveRecord::Base
   end
 
   def meeting_role(meeting)
-    attendance_for_meeting(meeting).meeting_role
+    found_attendance = attendance_for_meeting(meeting)
+    if(found_attendance)
+      return found_attendance.meeting_role
+    else
+      return MeetingRole.find_by_title('Absentee')
+    end
   end
 
   def attending?(meeting)
     attendance = attendance_for_meeting(meeting)
-    attendance && !attendance.absentee?
+    !!(attendance && !attendance.absentee?)
   end
 
   def attendance_for_meeting(meeting)

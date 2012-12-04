@@ -17,41 +17,20 @@ $(document).ready(function(){
         }, 'weekStart': 7 }).on('onEvent', function(event) {
           changeAccordion(event);
         })
-        $('.accordion-toggle').addClass('collapsed');
+        //$('.accordion-toggle').addClass('collapsed');
       }
     });
 
-
     var changeAccordion = function(event) {
-
       var day = checkZero(event.day);
       var date = event.month + "/" + day + "/" + event.year;
       accordion = $('.accordion-toggle:contains(' + date + ')');
       accordionChild = $('.accordion-body.in');
-      //reset all accordions to collapsed.
-      //check the target accordion
-        //if it's collapsed, open it
       if(accordionChild.hasClass('in')) {
         accordionChild.siblings().children().click();
       }
       accordion.click();
-      //$('.accordion-body').removeClass('in');
-      // if(accordionChild.hasClass('in')) {
-      //   accordion.addClass('collapsed');
-      //   accordionChild.removeClass('in');
-      // } else {
-      //   //$('.accordion-toggle').addClass('collapsed');
-      //   accordion.removeClass('collapsed');
-      //   accordionChild.addClass('in');
-      // }
-
-      // alert("current = " + event.currentTarget);
-      // alert("target = " + event.target)
     };
-  // $('.holiday').on('click', function() {
-  //   console.log(this.day);
-  // });
-
 
   function checkZero(day) {
       if (day < 10) {
