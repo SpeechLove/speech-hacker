@@ -1,0 +1,3 @@
+$('form.edit_manual').hide();
+$('#new_manual_button').show();
+$('#collapse_<%= @manual.id %>').parent().replaceWith('<%= j render(@manual) %>');
