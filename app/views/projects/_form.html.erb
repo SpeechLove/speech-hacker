@@ -1,2 +1,7 @@
-<%= form_for @project do |p| %>
-<%= p.text_field :
+<% form_for @project do |p| %>
+  <%= p.label :name %>
+  <%= p.text_field :name %>
+  <%= p.label :project_number %>
+  <%= p.text_field :project_number %>
+  <%= p.submit %>
+<% end %>

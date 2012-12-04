@@ -4,12 +4,17 @@ class ProjectsController < ApplicationController
     @user_count = User.count
     respond_to do |format|
       format.html
+      format.js
     end
   end
 
   def edit
-    @project = params[:project]
-    render :partial => 'form'
+    @project = Project.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:project][:id])
+    @project.update_attributes(params[:project])
   end
 
   def projects_by_manual
