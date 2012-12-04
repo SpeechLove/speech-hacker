@@ -1,53 +1,60 @@
 require 'spec_helper'
 
 describe ManualsController do
-  let!(:manual) { Fabricate(:manual) }
-  let(:mr_user) { Fabricate(:user_testing) }
-  # let!(:manual_two_speech) { Fabricate(:manual_two_speech) }
+  let!(:speech) { Fabricate(:speech) }
+  let!(:new_manual) { Fabricate(:manual) }
 
-  before(:each) { sign_in mr_user }
-
-  describe 'index' do
-    it "assigns a list of manuals" do
-      get(:index, :user_id => mr_user.id)
-      assigns(:manuals).should eq [manual]
-    end
-
-  # describe 'show' do
-    # it "assigns a current manual" do
-    #   controller.stub(:current_user).and_return(mr_user)
-    #   get(:show, :user_id => mr_user.id, :id => manual.id)
-    #   assigns(:manual).should eq manual
-    # end
-
-    # it "assigns a list of the current user's speeches from the current manual" do
-    #   #sign_in mr_user
-    #   speech = Fabricate(:speech, :user => mr_user)
-    #
-    #   get(:index, :user_id => mr_user.id, :id => speech.manual.id)
-    #   assigns(:speeches_test).first.should eq speech
-    # end
-
-    # it "doesn't include speeches from other manuals in the speeches list" do
-    #   #sign_in mr_user
-    #   speech1 = Fabricate(:speech, :user => mr_user)
-    #   speech2 = Fabricate(:speech, :user => mr_user)
-    #   puts('---------speech---------')
-    #   puts(speech1.inspect)
-    #   puts(Speech.all)
-    #   get(:index, :user_id => mr_user.id, :id => speech1.manual.id)
-    #   assigns(:speeches_test).should eq [speech1]
-    # end
-
-    it "creates a list of speeches for the current user grouped by manuals"
-
-
-    it "can be accessed by the user for the records"
-
-    it "can be accessed by an admin"
-
-    it "cannot be accessed by a non-admin for someone else's files"
-
+  before(:each) do
+   speech.user.add_role(:admin)
+   sign_in speech.user
   end
 
+  describe "#index" do
+    it "assigns a list of manuals" do
+      get(:index, :user_id => speech.user.id)
+      assigns(:manuals).should eq Manual.all
+    end
+
+    it "assigns the current user to @user if the current user's id equals the passed-in user id" do
+      get(:index, :user_id => speech.user.id)
+      assigns(:user).should eq speech.user
+    end
+
+    it "assigns the user with the passed-in user id to @user" do
+      new_user = Fabricate(:user)
+      get(:index, :user_id => new_user.id)
+      assigns(:user).should eq new_user
+    end
+  end
+
+  describe "#new" do
+    it "creates a new manual" do
+      get(:new, :user_id => speech.user.id)
+      assigns(:manual).should be_a(Manual)
+    end
+  end
+
+  describe "#create" do
+    it "creates a new manual and increases the manual count by 1" do
+      expect {
+        post(:create, :user_id => speech.user.id, :manual => { :name => "blah" })
+      }.to change(Manual, :count).by(1)
+    end
+  end
+
+  describe "#edit" do
+    it "finds the current manual" do
+      get(:edit, :user_id => speech.user.id, :id => new_manual.id )
+      assigns(:manual).should be_a(Manual)
+      assigns(:manual).id.should eq new_manual.id
+      assigns(:manual).should be_valid
+    end
+  end
+
+  describe "#update" do
+    it "updates the manual title" do
+      post(:update, :user_id => speech.user.id, :id => new_manual.id, :manual => { :name => new_manual.name } )
+      assigns(:manual).name.should eq new_manual.name
+    end
+  end
 end

@@ -11,7 +11,6 @@ class Ability
       cannot :read, [MeetingRole]
     else
       can :read, :all
-      cannot :read, [User]
       cannot :read, [MeetingRole]
     end
   end

@@ -1,8 +1,9 @@
 class MeetingsController < ApplicationController
+
   load_and_authorize_resource
 
   before_filter :authenticate_user!, :except => [:index]
- # =>  before_filter :admin_only, :only => [:destroy, :edit, :new, :create]
+  skip_before_filter :authenticate_user!, :only => [:index]
 
   def index
     @meetings = Meeting.all

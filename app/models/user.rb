@@ -52,6 +52,9 @@ class User < ActiveRecord::Base
 
   def self.count
     User.all.count
+
+  def speeches_for_manual(manual)
+    speeches.for_manual(manual)
   end
 
 end

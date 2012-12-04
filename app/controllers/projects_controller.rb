@@ -8,6 +8,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def create
+
+  end
+
   def edit
     @project = Project.find(params[:id])
   end
