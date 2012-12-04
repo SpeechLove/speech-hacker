@@ -1,17 +1,16 @@
 class ManualsController < ApplicationController
-
   before_filter :authenticate_user!
-  #need to add authorization here so that only admins and the records' user can view this page
   load_and_authorize_resource
 
   def index
-      @manuals = Manual.all
-      if current_user.id == params[:user_id]
-        @user = current_user
-      else
-        @user = User.find(params[:user_id])
-      end
+    @manuals = Manual.all
+    if current_user.id == params[:user_id]
+      @user = current_user
+    else
+      @user = User.find(params[:user_id])
+    end
   end
+
 
   # def show
   #   @manual = Manual.find(params[:id])
