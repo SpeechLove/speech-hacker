@@ -54,4 +54,8 @@ class User < ActiveRecord::Base
     speeches.for_manual(manual)
   end
 
+  def self.max
+    User.all.last.id
+  end
+
 end
