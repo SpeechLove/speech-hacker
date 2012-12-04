@@ -1,17 +1,27 @@
 <h2>Update Past Meeting</h2>
 
+<div class="alert alert-success notice-box"></div>
+<div class="alert alert-error alert-box"></div>
+
+<%= hidden_field_tag :meeting_id, @meeting.id %>
+
 <table class="table table-hover">
   <thead>
     <tr>
       <th>Meeting Role</th>
+      <th>Members</th>
+      <th>Add New Role</th>
     </tr>
   </thead>
   <tbody>
     <% @meeting_roles.each do |role| %>
       <tr>
         <% next if role.attendee? %>
-        <td><%= role.title %></td>
         <td>
+            <%= role.title %>
+        </td>
+        <td class="span5">
+            <div class="role-title-id"><%= role.id %></div>
             <% # If no one has taken the role, let admins be able to choose one %>
             <% if @roles_taken[role.id].count == 0 %>
               <select class="attendance-role-select">
@@ -25,6 +35,7 @@
 
               <% @roles_taken[role.id].each do |role_user_id| %>
                 <select class="attendance-role-select">
+                  <option value="" selected="selected">Select a member...</option>
                   <% User.all.each do |user| %>
                     <% if user.id == role_user_id %>
                       <option value="<%= user.id %>" selected="selected">
@@ -35,13 +46,9 @@
                       </option>
                   <% end %>
                 </select>
-                <%= button_to "Delete Role", "#",
-                              :class => "btn btn-warning",
-                              :method => :get %>
-                <br />
+                &nbsp;<%= link_to "Delete", "#", :class => "delete-role" %>
               <% end %>
             <% end %>
-          </select>
         </td>
         <td>
           <%= button_to "Add Role", "#",
@@ -52,3 +59,11 @@
     <% end %>
   </tbody>
 </table>
+
+<% @meeting.attendances.each do |attendance| %>
+  <% #if attendance.meeting_role.attendee? %>
+    <%= attendance.user.name %>,
+  <% #end %>
+<% end %>
+
+

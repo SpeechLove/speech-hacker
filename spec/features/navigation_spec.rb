@@ -21,7 +21,7 @@ describe "Navigation", :js => true do
     end
 
     it "does not have Edit Users in the navigation bar" do
-      page.should_not have_link("Edit Users", :href => users_path)
+      page.should_not have_link("Members", :href => users_path)
     end
 
     it "does not have the Meeting Roles on the navigation bar" do
@@ -40,16 +40,17 @@ describe "Navigation", :js => true do
       page.should have_link("Current Meetings", :href => meetings_path)
     end
 
-    it "shows Member on menu" do
-      page.find(:xpath, "//a[@href='#']").click
-      page.find(:xpath, "//a[@href='/speeches']").click
-      page.should have_content("Speech Title")
-    end
+    #took out the My speeches view page so this link no longer exits
+    # it "shows Member on menu" do
+    #   page.find(:xpath, "//a[@href='#']").click
+    #   page.find(:xpath, "//a[@href='/speeches']").click
+    #   page.should have_content("Speech Title")
+    # end
 
     it "shows My Progress on menu" do
       page.find(:xpath, "//a[@href='#']").click
       page.find(:xpath, "//a[@href='/users/#{@user.id}/manuals']").click
-      page.should have_content("My Progress")
+      page.should have_content("Progress for #{@user.name}")
     end
 
     it "shows Edit Profile on menu" do
@@ -90,10 +91,10 @@ describe "Navigation", :js => true do
       page.should have_content("Meeting date")
     end
 
-    it "shows Edit Users in navigation bar" do
-      page.should have_link("Edit Users", :href => users_path)
-      click_link "Edit Users"
-      page.should have_content("Edit user")
+    it "shows Members in navigation bar" do
+      page.should have_link("Members", :href => users_path)
+      click_link "Members"
+      page.should have_content("Members")
     end
 
     it "does not have the Meeting Roles on the navigation bar" do

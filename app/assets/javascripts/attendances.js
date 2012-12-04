@@ -1,6 +1,34 @@
 $(document).ready(function() {
   show_hide_role_sign_up();
+  hide_role_id();
+  hide_alert_boxes();
 
+  var old_user_id;
+
+  $('.attendance-role-select').focus(function() {
+    old_user_id = $(this).val();
+  }).change(function() {
+    user_id = $(this).val();
+    role_id = $(this).parent().parent().find('.role-title-id').html();
+    meeting_id = $('#meeting_id').val();
+
+    var params = "old_user_id=" + old_user_id + "&user_id=" + user_id + "&role_id=" + role_id;
+
+    $.ajax({
+      type: 'post',
+      url:  '/meetings/' + meeting_id + '/attendances',
+      dataType: 'json',
+      data: params,
+        success: function(data, status, xhr) {
+          console.log("ajax success");
+        },
+        error: function(xhr, status, error) {
+          console.log("ajax error");
+        }
+    }); // ajax
+  });
+
+  // Show role options if the user selects to attend the meeting
   $('.attend-option').on('click', function(e) {
     if ($(this).val() == 'true') {
       $('.role-sign-up').fadeIn('fast');
@@ -9,6 +37,7 @@ $(document).ready(function() {
     }
   });
 
+  // Show speech options when the speaker role is selected
   $('.role-option').on('click', function(e) {
     if ($(this).val() == $('.Speaker-option').val())
       $('.speech-fields').fadeIn('fast');
@@ -16,6 +45,7 @@ $(document).ready(function() {
       $('.speech-fields').fadeOut('fast');
   });
 
+  // Change project options when the selected manual is changed
   $('.manual-select').change(function(){
     var params = "manual_id="+$(this).val();
 
@@ -57,4 +87,12 @@ $(document).ready(function() {
     }
   }
 
+  function hide_alert_boxes() {
+    $('.notice-box').hide();
+    $('.alert-box').hide();
+  }
+
+  function hide_role_id() {
+    $('.role-title-id').hide();
+  }
 });

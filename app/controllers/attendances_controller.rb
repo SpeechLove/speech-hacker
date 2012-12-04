@@ -27,4 +27,42 @@ class AttendancesController < ApplicationController
       render "meetings/show", :alert => "Something went wrong!"
     end
   end
+
+  def update_role
+    logger.info("-------- update role ----------")
+    logger.info(params)
+
+    @meeting = Meeting.find(params[:id])
+    @user = User.find(params[:user_id])
+    @role = MeetingRole.find(params[:role_id])
+
+    if params[:old_user_id] == ""
+      success = add_new_attendance(@meeting, @user, @role)
+    else
+      @old_user = User.find(params[:old_user_id])
+      @attendance = @meeting.attendances.where(:user_id => @old_user.id).first
+      success = @attendance.update_attributes(:attend => "true", :user => @user)
+    end
+
+    respond_to do |format|
+      format.json do
+        if success
+          render :json => { :success => true }
+        else
+          logger.info(@attendance.errors.full_messages)
+          render :json => {
+                            :errors => @attendance.errors.full_messages.join(', '),
+                            :status => :unprocessable_entity
+                          }
+        end
+      end
+    end
+  end
+
+  private
+
+  def add_new_attendance(meeting, user, role)
+    Attendance.create(:attend => "true", :user => user, :meeting_role => role,
+                      :meeting => meeting)
+  end
 end
