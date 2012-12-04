@@ -5,6 +5,34 @@ $(document).ready(function() {
 
   var old_user_id;
 
+  // Delete member roles from meeting through the delete link.
+  $('.remove-meeting-role').on('click', function(e) {
+    e.preventDefault();
+    old_user_id = $(this).prev().find(":selected").val()
+    user_id = "";
+    role_id = $(this).parent().parent().find('.role-title-id').html();
+    meeting_id = $('#meeting_id').val();
+
+    var params = "old_user_id=" + old_user_id + "&user_id=" + user_id + "&role_id=" + role_id;
+
+    $.ajax({
+      type: 'post',
+      url:  '/meetings/' + meeting_id + '/attendances',
+      dataType: 'json',
+      data: params,
+        success: function(data, status, xhr) {
+          show_success_box('Your update has been made successfully!');
+          // Change the dropdown box to "Select a member"
+          $('.attendance-role-select').val("");
+        },
+        error: function(xhr, status, error) {
+          show_error_box('Something is wrong! Your update did not go through!');
+        }
+    }); // ajax
+  });
+
+  // Update member roles in current meeting through changes to the
+  // drop-down box.
   $('.attendance-role-select').focus(function() {
     old_user_id = $(this).val();
   }).change(function() {
@@ -20,16 +48,10 @@ $(document).ready(function() {
       dataType: 'json',
       data: params,
         success: function(data, status, xhr) {
-          console.log("ajax success");
-          $('.notice-box').html('Your update has been made successfully!');
-          $('.alert-box').hide();
-          $('.notice-box').fadeIn('fast');
+          show_success_box('Your update has been made successfully!');
         },
         error: function(xhr, status, error) {
-          console.log("ajax error");
-          $('.alert-box').html('Something is wrong! Your update did not go through!');
-          $('.notice-box').hide();
-          $('.alert-box').fadeIn('fast');
+          show_error_box('Something is wrong! Your update did not go through!');
         }
     }); // ajax
   });
@@ -99,5 +121,17 @@ $(document).ready(function() {
 
   function hide_role_id() {
     $('.role-title-id').hide();
+  }
+
+  function show_success_box(display_html) {
+    $('.notice-box').html(display_html);
+    $('.alert-box').hide();
+    $('.notice-box').fadeIn('fast');
+  }
+
+ function show_error_box(display_html) {
+   $('.alert-box').html(display_html);
+   $('.notice-box').hide();
+   $('.alert-box').fadeIn('fast');
   }
 });

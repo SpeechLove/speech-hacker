@@ -50,7 +50,7 @@
                               </option>
                           <% end %>
                         </select>
-                        &nbsp;<%= link_to "Delete", "#", :class => "delete-role" %>
+                        &nbsp;<%= link_to "Remove", "#", :class => "remove-meeting-role" %>
                       <% end %>
                     <% end %>
                 </td>
@@ -68,7 +68,7 @@
       <h4>Attendees without Roles</h4>
       <ul>
       <% @meeting.attendances.each do |attendance| %>
-        <% if attendance.meeting_role.attendee? %>
+        <% if attendance.meeting_role and attendance.meeting_role.attendee? %>
           <li><%= attendance.user.name %> <%= link_to "Delete", '#' %></li>
         <% end %>
       <% end %>

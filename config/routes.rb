@@ -12,5 +12,7 @@ SpeechHacker::Application.routes.draw do
 
   post "/manuals/:id/projects" => "projects#projects_by_manual"
   post '/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin_user'
+
   post '/meetings/:id/attendances' => 'attendances#update_role'
+  delete '/meetings/:id/attendances' => 'attendances#delete_role'
 end
