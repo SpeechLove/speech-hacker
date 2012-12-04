@@ -2,7 +2,7 @@ class MeetingRolesController < ApplicationController
   load_and_authorize_resource
 
   before_filter :authenticate_user!
-  before_filter :superadmin_only
+  #before_filter :superadmin_only
 
   def index
     @meeting_roles = MeetingRole.all
@@ -74,7 +74,7 @@ class MeetingRolesController < ApplicationController
   end
 
   private
-  def superadmin_only
-    current_user.super_admin?
-  end
+  # def superadmin_only
+  #   current_user.super_admin?
+  # end
 end
