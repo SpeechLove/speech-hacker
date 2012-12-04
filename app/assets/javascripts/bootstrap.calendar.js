@@ -269,9 +269,6 @@
                             var month = parseInt(target.attr('month'), 10)||1;
                             var year = parseInt(target.attr('year'), 10)||1;
 
-                            //meetingInfoDisplay(day, month, year);
-
-
                             this.element.trigger({
                                 type: 'onEvent',
                                 day: day,
@@ -369,33 +366,6 @@
         });
     }
 
-
-
-    // var meetingInfoDisplay = function(day, month, year) {
-    //     var $meeting = $('#meeting-info');
-    //     var $list = $('#meeting-list');
-
-    //     if($meeting.hasClass('hide')) {
-    //         $meeting.removeClass('hide');
-    //         $meeting.attr("day", day);
-    //         $list.addClass('hide');
-
-    //         $meeting[0].innerHTML = "Details about this meeting on "
-    //          + month + "/" + day + "/" + year;
-    //     }
-    //     else if($meeting.attr('day') != day) {
-    //         //get info for new meeting
-    //         $meeting[0].innerHTML = "Details about this meeting on "
-    //          + month + "/" + day + "/" + year;
-    //         $meeting.attr("day", day);
-    //     }
-    //     else {
-    //         $meeting.addClass('hide');
-    //         $meeting.removeAttr('day');
-    //         $list.removeClass('hide');
-    //     }
-    // };
-
     Plugin.prototype.monthlyList = function(events) {
         $('#meeting-list div')[0].innerHTML = "";
         var year = this.yy;
@@ -422,8 +392,9 @@
                     // 'time = ' + this.time + "<br/>" +
                     // 'location = ' + this.location + "<br/>" +
                     '<em>' + this.description + '</em>' + '<br/>' +
-                    attendingOrNot(this.attending, this.meeting_role.title) + "<br/>" +
-                    '<a href="meetings/' + this.meeting_id  + '">Change Status</a>' +
+
+                    // attendingOrNot(this.attending, this.meeting_role.title) + "<br/>" +
+                    '<a href="meetings/' + this.meeting_id  + '">Sign up</a>' +
 
                     '</br></div></div></div></div>';
                 //$('#monthly-list')[1].innerHTML += "<strong>" + this.date + " " + "</strong>" + this.time + " " + this.location + "</p>";
