@@ -1,3 +1,3 @@
 $('form.new_meeting_role').hide();
 $('#new_role_button').show();
-$('#meeting_roles_table tr:last').after('<tr><td class="role_title"><%= meeting_role_title %></td><td class="role_edit"><%= link_to "Edit", edit_meeting_role_path(meeting_role_id), :remote => true %></td><td class="role_description"><%= meeting_role_description %><td class="role_destroy"><%= link_to "Destroy", meeting_role_path(meeting_role_id), :method => :delete, :remote => true %></td></tr>');
+$('#meeting_roles_table tr:last').after('<%= j render @meeting_role %>');

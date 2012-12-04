@@ -11,7 +11,7 @@ class Speech < ActiveRecord::Base
   accepts_nested_attributes_for :project
 
   def self.for_manual(manual)
-  	#sql query for joining manual and project tables on the manual id //from Robert!
-  	joins(:project).where("projects.manual_id = ?", [manual.id])
+    #sql query for joining manual and project tables on the manual id //from Robert!
+    joins(:project).where("projects.manual_id = ?", [manual.id])
   end
 end
