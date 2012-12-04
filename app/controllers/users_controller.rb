@@ -53,13 +53,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  # def admin_only
-  #   unless current_user.admin? or current_user.super_admin?
-  #     redirect_to root_path, notice: "You are not authorized to access this page."
-  #   end
-  # end
-
   def assigning_roles?
     params[:user].has_key?(:roles)
   end

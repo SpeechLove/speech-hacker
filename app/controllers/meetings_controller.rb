@@ -1,14 +1,11 @@
 class MeetingsController < ApplicationController
-
-  load_and_authorize_resource
-
   before_filter :authenticate_user!, :except => [:index]
-  skip_before_filter :authenticate_user!, :only => [:index]
+  load_and_authorize_resource
+  #skip_before_filter :authenticate_user!, :only => [:index]
 
   def index
     @meetings = Meeting.all
     @attendance = Attendance.all
-    #render "calendar"
   end
 
   def new
@@ -53,9 +50,12 @@ class MeetingsController < ApplicationController
       render action: "edit"
     end
   end
+<<<<<<< HEAD
 
   private
   # def admin_only
   #   current_user.admin?
   # end
+=======
+>>>>>>> refactored meeting roles
 end
