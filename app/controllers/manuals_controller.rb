@@ -1,11 +1,13 @@
 class ManualsController < ApplicationController
 
   #need to add authorization here so that only admins and the records' user can view this page
+  load_and_authorize_resource
 
   def index
     @manuals = Manual.all
     @speeches = Hash.new
     user = User.find(params[:user_id])
+    authorize! :read, user.speeches.for_manual(@manuals[0])
     #@speeches_test = current_user.speeches
     #current_user # => User.find(session[:user_id])
     @manuals.each do |manual|

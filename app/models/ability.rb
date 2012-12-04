@@ -11,8 +11,14 @@ class Ability
       cannot :read, [MeetingRole]
     else
       can :read, :all
-      cannot :read, [User]
+      cannot :read, Speech, :user_id => other_user_id(user.id)
       cannot :read, [MeetingRole]
     end
   end
+
+  def other_user_id(u_id)
+    random_id = rand(0..User.max)
+    (u_id == random_id) ? other_user_id(u_id) : random_id
+  end
+
 end
