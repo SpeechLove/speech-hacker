@@ -39,6 +39,14 @@ class Meeting < ActiveRecord::Base
     json_meetings = { "event" => formatted_meetings }
   end
 
+  # def self.for_month(month)
+  #   month_num = (month.to_i + 1)#convert incoming string to number to account for incoming months numbered 0 - 11
+  #   Meeting.all.select do |meeting|
+  #     date = meeting.meeting_date.to_s.gsub(/(\d{4})-(\d{2})-(\d{2})/, '\2/\3/\1')
+  #     meet_month = $2
+  #     meeting if month_num.to_s == meet_month
+  #   end
+  # end
 
   private
   def verify_date

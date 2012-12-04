@@ -17,7 +17,15 @@ $(document).ready(function(){
         }, 'weekStart': 7 }).on('onEvent', function(event) {
           changeAccordion(event);
         })
-        //$('.accordion-toggle').addClass('collapsed');
+          .on('onNext', function(event){
+            console.log(event.month);
+        })
+          .on('onPrev', function(event){
+            console.log(event.month);
+        })
+          .on('onCurrent', function(event){
+            console.log(event.month);
+        });
       }
     });
 

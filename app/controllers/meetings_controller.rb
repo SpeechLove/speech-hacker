@@ -4,14 +4,14 @@ class MeetingsController < ApplicationController
 
   def index
     @meetings = Meeting.all
-    # @meetings = Meeting.for_month(params[:month])
+    #@meetings = Meeting.for_month(params[:month])
     @attendance = Attendance.all
     json_meetings = Meeting.to_json(@meetings, current_user)
 
     respond_to do |format|
       format.html
       format.json { render :json => { :meetings => json_meetings} }
-      #format.js
+      #format.js { render 'index.js.erb', :locals => { :meetings => @meetings } }
     end
   end
 

@@ -301,6 +301,7 @@
                                     this.renderCalendar(prv, this.events);
                                     this.element.trigger({
                                         type: 'onPrev',
+                                        month: this.mm,
                                     });
                                     break;
                                 case 'current':
@@ -310,6 +311,7 @@
                                     this.renderCalendar(now, this.events);
                                     this.element.trigger({
                                         type: 'onCurrent',
+                                        month: this.mm,
                                     });
                                     break;
                                 case 'next':
@@ -319,6 +321,7 @@
                                     this.renderCalendar(nxt, this.events);
                                     this.element.trigger({
                                         type: 'onNext',
+                                        month: this.mm,
                                     });
                                     break
                             }
@@ -394,7 +397,7 @@
     // };
 
     Plugin.prototype.monthlyList = function(events) {
-        $('#meeting-list div')[1].innerHTML = "";
+        $('#meeting-list div')[0].innerHTML = "";
         var year = this.yy;
         var month = this.mm + 1;
         var counter = 0;
@@ -402,7 +405,7 @@
             if( month == this.month && year == this.year) {
 
 
-                $('#meeting-list div')[1].innerHTML += '<div class="accordion accordion-group"><div class="accordion-heading">' +
+                $('#meeting-list div')[0].innerHTML += '<div class="accordion accordion-group"><div class="accordion-heading">' +
                     '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse' + counter + '">' +
                     '<strong>' + this.date + '</strong>' + " | " + this.time + " | " + this.location + " " +
                     '</a></div><div id="collapse' + counter + '" class="accordion-body collapse out">' +
