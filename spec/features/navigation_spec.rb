@@ -42,7 +42,7 @@ describe "Navigation", :js => true do
 
     it "shows Member on menu" do
       page.find(:xpath, "//a[@href='#']").click
-      page.find(:xpath, "//a[@href='/speeches']").click
+#       page.find(:xpath, "//a[@href='/speeches']").click
       page.should have_content("Speech Title")
     end
 
@@ -91,8 +91,8 @@ describe "Navigation", :js => true do
     end
 
     it "shows Edit Users in navigation bar" do
-      page.should have_link("Edit Users", :href => users_path)
-      click_link "Edit Users"
+      page.should have_link("Members", :href => users_path)
+      click_link "Members"
       page.should have_content("Edit user")
     end
 
