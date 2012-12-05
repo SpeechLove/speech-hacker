@@ -17,9 +17,14 @@ class MeetingRolesController < ApplicationController
 
   def create
     @meeting_roles = MeetingRole.all
-    @meeting_role = MeetingRole.create!(params[:meeting_role])
+    @meeting_role = MeetingRole.new(params[:meeting_role])
+
     respond_to do |format|
-      format.js
+      if @meeting_role.save
+        format.js
+      else
+        format.js { render "shared/errors.js.erb" }
+      end
     end
   end
 

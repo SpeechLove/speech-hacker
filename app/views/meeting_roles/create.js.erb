@@ -1,3 +1,7 @@
+if (errors.length != 0) {
+	$('h1').after('blah');
+};
+
 $('form.new_meeting_role').hide();
 $('#new_role_button').show();
 $('#meeting_roles_table tr:last').after('<%= j render @meeting_role %>');
