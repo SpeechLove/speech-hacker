@@ -40,7 +40,7 @@
 
       <% if current_user && (can? :update, @meeting) %>
       <td> <!-- Edit -->
-            <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
+            <%= link_to "Edit", edit_meeting_path(meeting) %>
       </td>
       <% end %>
 
@@ -58,7 +58,7 @@
         </td>
         <% if can? :destroy, @meeting %>
           <td> <!-- Cancel Meeting? -->
-            <%= link_to "Destroy", meeting_path(meeting), :method => :delete %>
+            <%= link_to "Cancel", meeting_path(meeting), :method => :delete %>
           </td>
         <% end %>
       <% end %>
