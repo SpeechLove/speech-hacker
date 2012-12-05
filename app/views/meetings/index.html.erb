@@ -8,8 +8,9 @@
   <%= render 'meetings' %>
 <% else %>
   <div class="alert alert-info">
-    You don't have any meetings! <a href="<%= new_meeting_path %>">Create a meeting</a> to get started.
+    There are no meetings.
+    <% if can? :manage, Meeting %>
+      <a href="<%= new_meeting_path %>">Create a meeting</a> to get started.
+    <% end %>
   </div>
 <% end %>
-
-<%= create_meeting_button %>

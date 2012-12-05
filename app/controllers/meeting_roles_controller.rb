@@ -1,10 +1,10 @@
 class MeetingRolesController < ApplicationController
-  load_and_authorize_resource
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @meeting_roles = MeetingRole.all
-    @meeting_role = MeetingRole.new
+    @meeting_role  = MeetingRole.new
   end
 
   def new
