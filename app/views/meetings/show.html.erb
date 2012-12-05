@@ -1,0 +1,15 @@
+<h1> Meeting on <%= @meeting.meeting_date %> at
+     <%= @meeting.meeting_time%></h1>
+
+<p>
+  <%= @meeting.location %>
+</p>
+
+<p>
+  <% if @meeting.description %>
+    <%= @meeting.description.capitalize %>
+  <% end %>
+</p>
+
+<%= render 'attendances/form', :attendance => @meeting.attendance_for(current_user),
+                               :meeting => @meeting %>

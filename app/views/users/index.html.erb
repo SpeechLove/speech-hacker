@@ -1,0 +1,36 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th>Action</th>
+      <% if current_user.super_admin? %>
+        <th>Make admin?</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "Edit user", edit_user_path(user.id) %></td>
+        <% if current_user.super_admin? %>
+          <% if !user.super_admin? %>
+            <% is_admin = (user.admin? or user.super_admin?) %>
+            <td><%= check_box_tag 'make_admin', user.id, is_admin, :class => "make-admin-option" %></td>
+          <% else%>
+            <td></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

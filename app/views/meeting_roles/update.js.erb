@@ -1,0 +1,3 @@
+$("tr#meeting_role_<%= @meeting_role.id %>").replaceWith("<%= j render @meeting_role %>");
+$("form.edit_meeting_role").remove();
+$('#new_role_button').show();

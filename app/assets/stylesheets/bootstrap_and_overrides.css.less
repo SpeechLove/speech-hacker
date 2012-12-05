@@ -1,0 +1,120 @@
+@import "twitter/bootstrap/bootstrap";
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");
+@iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings-white");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// Note: If you use asset_path() here, your compiled bootstrap_and_overrides.css will not
+//       have the proper paths. So for now we use the absolute path.
+@fontAwesomeEotPath: asset-path("fontawesome-webfont.eot");
+@fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-path("fontawesome-webfont.svg");
+
+// Font Awesome
+@import "fontawesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+p {font-size: 16px}
+
+.accordion-heading .accordion-toggle {
+  display: inline;
+}
+
+body {
+  padding-top: 60px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+h1{ padding-bottom: 15px}
+.table {font-size: 16px}
+td{ text-align:center}
+
+.indentation {
+	margin-left: 2em;
+}
+
+.progress-indent {
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+
+/* Body and structure
+-------------------------------------------------- */
+/*body {
+  background-color: #fff;
+  position: relative;
+}*/
+
+.year{
+  font-size:108px;
+  margin-top:30px;
+}
+
+.month{
+  font-size:42px;
+  color:red;
+}
+
+.time{
+  float:right;
+  font-size:36px;
+  text-align:right;
+}
+
+.calendar{
+}
+
+.calendar TH{
+  font-size:14px;
+  font-weight:bold;
+  border-top:1px solid #ccc;
+}
+
+.calendar TD{
+  height:50px;
+  font-size:24px;
+  color:#999;
+}
+
+.calendar TD.weekend{
+  color:#CDCDCD;
+}
+
+.calendar TD.today{
+  background-color:#EFEFEF;
+  color:#666666;
+}
+
+.calendar TD.holiday{
+  color:red;
+}
+
+.content{
+  color:black;
+  font-size:11px;
+  line-height:0px;
+}
+.right {
+	float: right;
+	margin-right: 5em;
+}

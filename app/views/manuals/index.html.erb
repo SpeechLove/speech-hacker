@@ -1,0 +1,16 @@
+<%- model_class = Manual -%>
+<div class="page-header">
+  <h1>My Progress</h1>
+</div>
+
+<% @manuals.each do |manual| %>
+  <%= render manual %>
+<% end %>
+
+<br />
+
+<div id="new_manual_button">
+  <% if can? :manage, [Manual] %>
+    <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn btn-primary', :method => :get, :remote => true) %>
+  <% end %>
+</div>

@@ -1,0 +1,60 @@
+<h1> Meetings </h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Meeting</th>
+      <th>Start time</th>
+      <th>Description</th>
+      <% if current_user && (can? :update, @meeting)%>
+      <th>
+        <%="Edit"%>
+      </th>
+      <% end %>
+      <th>Location</th>
+      <% if current_user %>
+        <th>Attending?</th>
+        <th>Meeting Role</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meetings.each do |meeting| %>
+    <tr>
+      <td> <!-- Meeting -->
+        <%= link_to meeting.formatted_date, meeting_path(meeting) %>
+      </td>
+
+      <td> <!-- Start time -->
+        <%= meeting.meeting_time %>
+      </td>
+
+      <td> <!-- Description -->
+          <% if meeting.description %>
+            <%= meeting.description.capitalize %>
+          <% end %>
+      </td>
+
+      <% if current_user && (can? :update, @meeting) %>
+      <td> <!-- Edit -->
+            <%= link_to "Edit Meeting", edit_meeting_path(meeting) %>
+      </td>
+      <% end %>
+
+      <td> <!-- Location -->
+        <%= meeting.location %>
+      </td>
+
+      <% if current_user %>
+        <td> <!-- Attending -->
+          <%= current_user.attending?(meeting) ? "Yes" : "No" %>
+        </td>
+
+        <td> <!-- Meeting Role -->
+          <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
+        </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
