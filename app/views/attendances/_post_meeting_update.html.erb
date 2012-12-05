@@ -18,7 +18,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @meeting_roles.each do |role| %>
+            <% @meeting_roles.each_with_index do |role, index| %>
               <tr>
                 <% next if role.attendee? %>
                 <td>
@@ -28,7 +28,7 @@
                     <div class="role-title-id"><%= role.id %></div>
                     <% # If no one has taken the role, let admins be able to choose one %>
                     <% if @roles_taken[role.id].count == 0 %>
-                      <select class="attendance-role-select-<%= role.id %>" id="attendance_role_select_<%= role.id %>">
+                      <select class="attendance-role-select" id="attendance_role_select_<%= index %>">
                         <option value="" selected="selected">Select a member...</option>
                         <% User.all.each do |user| %>
                             <option value="<%= user.id %>"><%= user.name %></option>
@@ -37,7 +37,7 @@
                     <% else %>
                       <% # The role has been taken by one or more members. Let admins be able to change members. %>
 
-                      <% @roles_taken[role.id].each_with_index do |role_user_id, index| %>
+                      <% @roles_taken[role.id].each do |role_user_id| %>
                         <select class="attendance-role-select" id="attendance_role_select_<%= index %>">
                           <option value="" selected="selected">Select a member...</option>
                           <% User.all.each do |user| %>

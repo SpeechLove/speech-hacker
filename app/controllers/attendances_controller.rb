@@ -52,16 +52,22 @@ class AttendancesController < ApplicationController
       new_attendee = @old_user if !@user.attendance_for_meeting(@meeting).attendee?
     end
 
+    @all_attendees = Array.new
+    @meeting.attendances.each do |attendance|
+      @all_attendees << attendance.user if attendance.meeting_role and attendance.meeting_role.attendee?
+    end
+
     respond_to do |format|
       format.json do
         if success.errors.empty?
           logger.info("new attendee: ")
           logger.info(new_attendee.name) if new_attendee
           render :json => {
+                            :success => true,
                             :role => @role,
                             :remove_attendee => (remove_attendee || ""),
                             :new_attendee => (new_attendee || ""),
-                            :success => true
+                            :all_attendees => @all_attendees
                           }
         else
           render :json => {
