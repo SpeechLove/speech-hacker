@@ -2,14 +2,15 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   before_filter :authenticate_user!
-  #before_filter :admin_only, :only => [:index]
 
   def index
     @users = User.all
   end
 
   def show
+    @manuals = Manual.all
     @user = User.find(params[:id])
+
   end
 
   def edit

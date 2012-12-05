@@ -50,12 +50,4 @@ class MeetingsController < ApplicationController
       render action: "edit"
     end
   end
-<<<<<<< HEAD
-
-  private
-  # def admin_only
-  #   current_user.admin?
-  # end
-=======
->>>>>>> refactored meeting roles
 end
