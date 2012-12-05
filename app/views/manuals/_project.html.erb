@@ -1,0 +1,17 @@
+<div class="accordion-inner">
+  <div class="indentation">
+    <strong>#<%= project.project_number.to_s.ljust(5) + ": " + project.name %></strong>
+      <%="was completed by: " + project.speeches.count.to_s + "/" + @user_count.to_s + " members" %>
+    <br /><br />
+      <% @user_count ? user_count = @user_count : user_count = 0 %>
+      <% percent_users_done = (project.speeches.count * 100.0) / user_count %>
+    <div class="progress_bar">
+      <div class="progress progress-info">
+        <div class="bar" style="width: <%= percent_users_done.to_s %>%"></div>
+      </div>
+    </div>
+    <span class="right" >
+      <%= link_to "Edit", edit_project_path(:id => project.id) %>
+    </span><br />
+  </div>
+</div>
