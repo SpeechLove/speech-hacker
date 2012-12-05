@@ -1,5 +1,5 @@
 Fabricator(:meeting_role) do
-  title { Faker::Lorem.sentence.chomp.split.first }
+  title { Faker::Lorem.sentence }
   description { Faker::Lorem.sentence }
 end
 
