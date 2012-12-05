@@ -19,7 +19,7 @@ class MeetingRolesController < ApplicationController
     @meeting_roles = MeetingRole.all
     @meeting_role = MeetingRole.create!(params[:meeting_role])
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
 
@@ -27,7 +27,7 @@ class MeetingRolesController < ApplicationController
     @meeting_roles = MeetingRole.all
     @meeting_role = MeetingRole.find(params[:id])
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
 
@@ -48,8 +48,9 @@ class MeetingRolesController < ApplicationController
   def destroy
     @meeting_roles = MeetingRole.all
     @meeting_role = MeetingRole.find(params[:id])
+    @meeting_role.destroy
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
 end

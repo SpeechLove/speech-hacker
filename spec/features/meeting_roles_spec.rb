@@ -40,6 +40,8 @@ describe "MeetingRole", :js => true do
   end
 
   context "when user is a superadmin" do
+    let(:toastmaster) { Fabricate(:toastmaster)}
+
     before(:each) do
       @user = Fabricate(:user_superadmin)
       login_as @user
@@ -61,11 +63,11 @@ describe "MeetingRole", :js => true do
       end
 
       it "allows the user to create a new role and saves it" do
-        click_button("Create New Role")        
-        fill_in 'meeting_role_title', :with => meeting_role.title
-        fill_in 'meeting_role_description', :with => meeting_role.description
+        click_button("Create New Role")
+        fill_in 'meeting_role_title', :with => "Foo"
+        fill_in 'meeting_role_description', :with => "Boo"
         click_button("Create Meeting role")
-        page.should have_content(meeting_role.title)
+        page.should have_content("Foo")
       end
 
       it "has a link called 'Edit'" do
@@ -73,8 +75,6 @@ describe "MeetingRole", :js => true do
       end
 
       it "updates the meeting role if it is edited" do
-        toastmaster = Fabricate(:toastmaster)
-
         within_table('meeting_roles_table') do
           click_link("Edit")
         end

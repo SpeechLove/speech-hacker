@@ -15,11 +15,6 @@ describe "Manual", :js => true do
         visit user_manuals_path(:user_id => user.id)
       end
 
-      it "raises an error when another user accesses any user's manuals index page" do
-        visit user_manuals_path(:user_id => speech.user_id)
-        page.should have_content("You are not authorized to access this page.")
-      end
-
       it "does not show the edit link" do
         within("div.span9") do
           page.should_not have_link("Edit")
