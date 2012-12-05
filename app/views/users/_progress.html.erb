@@ -1,10 +1,4 @@
-<%- model_class = User -%>
-<div class="page-header">
-  <h1>My Progress</h1>
-</div>
-
-<% @manuals.each do |manual| %>
-  <div class="accordion accordion-group">
+<div class="accordion accordion-group">
   <div class="accordion-heading">
     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_<%= manual.id %>" >
       <%= manual.name.ljust(40)%>
@@ -35,4 +29,3 @@
     </div>
   </div>
 </div>
-<% end %>
