@@ -11,5 +11,15 @@ require 'spec_helper'
 #   end
 # end
 describe ManualsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#project_completed_date" do
+    it "returns the short formatted date if the speech has an associated meeting" do
+      speech = Fabricate(:speech)
+      project_completed_date(speech).should eq speech.meeting.formatted_short_date
+    end
+
+    it "returns 'Unknown meeting' if the speech does not have an associated meeting" do
+      speech = Speech.new
+      project_completed_date(speech).should eq "Unknown meeting"
+    end
+  end
 end
