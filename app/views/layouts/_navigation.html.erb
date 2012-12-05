@@ -9,21 +9,11 @@
       <a class="brand" href="<%= root_path %>">Speech Hacker</a>
       <div class="container nav-collapse">
         <% if user_signed_in? %>
-
           <ul class="nav pull-right">
             <li><%= link_to "Current Meetings", meetings_path %></li>
-
-            <% if can? :manage, Meeting %>
-            <li><%= link_to "Create Meeting", new_meeting_path %></li>
-            <% end %>
-
-            <% if can? :manage, User %>
-            <li><%= link_to "Members", users_path %></li>
-            <% end  %>
-
-            <% if can? :read, MeetingRole %>
-            <li><%= link_to "Meeting Roles", meeting_roles_path %></li>
-            <% end  %>
+            <li><%= create_meeting_link %></li>
+            <li><%= manage_users_link %></li>
+            <li><%= manage_meeting_roles_link %></li>
 
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
