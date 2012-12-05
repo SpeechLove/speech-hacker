@@ -5,6 +5,13 @@ class ManualsController < ApplicationController
 
   def index
     @manuals = Manual.all
+    @speeches = Hash.new
+    @user = User.find(params[:user_id])
+    @manuals.each do |manual|
+      @speeches[manual] = @user.speeches.for_manual(manual).sort_by do |speech|
+        speech.project.project_number
+      end
+    end
   end
 
   def new

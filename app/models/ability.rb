@@ -11,6 +11,7 @@ class Ability
       cannot :read, [MeetingRole]
     else
       can :read, :all
+      cannot :destroy, [Meeting]
       cannot :read, [MeetingRole]
       cannot :read, User do |this_user|
         this_user.id != user.id
