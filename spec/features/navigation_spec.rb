@@ -42,11 +42,9 @@ describe "Navigation", :js => true do
     end
 
     it "shows My Progress on menu" do
-      within('#user-menu') do
-        page.find(:xpath, "//a[@href='#']").click
-        page.find(:xpath, "//a[@href='/users/#{@user.id}/show']").click
-      end
-      page.should have_content("My Progress")
+      click_link "#{@user.name}"
+      click_link "My Progress"
+      page.should have_content("Progress for #{@user.name}")
     end
 
     it "shows Edit Profile on menu" do
@@ -85,13 +83,13 @@ describe "Navigation", :js => true do
     end
 
 
-    it "shows Edit Users in navigation bar" do
-      within('#admin-menu') do
-        page.find(:xpath, "//a[@href='#']").click
-        page.should have_link("Users", :href => users_path)
-      end
-      click_link "Users"
-      page.should have_content("Edit user")
+    it "shows Members in navigation bar" do
+      # within('#admin-menu') do
+      click_link "Manage"
+      page.should have_link("Members", :href => users_path)
+      # end
+      click_link "Members"
+      page.should have_content("Member Name")
     end
 
     it "does not have the Meeting Roles on the navigation bar" do
@@ -107,10 +105,11 @@ describe "Navigation", :js => true do
     end
 
     it "shows Meeting Roles on the navigation bar" do
-      within('#admin-menu') do
+      # within('#admin-menu') do
+        click_link "Manage" 
         page.should have_link("Meeting Roles", :href => meeting_roles_path)
         click_link "Meeting Roles"
-      end
+      # end
       page.should have_button("Create New Role")
     end
   end

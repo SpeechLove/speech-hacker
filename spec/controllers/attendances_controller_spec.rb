@@ -19,11 +19,6 @@ describe AttendancesController do
       post(:create, :meeting_id => meeting.id, :attendance => attendance_params)
       assigns(:attendance).meeting_role.title.should eq absentee_role.title
     end
-
-    it "sends an alert if an invalid attendance is created" do
-      post(:create, :meeting_id => meeting.id, :attendance => attendance_params)
-      assigns(:meeting_roles).should eq MeetingRole.attendee_roles
-    end
   end
 
   describe "#update" do
