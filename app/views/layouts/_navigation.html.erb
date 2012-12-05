@@ -9,7 +9,6 @@
       <a class="brand" href="<%= root_path %>">SpeechHacker</a>
       <div class="container nav-collapse">
         <% if user_signed_in? %>
-
           <ul class="nav pull-right">
             <li><%= link_to "Current Meetings", meetings_path  %></li>
             <% if can? :manage, Meeting %>
@@ -34,7 +33,10 @@
               </li>
             <% end %>
 
-
+            <li><%= link_to "Current Meetings", meetings_path %></li>
+            <li><%= create_meeting_link %></li>
+            <li><%= manage_users_link %></li>
+            <li><%= manage_meeting_roles_link %></li>
 
             <li id="user-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -23,7 +23,7 @@ class MeetingRolesController < ApplicationController
       if @meeting_role.save
         format.js
       else
-        format.js { render "shared/errors.js.erb" }
+        format.js { render "shared/errors", :locals => { :current_object => @meeting_role } }
       end
     end
   end
@@ -48,7 +48,7 @@ class MeetingRolesController < ApplicationController
       if @meeting_role.update_attributes(params[:meeting_role])
         format.js
       else
-        format.js { render "shared/errors.js.erb" }
+        format.js { render "shared/errors", :locals => { :current_object => @meeting_role } }
       end
     end
   end
