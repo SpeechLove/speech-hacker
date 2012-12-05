@@ -11,7 +11,7 @@
         <% if user_signed_in? %>
           <ul class="nav pull-right">
             <li><%= link_to "Current Meetings", meetings_path  %></li>
-             <li><%= create_meeting_link %></li>  
+             <li><%= create_meeting_link %></li>
 
 
             <% if can? :manage, :all %>
@@ -28,15 +28,11 @@
               </li>
             <% end %>
 
-           
-
-
             <li id="user-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <%= current_user.name %> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "My Speeches", speeches_path %></li>
                 <li><%= link_to "My Progress", user_path(current_user) %></li>
                 <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
                 <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
