@@ -5,8 +5,6 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :name, :manual_id, :project_number
 
-  def sorted_by_manual
-    @grouped = Project.all.group_by{ |p| p.manual_id }
-  end
+  
 
 end

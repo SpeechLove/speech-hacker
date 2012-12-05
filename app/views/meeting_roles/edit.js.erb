@@ -1,8 +1,4 @@
-if ($('td.role_title').filter(function(index) {return $(this).text() == '<%= meeting_role_title %>'}).next().children().attr('href') !== undefined) {
-  $('td.role_title').next().bind("click", true);
-  $("form.edit_meeting_role").remove();
-  $("form.new_meeting_role").remove();
-  $('#new_role_button').hide();
-  $('#meeting_roles_table').after('<%= j render("create") %>');
-  $('td.role_title').filter(function(index) {return $(this).text() == '<%= meeting_role_title %>'}).next().bind('click', false);
-}
+$("form.edit_meeting_role").remove();
+$("form.new_meeting_role").remove();
+$('#new_role_button').hide();
+$('#meeting_roles_table').after('<%= j render("create") %>');

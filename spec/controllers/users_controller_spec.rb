@@ -24,19 +24,31 @@ describe UsersController do
   end
 
   describe "#show" do
-    context "when the current user is admin" do
-      it "shows information about a user" do
-        sign_in user_admin
-        get(:show, :id => 1)
-        assigns(:user).should be_a(User)
+    let!(:other_user) { Fabricate(:user) }
+    
+    context "when a user tries to access another user's records" do
+      context "when the current user is admin" do
+        it "shows information about a user" do
+          sign_in user_admin
+          get(:show, :id => other_user.id)
+          assigns(:user).id.should eq(other_user.id)
+        end
+      end
+
+      context "when the current user is not admin" do
+        it "does not allow the user to see records" do
+          sign_in user
+          get(:show, :id => other_user.id)
+          response.should redirect_to root_path
+        end
       end
     end
 
-    context "when the current user is not admin" do
-      it "does not show information about a user" do
+    context "When users access their own records" do
+      it "shows information about the current user" do
         sign_in user
-        get(:show, :id => 1)
-        response.should redirect_to root_path
+        get(:show, :id => user.id)
+        assigns(:user).id.should eq(user.id)
       end
     end
   end

@@ -8,53 +8,14 @@
                 :class => "btn btn-primary", :method => :get %></div>
 <br /><br />
 
-<% @manuals.each_with_index do |manual, index| %>
-<div class="accordion accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= index %>">
-        <%= manual.name %> (<%= @speeches[manual].count.to_s + "/" + manual.projects.count.to_s %>)
-        <% percent_done = (@speeches[manual].count * 100.0) / manual.projects.count %>
-        <% if percent_done > 0 %>
-        <div class="progress-indent">
-          <div class="progress_bar">
-            <div class="progress progress-info">
-              <div class="bar" style="width: <%= percent_done.to_s %>%"></div>
-            </div>
-          </div>
-        </div>
-        <% end %>
-    </a>
-
-    </div>
-    <div id="collapse<%= index %>" class="accordion-body collapse out">
-      <div class="accordion-inner">
-        <div class="indentation">
-          <strong>Project title</strong>
-          <span class="right"><strong>Completed Date</strong></span>
-        </div>
-      </div>
-
-      <% all_projects = manual.projects.sort_by { |project| project.project_number } %>
-      <% all_projects.each do |project| %>
-        <div class="accordion-inner">
-          <div class="indentation">
-            <%= project.project_number %>)
-            <%= project.name.ljust(20) %>
-            <% @user.speeches.each do |speech| %>
-              <% if speech.project_id == project.id %>
-                <%= ": " + speech.title %>
-                <span class="right"><%= speech.meeting.meeting_date.strftime("%b %-d, %Y") %></span><br />
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="accordion-inner">
-      </div>
-    </div>
-
-</div>
+<% @manuals.each do |manual| %>
+  <%= render manual %>
 <% end %>
 
+<br />
 
+<div id="new_manual_button">
+  <% if can? :manage, [Manual] %>
+    <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn btn-primary', :method => :get, :remote => true) %>
+  <% end %>
+</div>

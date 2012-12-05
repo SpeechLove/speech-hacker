@@ -1,10 +1,26 @@
 require 'spec_helper'
 
 describe Project do
-  @project_params = { :manual_id => 1, :name => "Hello Project", :project_number => 1 }
-  let!(:project) { Project.create(@project_params) }
-  it { should belong_to :manual }
-  it { should validate_presence_of :manual_id }
-  it { should validate_presence_of :name }
-  it { should validate_presence_of :project_number }
+	include Warden::Test::Helpers
+
+	let!(:project) { Fabricate(:project) }
+	after(:all) { Warden.test_reset! }
+
+  describe "validations" do
+	  [:manual_id, :name, :project_number].each do |i|
+	  	it { should validate_presence_of i }
+	  end
+
+	  it "doesn't allow duplicate projects with the same name"
+	end
+
+	describe "relationships" do
+	  it { should belong_to :manual }
+	  it { should have_many :speeches }
+	end
+
+	describe "#sorted_by_manual" do
+		pending
+	end
+
 end

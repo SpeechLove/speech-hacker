@@ -4834,12 +4834,15 @@ a.badge:hover {
 }
 .accordion-heading {
   border-bottom: 0;
-}
-.accordion-heading .accordion-toggle {
   display: block;
   padding: 8px 15px;
 }
+/*.accordion-heading .accordion-toggle {
+  display: block;
+  padding: 8px 15px;
+}*/
 .accordion-toggle {
+  display: inline;
   cursor: pointer;
 }
 .accordion-inner {
