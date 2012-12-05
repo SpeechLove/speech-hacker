@@ -24,6 +24,21 @@ describe "Manual", :js => true do
       it "does not show the create button" do
         page.should_not have_button("Create New Manual")
       end
+
+      it "has the title my progress" do
+        page.should have_content "My Progress"
+      end
+
+      it "should have a specific user's speeches" do
+        speech2 = Speech.create(  :title => "Love", 
+                                  :user_id => user.id, 
+                                  :project_id => speech.project_id,
+                                  :evaluator => speech.evaluator,
+                                  :meeting => speech.meeting)
+        click_link "#{speech2.project.manual.name}"
+        page.should have_content "#{speech2.title}"
+      end
+
     end
 
   end
@@ -33,6 +48,7 @@ describe "Manual", :js => true do
       it "lets an admin access any user's manuals index page" do
         login_as user_admin
         visit user_manuals_path(:user_id => speech.user.id)
+        click_link "#{speech.project.manual.name}"
         page.should have_content "#{speech.title}"
       end
     end
@@ -48,6 +64,7 @@ describe "Manual", :js => true do
 
       it "lets a super_admin access any user's manuals index page" do
         visit user_manuals_path(:user_id => speech.user.id)
+        click_link "#{speech.project.manual.name}"
         page.should have_content "#{speech.title}"
       end
 
