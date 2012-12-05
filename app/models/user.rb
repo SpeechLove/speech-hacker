@@ -50,12 +50,12 @@ class User < ActiveRecord::Base
     self.speeches.where(:meeting_id => meeting.id).first
   end
 
-  def speeches_for_manual(manual)
-    speeches.for_manual(manual)
+  def self.count
+    User.all.count
   end
 
-  def self.max
-    User.all.last.id
+  def speeches_for_manual(manual)
+    speeches.for_manual(manual)
   end
 
 end

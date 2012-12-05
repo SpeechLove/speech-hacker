@@ -2,14 +2,15 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   before_filter :authenticate_user!
-  before_filter :admin_only, :only => [:index]
 
   def index
     @users = User.all
   end
 
   def show
+    @manuals = Manual.all
     @user = User.find(params[:id])
+
   end
 
   def edit
@@ -53,13 +54,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def admin_only
-    unless current_user.admin? or current_user.super_admin?
-      redirect_to root_path, notice: "You are not authorized to access this page."
-    end
-  end
-
   def assigning_roles?
     params[:user].has_key?(:roles)
   end
