@@ -20,7 +20,7 @@
           <% @user.speeches.each do |speech| %>
             <% if speech.project_id == project.id %>
               <%= ": " + speech.title %>
-              <span class="right"><%= speech.meeting.formatted_short_date %></span>
+              <span class="right"><%= project_completed_date(speech) %></span>
               <br />
             <% end %>
           <% end %>
@@ -35,7 +35,7 @@
     <div class="progress-indent">
       <% percent_done = (@user.speeches_for_manual(manual).count * 100.0) / manual.projects.count %>
       <div class="progress_bar">
-        <div class="progress progress-info">
+        <div class="progress progress-info progress-striped">
           <div class="bar" style="width: <%= percent_done.to_s %>%"></div>
         </div>
       </div>

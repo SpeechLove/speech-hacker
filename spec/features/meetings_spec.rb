@@ -45,7 +45,7 @@ describe "Meeting", :js => true do
     describe "meetings#index" do
       it "shows the edit meeting column" do
         visit meetings_path
-        page.should have_link("Edit Meeting", :href => edit_meeting_path(meeting))
+        page.should have_link("Edit", :href => edit_meeting_path(meeting))
       end
 
       it "shows the cancel meeting column" do
@@ -55,7 +55,7 @@ describe "Meeting", :js => true do
 
       it "destroys the meeting if the user clicks on 'Destroy'" do
         visit meetings_path
-        click_link("Destroy")
+        click_link("Cancel")
         page.should_not have_content(meeting.description)
       end
     end
