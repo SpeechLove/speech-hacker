@@ -14,6 +14,7 @@ class Attendance < ActiveRecord::Base
 
   delegate :absentee?, :to => :meeting_role
   accepts_nested_attributes_for :meeting
+
   def assign_meeting_role
     if attend == true && (meeting_role == MeetingRole.absentee || meeting_role.nil?)
       self.meeting_role = MeetingRole.attendee
@@ -28,5 +29,9 @@ class Attendance < ActiveRecord::Base
     else
       meeting_role != MeetingRole.absentee && @attend == "true"
     end
+  end
+
+  def attend?
+    attend
   end
 end

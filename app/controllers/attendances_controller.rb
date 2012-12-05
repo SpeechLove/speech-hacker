@@ -5,8 +5,8 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.new(params[:attendance])
 
     if @attendance.save
-      notice = @attendance.attend ? "See you there!" : "Sorry you won't be there."
-      redirect_to meetings_path(@meeting), :notice => notice
+      notice = @attendance.attend? ? "See you there!" : "Sorry you won't be there."
+      redirect_to meetings_path, :notice => notice
     else
       @meeting_roles = MeetingRole.attendee_roles
       render "meetings/show", :alert => "Something went wrong!"
@@ -17,9 +17,9 @@ class AttendancesController < ApplicationController
     @attendance = current_user.attendances.find(params[:id])
 
     if @attendance.update_attributes(params[:attendance])
-      # if role changed from speaker to non-speaker, remove db record
+      # TODO: if role changed from speaker to non-speaker, remove db record
 
-      notice = @attendance.attend ? "See you there!" : "Sorry you won't be there."
+      notice = @attendance.attend? ? "See you there!" : "Sorry you won't be there."
       redirect_to meetings_path, :notice => notice
     else
       @meeting = @attendance.meeting
