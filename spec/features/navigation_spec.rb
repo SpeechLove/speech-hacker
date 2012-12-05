@@ -20,13 +20,6 @@ describe "Navigation", :js => true do
       page.should_not have_link("Create Meeting", :href => new_meeting_path)
     end
 
-    it "does not have Edit Users in the navigation bar" do
-      page.should_not have_link("Edit Users", :href => users_path)
-    end
-
-    it "does not have the Meeting Roles on the navigation bar" do
-      page.should_not have_link("Meeting Roles", :href => meeting_roles_path)
-    end
   end
 
   context "when member is logged in" do
@@ -41,26 +34,34 @@ describe "Navigation", :js => true do
     end
 
     it "shows Member on menu" do
-      page.find(:xpath, "//a[@href='#']").click
-#       page.find(:xpath, "//a[@href='/speeches']").click
+      within('#user-menu') do
+        page.find(:xpath, "//a[@href='#']").click
+        page.find(:xpath, "//a[@href='/speeches']").click
+      end
       page.should have_content("Speech Title")
     end
 
     it "shows My Progress on menu" do
-      page.find(:xpath, "//a[@href='#']").click
-      page.find(:xpath, "//a[@href='/users/#{@user.id}/manuals']").click
+      within('#user-menu') do
+        page.find(:xpath, "//a[@href='#']").click
+        page.find(:xpath, "//a[@href='/users/#{@user.id}/show']").click
+      end
       page.should have_content("My Progress")
     end
 
     it "shows Edit Profile on menu" do
-      page.find(:xpath, "//a[@href='#']").click
-      page.find(:xpath, "//a[@href='/users/edit']").click
+      within('#user-menu') do
+        page.find(:xpath, "//a[@href='#']").click
+        page.find(:xpath, "//a[@href='/users/edit']").click
+      end
       page.should have_content("Cancel my account")
     end
 
     it "shows Sign Out on menu" do
-      page.find(:xpath, "//a[@href='#']").click
-      page.find(:xpath, "//a[@href='/users/sign_out']").click
+      within('#user-menu') do
+        page.find(:xpath, "//a[@href='#']").click
+        page.find(:xpath, "//a[@href='/users/sign_out']").click
+      end
       page.should have_content("Signed out successfully.")
     end
 
@@ -68,13 +69,6 @@ describe "Navigation", :js => true do
       page.should_not have_link("Create Meeting", :href => new_meeting_path)
     end
 
-    it "does not have Edit Users in the navigation bar" do
-      page.should_not have_link("Edit Users", :href => users_path)
-    end
-
-    it "does not have the Meeting Roles on the navigation bar" do
-      page.should_not have_link("Meeting Roles", :href => meeting_roles_path)
-    end
   end
 
   context "when admin is logged in" do
@@ -90,9 +84,13 @@ describe "Navigation", :js => true do
       page.should have_content("Meeting date")
     end
 
+
     it "shows Edit Users in navigation bar" do
-      page.should have_link("Members", :href => users_path)
-      click_link "Members"
+      within('#admin-menu') do
+        page.find(:xpath, "//a[@href='#']").click
+        page.should have_link("Users", :href => users_path)
+      end
+      click_link "Users"
       page.should have_content("Edit user")
     end
 
@@ -109,8 +107,10 @@ describe "Navigation", :js => true do
     end
 
     it "shows Meeting Roles on the navigation bar" do
-      page.should have_link("Meeting Roles", :href => meeting_roles_path)
-      click_link "Meeting Roles"
+      within('#admin-menu') do
+        page.should have_link("Meeting Roles", :href => meeting_roles_path)
+        click_link "Meeting Roles"
+      end
       page.should have_button("Create New Role")
     end
   end
