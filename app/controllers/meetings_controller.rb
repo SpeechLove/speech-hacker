@@ -24,7 +24,6 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
-    @meeting_roles = MeetingRole.attendee_roles
   end
 
   def destroy

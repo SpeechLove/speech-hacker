@@ -7,16 +7,14 @@
       <th>Description</th>
 
       <% if user_signed_in? and (can? :update, @meeting) %>
-      <th>
-        <%="Edit"%>
-      </th>
-      <% end %>
+        <th>
+          <%="Edit"%>
+        </th>
+        <% end %>
       <% if user_signed_in? %>
         <th>Attending?</th>
         <th>Meeting Role</th>
-        <% if can? :destroy, @meeting %>
-          <th>Cancel Meeting?</th>
-        <% end %>
+        <th><%= cancel_meeting_header(@meeting) %></th>
       <% end %>
     </tr>
   </thead>
@@ -24,43 +22,37 @@
   <tbody>
     <% @meetings.each do |meeting| %>
     <tr>
-      <td> <!-- Meeting -->
+      <td>
         <%= link_to meeting.formatted_full_date, meeting_path(meeting) %>
       </td>
 
-      <td> <!-- Start time -->
+      <td>
         <%= meeting.meeting_time %>
       </td>
 
-      <td> <!-- Location -->
+      <td>
         <%= meeting.location %>
       </td>
 
-      <td> <!-- Description -->
-          <% if meeting.description %>
-            <%= meeting.description.capitalize %>
-          <% end %>
+      <td>
+        <%= meeting_description(meeting) %>
       </td>
 
-      <% if current_user && (can? :update, @meeting) %>
-      <td> <!-- Edit -->
-            <%= link_to "Edit", edit_meeting_path(meeting) %>
+      <td>
+        <%= edit_meeting_link(meeting) %>
       </td>
-      <% end %>
 
-      <% if current_user %>
-        <td> <!-- Attending -->
+      <% if user_signed_in? %>
+        <td>
           <%= current_user.attending?(meeting) ? "Yes" : "No" %>
         </td>
 
-        <td> <!-- Meeting Role -->
+        <td>
           <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
         </td>
-        <% if can? :destroy, @meeting %>
-          <td> <!-- Cancel Meeting? -->
-            <%= link_to "Cancel", meeting_path(meeting), :method => :delete %>
-          </td>
-        <% end %>
+        <td>
+          <%= cancel_meeting_link(meeting) %>
+        </td>
       <% end %>
     </tr>
     <% end %>

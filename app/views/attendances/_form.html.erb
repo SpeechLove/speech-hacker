@@ -3,7 +3,7 @@
 </div>
 
 <%= form_for attendance do |f| %>
-  <%= render 'attendances/attendance_fields', :f => f %>
+  <%= render 'attendances/attendance_fields', :f => f, :meeting => meeting %>
 
   <div class="control-group role-sign-up">
     <hr class="bs-docs-separator">

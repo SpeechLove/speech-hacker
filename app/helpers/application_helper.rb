@@ -18,4 +18,28 @@ module ApplicationHelper
   def attendee_meeting_roles
     MeetingRole.attendee_roles
   end
+
+  def create_meeting_link
+    if can? :manage, Meeting
+      link_to "Create Meeting", new_meeting_path
+    end
+  end
+
+  def create_meeting_button
+    if user_signed_in? and (can? :update, [Meeting])
+      button_to "Create Meeting", new_meeting_path, :class => "btn btn-primary", :method => :get
+    end
+  end
+
+  def manage_users_link
+    if can? :manage, User
+      link_to "Members", users_path
+    end
+  end
+
+  def manage_meeting_roles_link
+    if can? :read, MeetingRole
+      link_to "Meeting Roles", meeting_roles_path
+    end
+  end
 end

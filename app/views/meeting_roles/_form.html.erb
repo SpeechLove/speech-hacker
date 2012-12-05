@@ -1,16 +1,5 @@
 <%= form_for @meeting_role do |f| %>
-  <% if @meeting_role.errors.any? %>
-    <div id="error_explanation">
-      <h4><%= pluralize(@meeting_role.errors.count, "error") %> prohibited this meeting from being saved:</h4>
-      <div class="alert alert-error">
-        <ul>
-        <% @meeting_role.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
+  <%= render 'shared/errors', :current_object => @meeting_roles, :title => "meeting roles" %>
 
   <div class="control-group">
     <%= f.label :title %>
@@ -19,16 +8,12 @@
     </div>
   </div>
 
-  <br />
-
   <div class="control-group">
     <%= f.label :description %>
     <div class="controls">
       <%= f.text_field :description, :class => "span6", :rows => 7 %>
     </div>
   </div>
-
-  <br />
 
   <%= f.submit :class => 'btn btn-primary' %>
 <%end%>
