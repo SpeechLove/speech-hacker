@@ -1,0 +1,68 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Meeting</th>
+      <th>Start time</th>
+      <th>Location</th>
+      <th>Description</th>
+
+      <% if user_signed_in? and (can? :update, @meeting) %>
+      <th>
+        <%="Edit"%>
+      </th>
+      <% end %>
+      <% if user_signed_in? %>
+        <th>Attending?</th>
+        <th>Meeting Role</th>
+        <% if can? :destroy, @meeting %>
+          <th>Cancel Meeting?</th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meetings.each do |meeting| %>
+    <tr>
+      <td> <!-- Meeting -->
+        <%= link_to meeting.formatted_full_date, meeting_path(meeting) %>
+      </td>
+
+      <td> <!-- Start time -->
+        <%= meeting.meeting_time %>
+      </td>
+
+      <td> <!-- Location -->
+        <%= meeting.location %>
+      </td>
+
+      <td> <!-- Description -->
+          <% if meeting.description %>
+            <%= meeting.description.capitalize %>
+          <% end %>
+      </td>
+
+      <% if current_user && (can? :update, @meeting) %>
+      <td> <!-- Edit -->
+            <%= link_to "Edit", edit_meeting_path(meeting) %>
+      </td>
+      <% end %>
+
+      <% if current_user %>
+        <td> <!-- Attending -->
+          <%= current_user.attending?(meeting) ? "Yes" : "No" %>
+        </td>
+
+        <td> <!-- Meeting Role -->
+          <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
+        </td>
+        <% if can? :destroy, @meeting %>
+          <td> <!-- Cancel Meeting? -->
+            <%= link_to "Cancel", meeting_path(meeting), :method => :delete %>
+          </td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
