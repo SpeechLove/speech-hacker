@@ -1,9 +1,10 @@
-<% if @meeting_role.errors.any? %>
+<% if current_object.errors.any? %>
   <div id="error_explanation">
-    <h4><%= pluralize(@meeting_role.errors.count, "error") %> prohibited this meeting from being saved:</h4>
+    <h4><%= pluralize(current_object.errors.count, "error") %> prohibited this <%= title%> from being saved:</h4>
     <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
       <ul>
-      <% @meeting_role.errors.full_messages.each do |msg| %>
+      <% current_object.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
