@@ -70,6 +70,13 @@ describe "MeetingRole", :js => true do
         page.should have_content("Foo")
       end
 
+      it "raises an error if a user tries to create an invalid role" do
+        click_button("Create New Role")
+        fill_in 'meeting_role_title', :with => "Woo"
+        click_button("Create Meeting role")
+        page.should have_content("Description can't be blank")
+      end
+
       it "has a link called 'Edit'" do
         page.should have_link("Edit", :href => edit_meeting_role_path(meeting_role))
       end
@@ -78,11 +85,10 @@ describe "MeetingRole", :js => true do
         within_table('meeting_roles_table') do
           click_link("Edit")
         end
-
-        fill_in 'meeting_role_title', :with => toastmaster.title
-        fill_in 'meeting_role_description', :with => toastmaster.description
+        fill_in 'meeting_role_title', :with => "Woo"
+        fill_in 'meeting_role_description', :with => "Roo"
         click_button("Update Meeting role")
-        page.should have_content(toastmaster.title)
+        page.should have_content("Woo")
       end
 
       it "allows the user to destroy a meeting role" do

@@ -14,6 +14,9 @@
       <% if current_user %>
         <th>Attending?</th>
         <th>Meeting Role</th>
+        <% if can? :destroy, @meeting %>
+          <th>Cancel Meeting?</th>
+        <% end %>
       <% end %>
     </tr>
   </thead>
@@ -53,6 +56,11 @@
         <td> <!-- Meeting Role -->
           <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
         </td>
+        <% if can? :destroy, @meeting %>
+          <td> <!-- Cancel Meeting? -->
+            <%= link_to "Destroy", meeting_path(meeting), :method => :delete %>
+          </td>
+        <% end %>
       <% end %>
     </tr>
     <% end %>
