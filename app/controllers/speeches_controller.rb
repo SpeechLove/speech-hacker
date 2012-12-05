@@ -5,5 +5,4 @@ class SpeechesController < ApplicationController
   def index
     @speeches = current_user.speeches
   end
-
 end

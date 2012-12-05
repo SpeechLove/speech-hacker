@@ -7,10 +7,15 @@ module MeetingsHelper
     end
   end
 
-  def edit_meeting_link(meeting)
-    if user_signed_in? && (can? :update, meeting)
-      link_to "Edit", edit_meeting_path(meeting)
+  def meeting_index_action(meeting)
+    if meeting.happened?
+      action_title = "View agenda"
+      button_class = "inverse"
+    else
+      action_title = "Sign up for a role"
+      button_class = "primary"
     end
+    button_to action_title, meeting_path(meeting), :class => "btn btn-#{button_class}", :method => :get
   end
 
   def cancel_meeting_header(meeting)
@@ -21,7 +26,7 @@ module MeetingsHelper
 
   def cancel_meeting_link(meeting)
     if can? :destroy, meeting
-      link_to "Cancel", meeting_path(meeting), :method => :delete
+      button_to "Cancel", meeting_path(meeting), :class => "btn btn-danger", :method => :delete
     end
   end
 
