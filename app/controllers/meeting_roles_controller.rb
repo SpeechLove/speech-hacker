@@ -17,7 +17,7 @@ class MeetingRolesController < ApplicationController
 
   def create
     @meeting_roles = MeetingRole.all
-    @meeting_role = MeetingRole.new(params[:meeting_role])
+    @meeting_role  = MeetingRole.new(params[:meeting_role])
 
     respond_to do |format|
       if @meeting_role.save
@@ -30,7 +30,8 @@ class MeetingRolesController < ApplicationController
 
   def edit
     @meeting_roles = MeetingRole.all
-    @meeting_role = MeetingRole.find(params[:id])
+    @meeting_role  = MeetingRole.find(params[:id])
+
     respond_to do |format|
       format.js
     end
@@ -42,7 +43,7 @@ class MeetingRolesController < ApplicationController
 
   def update
     @meeting_roles = MeetingRole.all
-    @meeting_role = MeetingRole.find(params[:id])
+    @meeting_role  = MeetingRole.find(params[:id])
 
     respond_to do |format|
       if @meeting_role.update_attributes(params[:meeting_role])
@@ -55,7 +56,8 @@ class MeetingRolesController < ApplicationController
 
   def destroy
     @meeting_roles = MeetingRole.all
-    @meeting_role = MeetingRole.find(params[:id])
+    @meeting_role  = MeetingRole.find(params[:id])
+
     @meeting_role.destroy
     respond_to do |format|
       format.js

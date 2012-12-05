@@ -4,8 +4,6 @@
       <th>Meeting</th>
       <th>Start time</th>
       <th>Location</th>
-      <th>Description</th>
-
       <% if user_signed_in? and (can? :update, @meeting) %>
         <th>
           <%="Edit"%>
@@ -14,6 +12,7 @@
       <% if user_signed_in? %>
         <th>Attending?</th>
         <th>Meeting Role</th>
+        <th>Action</th>
         <th><%= cancel_meeting_header(@meeting) %></th>
       <% end %>
     </tr>
@@ -34,13 +33,11 @@
         <%= meeting.location %>
       </td>
 
+      <% if user_signed_in? and (can? :update, @meeting) %>
       <td>
-        <%= meeting_description(meeting) %>
+        <%= link_to "Edit", edit_meeting_path(meeting) %>
       </td>
-
-      <td>
-        <%= edit_meeting_link(meeting) %>
-      </td>
+      <% end %>
 
       <% if user_signed_in? %>
         <td>
@@ -50,6 +47,11 @@
         <td>
           <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
         </td>
+
+        <td>
+          <%= meeting_index_action(meeting) %>
+        </td>
+
         <td>
           <%= cancel_meeting_link(meeting) %>
         </td>
