@@ -29,4 +29,8 @@ class Attendance < ActiveRecord::Base
       meeting_role != MeetingRole.absentee && @attend == "true"
     end
   end
+
+  def attendee?
+    self.meeting_role == MeetingRole.attendee
+  end
 end

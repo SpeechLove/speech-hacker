@@ -12,6 +12,7 @@ $(document).ready(function() {
     user_id = "";
     role_id = $(this).parent().parent().find('.role-title-id').html();
     meeting_id = $('#meeting_id').val();
+    selected_element_id = $(this).prev().attr('id');
 
     var params = "old_user_id=" + old_user_id + "&user_id=" + user_id + "&role_id=" + role_id;
 
@@ -23,7 +24,8 @@ $(document).ready(function() {
         success: function(data, status, xhr) {
           show_success_box('Your update has been made successfully!');
           // Change the dropdown box to "Select a member"
-          $('.attendance-role-select').val("");
+          $('#' + selected_element_id).val('');
+          // add_attendee_to_list(data["new_attendee"]);
         },
         error: function(xhr, status, error) {
           show_error_box('Something is wrong! Your update did not go through!');
@@ -49,6 +51,13 @@ $(document).ready(function() {
       data: params,
         success: function(data, status, xhr) {
           show_success_box('Your update has been made successfully!');
+          if (data["new_attendee"] != "") {
+            console.log("add attendee: " + data["new_attendee"].name);
+            // remove_attendee_from_list(data["remove_attendee"]);
+            // add_attendee_to_list(data["new_attendee"]);
+          } else {
+            console.log("do not add attendee");
+          }
         },
         error: function(xhr, status, error) {
           show_error_box('Something is wrong! Your update did not go through!');
@@ -90,6 +99,20 @@ $(document).ready(function() {
         }
     }); // ajax
   });
+
+  function remove_attendee_from_list(user) {
+    $('#attendee_list').children().each(function(index) {
+      console.log(index + ': ' + $(this).html());
+      if ((user != "") && ($(this).html().indexOf(user.name) >= 0)) {
+        console.log("remove li at index " + index);
+        $(this).remove();
+      }
+    });
+  }
+
+  function add_attendee_to_list(user) {
+    $("#attendee_list").append('<li>' + user.name + '</li>');
+  }
 
   function replace_projects(projects) {
     var $select_elem = $(".project-select");
