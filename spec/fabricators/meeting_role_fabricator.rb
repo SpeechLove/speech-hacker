@@ -1,7 +1,12 @@
 Fabricator(:meeting_role) do
-  title "Fabricated Meeting Role"
-  description "This is a made-up role!"
+  title { Faker::Lorem.sentence.chomp.split.first }
+  description { Faker::Lorem.sentence }
 end
+
+# Fabricator(:meeting_role) do
+#   title "Fabricated Meeting Role"
+#   description "This is a made-up role!"
+# end
 
 Fabricator(:toastmaster, :from => :meeting_role) do
   title "Toastmaster"
