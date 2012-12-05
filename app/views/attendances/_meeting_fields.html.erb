@@ -1,3 +1,3 @@
-<%= f.fields_for :meeting, @attendance.meeting do |m|%>
-  <%= render 'attendances/speech_fields', :m => m %>
+<%= f.fields_for :meeting, attendance.meeting do |m|%>
+  <%= render 'attendances/speech_fields', :m => m, :meeting => meeting %>
 <% end %>

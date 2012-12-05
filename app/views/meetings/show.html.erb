@@ -2,7 +2,7 @@
      <%= @meeting.meeting_time%></h1>
 
 <p>
-	<%= @meeting.location %>
+  <%= @meeting.location %>
 </p>
 
 <p>
@@ -11,4 +11,5 @@
   <% end %>
 </p>
 
-<%= render 'attendances/form' %>
+<%= render 'attendances/form', :attendance => @meeting.attendance_for(current_user),
+                               :meeting => @meeting %>

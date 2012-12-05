@@ -1,4 +1,4 @@
-<%= m.fields_for :speeches, current_speech(@meeting) do |speech_fields| %>
+<%= m.fields_for :speeches, current_speech(meeting) do |speech_fields| %>
 
   Speech Title: <%= speech_fields.text_field :title, :class => "speech-title" %>
 
@@ -7,8 +7,8 @@
                                 {}, :class => "manual-select" %>
 
   Project: <%= speech_fields.collection_select :project_id,
-  																				     project_select(@meeting),
-   																	           :id, :name,
+                                               project_select(meeting),
+                                               :id, :name,
                                                {},
                                                :class => "project-select" %>
 

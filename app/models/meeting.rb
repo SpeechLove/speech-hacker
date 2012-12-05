@@ -16,6 +16,9 @@ class Meeting < ActiveRecord::Base
 
   accepts_nested_attributes_for :speeches, :reject_if => proc { |attributes| attributes['title'].blank? }
 
+  def happened?
+    meeting_date < DateTime.now
+  end
 
   def roles_taken
     self.attendances.reduce(Hash.new{ |hash, key| hash[key] = [] }) do |roles, attendance|
@@ -24,7 +27,7 @@ class Meeting < ActiveRecord::Base
     end
   end
 
-  def register(user)
+  def attendance_for(user)
     self.attendances.find_or_initialize_by_user_id(user.id)
   end
 

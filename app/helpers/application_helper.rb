@@ -14,4 +14,8 @@ module ApplicationHelper
   def project_select(meeting)
     Project.find_all_by_manual_id(current_manual(meeting).id)
   end
+
+  def attendee_meeting_roles
+    MeetingRole.attendee_roles
+  end
 end

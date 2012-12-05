@@ -6,8 +6,8 @@ describe MeetingsController do
   let!(:project) { Fabricate(:project) }
   let!(:meeting) { Fabricate(:meeting)}
   let(:meeting2) {Fabricate(:meeting)}
-  let!(:speech) { Fabricate(:speech, :user_id => user.id, 
-                            :meeting => meeting, 
+  let!(:speech) { Fabricate(:speech, :user_id => user.id,
+                            :meeting => meeting,
                             :project_id => project.id) }
 
   describe "#index" do
@@ -24,7 +24,7 @@ describe MeetingsController do
                                     :meeting_time => meeting2.meeting_time,
                                     :location => meeting2.location} )
       end.to change( Meeting, :count ).by(1)
-      
+
     end
 
     it "assigns the created meeting to meeting" do
@@ -41,7 +41,7 @@ describe MeetingsController do
     it "assigns meeting with the current meeting" do
       sign_in user
       get(:show, :id => meeting.id)
-      assigns(:meeting).should eq(meeting) 
+      assigns(:meeting).should eq(meeting)
     end
 
     it "renders the show page" do
@@ -54,9 +54,9 @@ describe MeetingsController do
   describe '#destroy' do
     it "destroys the meeting object" do
       sign_in user_admin
-      expect{
-      delete :destroy, id: meeting        
-    }.to change(Meeting,:count).by(-1)
+      expect {
+        delete :destroy, id: meeting
+      }.to change(Meeting,:count).by(-1)
     end
   end
 
