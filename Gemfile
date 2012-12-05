@@ -23,7 +23,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'pg'
   gem 'rspec-rails'
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
@@ -41,6 +41,10 @@ group :test do
   gem 'guard-jasmine'
   gem 'database_cleaner'
   gem 'debugger'
+end
+
+group :production do
+  gem 'pg'
 end
 
 gem 'jquery-rails'
