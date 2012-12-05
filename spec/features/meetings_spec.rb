@@ -33,9 +33,9 @@ describe "Meeting", :js => true do
   end
 
   context "when user is an admin" do
+    let!(:user_admin){Fabricate(:user_admin)}
     before(:each) do
-      @user = Fabricate(:user_admin)
-      login_as @user, :scope => :user
+      login_as user_admin, :scope => :user
     end
 
     describe "meetings#index" do
