@@ -27,11 +27,11 @@ describe "Meeting", :js => true do
       end
 
       it "hides the edit meeting column" do
-        page.should_not have_link("Edit Meeting", :href => edit_meeting_path(meeting))
+        page.should_not have_link("Edit", :href => edit_meeting_path(meeting))
       end
 
       it "hides the cancel meeting column" do
-        page.should_not have_link("Destroy", :href => meeting_path(meeting))
+        page.should_not have_link("Cancel", :href => meeting_path(meeting))
       end
     end
   end
@@ -50,10 +50,10 @@ describe "Meeting", :js => true do
 
       it "shows the cancel meeting column" do
         visit meetings_path
-        page.should have_link("Destroy", :href => meeting_path(meeting))
+        page.should have_link("Cancel", :href => meeting_path(meeting))
       end
 
-      it "destroys the meeting if the user clicks on 'Destroy'" do
+      it "destroys the meeting if the user clicks on 'Cancel'" do
         visit meetings_path
         click_link("Cancel")
         page.should_not have_content(meeting.description)
