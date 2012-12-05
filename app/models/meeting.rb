@@ -5,7 +5,7 @@ class Meeting < ActiveRecord::Base
   has_many :users, :through => :attendances
   has_many :speeches
 
-  before_save :verify_date
+  before_validation :verify_date
 
   validates :meeting_time, :presence => true,
             :format => { :with => /\d{2}\:\d{2}/,
