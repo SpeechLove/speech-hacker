@@ -25,7 +25,6 @@ $(document).ready(function() {
       dataType: 'json',
       data: params,
         success: function(data, status, xhr) {
-          console.log("ajax success");
           replace_projects(data["projects"]);
         },
         error: function(xhr, status, error) {
