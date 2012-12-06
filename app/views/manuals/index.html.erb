@@ -1,27 +1,5 @@
-<div class="page-header">
-  <h1>Progress for <%= @user.name %></h1>
-</div>
-
-<div class="pull-right">
-  <%= button_to "View All Speeches", speeches_path,
-                :class => "btn btn-primary", :method => :get %>
-</div>
-<br /><br />
-
-<% @manuals.each_with_index do |manual, index| %>
-  <%= render manual, :index => index %>
-<% end %>
-
-<br />
-
-<div id="new_manual_button">
-  <% if can? :manage, [Manual] %>
-    <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn btn-primary', :method => :get, :remote => true) %>
-  <% end %>
-</div>
-
-<!-- code to be added --> 
 <h3>Manuals</h3>
+
 <%= collection_select :manual, :manual_id, Manual.all, :id, :name, {}, :class => "manual-projects-select", :remote => true %>
 
 <br/><br/>
