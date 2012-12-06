@@ -1,4 +1,5 @@
 $(document).ready(function() {
+/*
   show_hide_role_sign_up();
 
   $('.attend-option').on('click', function(e) {
@@ -55,4 +56,5 @@ $(document).ready(function() {
       $('.speech-fields').hide();
     }
   }
+*/
 });
