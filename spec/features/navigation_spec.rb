@@ -34,7 +34,9 @@ describe "Navigation", :js => true do
     end
 
     it "has a link with the member's name on it" do
-      page.should have_link "#{@user.name}"
+      within('#user-menu') do
+        page.should have_link "#{@user.name}"
+      end
     end
 
     it "shows My Progress in the dropdown menu" do

@@ -24,15 +24,11 @@ module MeetingsHelper
     end
   end
 
-  def cancel_meeting_link(meeting)
+  def cancel_meeting_button(meeting)
     if can? :destroy, meeting
-      button_to "Cancel", meeting_path(meeting), :class => "btn btn-danger", :method => :delete
-    end
-  end
-
-  def meeting_description(meeting)
-    if meeting.description
-      meeting.description.capitalize
+      button_to "Cancel", meeting_path(meeting), :class => "btn btn-danger",
+                                                 :method => :delete,
+                                                 :confirm => "Are you sure you want to cancel this meeting?"
     end
   end
 end

@@ -17,10 +17,6 @@ describe "Meeting", :js => true do
         page.should have_content meeting.meeting_time
       end
 
-      it "shows the description for each meeting" do
-        page.should have_content meeting.description
-      end
-
       it "shows a blank space if the description is nil" do
         meeting.description = nil
         page.should have_content ""
@@ -31,7 +27,7 @@ describe "Meeting", :js => true do
       end
 
       it "hides the cancel meeting column" do
-        page.should_not have_link("Cancel", :href => meeting_path(meeting))
+        page.should_not have_button("Cancel")
       end
     end
   end
@@ -50,13 +46,23 @@ describe "Meeting", :js => true do
 
       it "shows the cancel meeting column" do
         visit meetings_path
-        page.should have_link("Cancel", :href => meeting_path(meeting))
+        page.should have_button("Cancel")
       end
 
       it "destroys the meeting if the user clicks on 'Cancel'" do
         visit meetings_path
-        click_link("Cancel")
+        click_button("Cancel")
+
+        # A confirmation box is expected, so accept the warning.
+        page.driver.browser.switch_to.alert.accept
         page.should_not have_content(meeting.description)
+      end
+    end
+
+    describe "meetings#show" do
+      it "shows the description for a meeting in show" do
+        visit meeting_path(meeting)
+        page.should have_content meeting.description
       end
     end
 

@@ -7,7 +7,7 @@
     <tr>
       <th>Member Name</th>
       <th>Email</th>
-      <th>Action</th>
+      <th>Edit</th>
       <% if current_user.super_admin? %>
         <th>Make admin?</th>
       <% end %>
@@ -18,7 +18,7 @@
       <tr>
         <td><%= link_to user.name, user_manuals_path(user) %></td>
         <td><%= user.email %></td>
-        <td><%= link_to "Edit user", edit_user_path(user.id) %></td>
+        <td><%= link_to "Edit member", edit_user_path(user.id) %></td>
         <% if current_user.super_admin? %>
           <% if !user.super_admin? %>
             <% is_admin = (user.admin? or user.super_admin?) %>
