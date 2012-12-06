@@ -28,4 +28,10 @@ class MeetingRole < ActiveRecord::Base
   def required_role?
     self.absentee? or self.attendee?
   end
+
+  def self.all_ordered
+    all.sort_by do |meeting_role|
+      meeting_role.id
+    end
+  end
 end
