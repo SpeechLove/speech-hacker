@@ -13,6 +13,7 @@ describe "MeetingRole", :js => true do
     describe "meeting_roles#index" do
       it "shows an error message when attempting to visit the index page" do
         visit meeting_roles_path
+        debugger
         page.should have_content("You are not authorized to access this page.")
       end
     end
@@ -82,8 +83,8 @@ describe "MeetingRole", :js => true do
       end
 
       it "updates the meeting role if it is edited" do
-        within_table('meeting_roles_table') do
-          click_link("Edit")
+        within('#meeting_roles_table') do
+         click_link("Edit")
         end
         fill_in 'meeting_role_title', :with => "Woo"
         fill_in 'meeting_role_description', :with => "Roo"
@@ -92,7 +93,7 @@ describe "MeetingRole", :js => true do
       end
 
       it "raises an error if a user tries to update a role with invalid info" do
-        within_table('meeting_roles_table') do
+        within('#meeting_roles_table') do
           click_link("Edit")
         end        
         fill_in 'meeting_role_title', :with => ""

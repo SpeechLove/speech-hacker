@@ -24,10 +24,10 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
-    @attendance = @meeting.register(current_user)
+    @attendance = @meeting.attendance_for(current_user)
     @meeting_roles = MeetingRole.attendee_roles
     @roles_taken = @meeting.roles_taken
-    @attendance.meeting.speeches.build
+    # @attendance.meeting.speeches.build
     @meeting_attendances = @meeting.attendances
   end
 

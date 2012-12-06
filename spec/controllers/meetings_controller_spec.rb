@@ -78,9 +78,7 @@ describe MeetingsController do
     end
 
     it "raises an error if a user tries to update a meeting with invalid info" do
-      within_table('meeting_roles_table') do
-        click_link("Edit")
-      end        
+      click_link("Edit")
       fill_in 'meeting_role_title', :with => ""
       fill_in 'meeting_role_description', :with => "Roo"
       click_button("Update Meeting role")
