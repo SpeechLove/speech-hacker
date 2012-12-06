@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
 
   def projects_by_manual
   	#this is necessary for the javascript on the attendance page 
+
     @projects = Project.find_all_by_manual_id(params[:manual_id])
     if @projects
       render :json => {
