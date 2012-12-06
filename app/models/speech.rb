@@ -1,5 +1,5 @@
 class Speech < ActiveRecord::Base
-  attr_accessible :project_id, :meeting, :title, :user_id, :evaluator
+  attr_accessible :project_id, :meeting, :meeting_id, :title, :user_id, :evaluator
 
   belongs_to :user
   belongs_to :evaluator, :class_name => "User"

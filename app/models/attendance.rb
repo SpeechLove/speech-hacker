@@ -8,7 +8,7 @@ class Attendance < ActiveRecord::Base
 
   validates :meeting, :presence => true
   validates :user, :presence => true
-  validates :meeting_role_id, :presence => true
+  #validates :meeting_role_id, :presence => true
   validates :user_id, :uniqueness => { :scope => :meeting_id }
   before_validation :assign_meeting_role
 

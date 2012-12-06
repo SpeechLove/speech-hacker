@@ -17,9 +17,7 @@ describe AttendancesController do
 
     it "creates a new attendance" do
       post(:create, :meeting_id => meeting.id, :attendance => attendance_params)
-
       assigns(:attendance).meeting_role.title.should eq absentee_role.title
-
     end
   end
 
@@ -33,9 +31,9 @@ describe AttendancesController do
                                   :meeting_role_id => 2)
       attendee_role = MeetingRole.attendee
       attendance_params[:meeting_role_id] = attendee_role.id
-      put(:update, :id => attendance.id, 
+      put(:update, :id => attendance.id,
           :attendance => {:attend => "true",
-                          :meeting_role_id => attendee_role.id, 
+                          :meeting_role_id => attendee_role.id,
                           :meeting_role => attendee_role}
           )
       assigns(:attendance).should be_an(Attendance)

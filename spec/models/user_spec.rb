@@ -1,38 +1,16 @@
 require 'spec_helper'
 
 describe User do
+  subject { Fabricate(:user) }
+  it { should validate_presence_of :name }
+  it { should have_many :attendances }
+  it { should have_many :speeches }
+  it { should have_many :meetings }
+
   let (:user) { Fabricate(:user) }
-
-  context "when user is valid" do
-    it "should be valid" do
-      user.should be_valid
-    end
-
-    it "has a name" do
-      user.name.should_not be_nil
-    end
-  end
-
-  context "when user is invalid" do
-    it "should return an error for having an invalid name" do
-      user.name = ""
-      user.should_not be_valid
-    end
-
-    it "should return an error for having an invalid email" do
-      user.email = "blah"
-      user.should_not be_valid
-    end
-
-    it "should return an error for having an invalid password" do
-      user.password = "blah"
-      user.should_not be_valid
-    end
-  end
+  let (:user_admin) { Fabricate(:user_admin) }
 
   describe "#admin?" do
-    let (:user_admin) { Fabricate(:user_admin) }
-
     it "returns true when user is an admin" do
       user_admin.admin?.should be_true
     end
@@ -42,4 +20,32 @@ describe User do
     end
   end
 
+  describe "#set_admin" do
+    it "sets a non-admin as an admin if make_admin checkbox is checked" do
+      user.set_admin(true)
+      user.admin?.should be_true
+    end
+
+    it "sets an admin as a non-admin if make_admin checkbox is not checked" do
+      user_admin.set_admin(false)
+      user.admin?.should be_false
+    end
+  end
+
+  describe "#meeting_speech" do
+    it "returns all speeches associated with a meeting" do
+      # user.meetings[0] = Fabricate(:meeting)
+      # user.meetings[0].speeches.build :title => "I love cakes!",
+      #                                 :user_id => user.id,
+      #                                 :project_id => Fabricate(:project).id
+      # binding.pry
+      # user.meeting_speech(user.meetings[0]).should eq user.meetings[0].speeches
+    end
+  end
+
+  describe ".count" do
+    it "returns the number of users" do
+      User.count.should eq User.all.count
+    end
+  end
 end
