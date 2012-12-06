@@ -36,9 +36,8 @@ describe "Navigation", :js => true do
     it "shows Member on menu" do
       within('#user-menu') do
         page.find(:xpath, "//a[@href='#']").click
-        page.find(:xpath, "//a[@href='/speeches']").click
       end
-      page.should have_content("Speech Title")
+      page.should have_content(@user.name)
     end
 
     it "shows My Progress on menu" do
