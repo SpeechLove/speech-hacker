@@ -52,6 +52,9 @@ describe "Meeting", :js => true do
       it "destroys the meeting if the user clicks on 'Cancel'" do
         visit meetings_path
         click_button("Cancel")
+
+        # A confirmation box is expected, so accept the warning.
+        page.driver.browser.switch_to.alert.accept
         page.should_not have_content(meeting.description)
       end
     end
