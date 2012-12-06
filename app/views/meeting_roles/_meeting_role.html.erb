@@ -6,13 +6,9 @@
     <%= meeting_role.description %>
   </td>
   <td class="role_edit">
-    <% unless meeting_role.required_role? %>
-      <%= link_to "Edit", edit_meeting_role_path(meeting_role), :remote => true %>
-    <% end %>
+    <%= edit_meeting_role_link(meeting_role) %>
   </td>
   <td class="role_destroy">
-    <% unless meeting_role.required_role? %>
-      <%= link_to "Destroy", meeting_role_path(meeting_role), :method => :delete, :remote => true %>
-    <% end %>
+    <%= delete_meeting_role_link(meeting_role) %>
   </td>
 </tr>
