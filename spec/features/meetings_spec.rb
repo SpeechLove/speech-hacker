@@ -60,7 +60,7 @@ describe "Meeting", :js => true do
     end
 
     describe "meetings#show" do
-      it "shows the description for each meeting in show" do
+      it "shows the description for a meeting in show" do
         visit meeting_path(meeting)
         page.should have_content meeting.description
       end
