@@ -13,7 +13,6 @@ describe "MeetingRole", :js => true do
     describe "meeting_roles#index" do
       it "shows an error message when attempting to visit the index page" do
         visit meeting_roles_path
-        debugger
         page.should have_content("You are not authorized to access this page.")
       end
     end
