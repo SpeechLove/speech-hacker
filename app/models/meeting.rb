@@ -16,6 +16,10 @@ class Meeting < ActiveRecord::Base
 
   accepts_nested_attributes_for :speeches, :reject_if => proc { |attributes| attributes['title'].blank? }
 
+  def self.order_by_most_recent_date
+    order("meeting_date DESC").all
+  end
+
   def happened?
     meeting_date < DateTime.now
   end

@@ -4,7 +4,7 @@ class MeetingsController < ApplicationController
   #skip_before_filter :authenticate_user!, :only => [:index]
 
   def index
-    @meetings = Meeting.all
+    @meetings   = Meeting.order_by_most_recent_date
     @attendance = Attendance.all
   end
 
