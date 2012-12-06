@@ -15,13 +15,14 @@
   <tbody>
     <% if @speeches != nil%>
       <% @speeches.each do |speech| %>
-      <tr>
-        <td class="span4"><%=speech.title%></td>
-        <td class="span1"><%=speech.project.project_number%></td>
-        <td class="span3"><%=speech.project.name%></td>
-        <td class="span2"><%=speech.project.manual.name%></td>
-        <td class="span1"><%=speech.meeting.meeting_date%></td>
-      </tr>
+        <% next unless speech.meeting %>
+        <tr>
+          <td class="span4"><%= speech.title %></td>
+          <td class="span1"><%= speech.project.project_number %></td>
+          <td class="span3"><%= speech.project.name %></td>
+          <td class="span2"><%= speech.project.manual.name %></td>
+          <td class="span1"><%= speech.meeting.meeting_date %></td>
+        </tr>
       <% end %>
     <%end%>
   </tbody>
