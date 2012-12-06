@@ -4,24 +4,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    if(params[:id])
-      authorize! :assign_roles, current_user
-      @user = User.find(params[:id])
-      should_be_admin = @user.set_admin(params[:make_admin])
-
-      respond_to do |format|
-        format.json do
-          if should_be_admin == @user.has_role?(:admin)
-            render :json => { :success => true }
-          else
-            render :json => {
-                              :errors => @user.errors.full_messages.join(', '),
-                              :status => :unprocessable_entity
-                            }
-          end
-        end
-      end
-    end
   end
 
   def show
@@ -36,11 +18,19 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    
+    if params[:admin]
+      authorize! :assign_roles, current_user
+      @user.set_admin(params[:admin])
+    end
 
-    if @user.update_attributes(params[:user])
-      redirect_to users_path, notice: 'User was successfully updated.'
-    else
-      render action: "edit"
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+        format.json { render :json => { :success => true } }
+      else
+        format.html { render action: "edit" }
+      end
     end
   end
 

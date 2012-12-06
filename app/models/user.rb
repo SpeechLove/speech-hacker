@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   def set_admin(make_admin)
-    if make_admin
+    if make_admin && make_admin != "false"
       self.add_role :admin
       true
     else

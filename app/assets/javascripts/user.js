@@ -4,17 +4,23 @@ $(document).ready(function() {
   $('.make-admin-option').on('click', function(e) {
     e.preventDefault();
     var $self = $(this),
-        params = $self.serialize();
+        // params = $self.serialize(),
+        admin = $self.attr('checked'),
+        params = { admin: admin };
+    if (admin) {
+      params = { admin: true };
+    } else {
+      params = { admin: false };
+    }
 
     $.ajax({
-      type: 'post',
-      url:  '/users/' + $self.val() + '/make_admin',
+      type: 'put',
+      url:  '/users/' + $self.val(),
       dataType: 'json',
       data: params,
         success: function(data, status, xhr) {
           if ($self.attr('checked')) {
             $self.prop('checked', false);
-
             $('.success-box').text('Admin privilege removed!');
           } else {
             $self.prop('checked', true);

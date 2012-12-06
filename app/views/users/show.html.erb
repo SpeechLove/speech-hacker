@@ -4,7 +4,7 @@
 
 <div class="pull-right">
   <%= button_to "View All Speeches", speeches_path,
-                :class => "btn btn-primary", :method => :get %>
+                :class => "btn", :method => :get %>
 </div>
 <br /><br />
 
@@ -16,6 +16,6 @@
 
 <div id="new_manual_button">
   <% if can? :manage, [Manual] %>
-    <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn btn-primary', :method => :get, :remote => true) %>
+    <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn', :method => :get, :remote => true) %>
   <% end %>
 </div>
