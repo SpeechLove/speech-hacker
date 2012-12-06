@@ -33,13 +33,12 @@ describe User do
   end
 
   describe "#meeting_speech" do
-    it "returns all speeches associated with a meeting" do
-      # user.meetings[0] = Fabricate(:meeting)
-      # user.meetings[0].speeches.build :title => "I love cakes!",
-      #                                 :user_id => user.id,
-      #                                 :project_id => Fabricate(:project).id
-      # binding.pry
-      # user.meeting_speech(user.meetings[0]).should eq user.meetings[0].speeches
+    it "returns the first speech associated with a meeting" do
+      user.meetings[0] = Fabricate(:meeting)
+      user.meetings[0].speeches.create :title => "I love cakes!",
+                                      :user_id => user.id,
+                                      :project_id => Fabricate(:project).id
+      user.meeting_speech(user.meetings[0]).should eq user.meetings[0].speeches.first
     end
   end
 
