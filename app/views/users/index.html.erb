@@ -1,35 +1,37 @@
-<div class="page-header">
+<!-- <div class="page-header">
   <h1>Members</h1>
 </div>
+ -->
+<div class="dark-wrapper">
+<div class="headers">
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Member Name</th>
-      <th>Email</th>
-      <th>Action</th>
+    <p><span class="span2">Member Name</span>
+      <span class="span3">Email</span>
+      <span class="span2">Action</span>
       <% if current_user.super_admin? %>
-        <th>Make admin?</th>
+        <span class="span2">Admin</span>
       <% end %>
-    </tr>
-  </thead>
-  <tbody>
+    </p>
+    <br/>
+</div>
+<div class="list-body">
+  <p>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to user.name, user_manuals_path(user) %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to "Edit user", edit_user_path(user.id) %></td>
+    <span class="span2"><%= link_to user.name, user_manuals_path(user) %></span>
+        <span class="span3"><%= user.email %></span>
+        <span class="span2"><%= link_to "Edit user", edit_user_path(user.id) %></span>
         <% if current_user.super_admin? %>
           <% if !user.super_admin? %>
             <% is_admin = (user.admin? or user.super_admin?) %>
-            <td><%= check_box_tag 'make_admin', user.id, is_admin, :class => "make-admin-option" %></td>
+            <span class="span2"><%= check_box_tag 'make_admin', user.id, is_admin, :class => "make-admin-option" %></span>
+
           <% else%>
-            <td></td>
           <% end %>
         <% end %>
-      </tr>
+        <br/>
     <% end %>
-  </tbody>
-</table>
+  </p>
+</div>
+</div>
 
 

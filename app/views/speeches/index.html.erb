@@ -1,28 +1,27 @@
-<div class="page-header">
+<!-- <div class="page-header">
   <h1>Speeches by <%= current_user.name %></h1>
-</div>
-
-<table class="table table-hover speeches">
-  <thead>
-    <tr>
-      <th>Speech Title</th>
-      <th>Project Number</th>
-      <th>Project</th>
-      <th>Manual</th>
-      <th>Date Completed</th>
-    </tr>
-  </thead>
-  <tbody>
+</div> -->
+<div class="dark-wrapper">
+    <div class="headers">
+      <strong>
+        <span class="span2">Speech Title</span>
+        <span class="span2">Project Number</span>
+        <span class="span2">Project</span>
+        <span class="span2">Manual</span>
+        <span class="span1">Date Completed</span>
+        <br/>
+      </strong>
+    </div>
+    <div class="list-body">
     <% if @speeches != nil%>
       <% @speeches.each do |speech| %>
-      <tr>
-        <td class="span4"><%=speech.title%></td>
-        <td class="span1"><%=speech.project.project_number%></td>
-        <td class="span3"><%=speech.project.name%></td>
-        <td class="span2"><%=speech.project.manual.name%></td>
-        <td class="span1"><%=speech.meeting.meeting_date%></td>
-      </tr>
+        <span class="span2"><%=speech.title%></span>
+        <span class="span2"><%=speech.project.project_number%></span>
+        <span class="span2"><%=speech.project.name%></span>
+        <span class="span2"><%=speech.project.manual.name%></span>
+        <span class="span1"><%=speech.meeting.meeting_date%></span>
       <% end %>
     <%end%>
-  </tbody>
-</table>
+    <br/>
+  </div>
+</div>

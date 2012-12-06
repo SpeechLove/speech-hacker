@@ -6,6 +6,6 @@
 
 <div id="new_manual_button">
   <% if can? :manage, [Manual] %>
-    <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn btn-primary', :method => :get, :remote => true) %>
+    <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn', :method => :get, :remote => true) %>
   <% end %>
 </div>

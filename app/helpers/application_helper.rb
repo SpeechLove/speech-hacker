@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def create_meeting_button
     if user_signed_in? and (can? :update, [Meeting])
-      button_to "Create Meeting", new_meeting_path, :class => "btn btn-primary", :method => :get
+      button_to "Create Meeting", new_meeting_path, :class => "btn", :method => :get
     end
   end
 
