@@ -1,15 +1,25 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the AttendancesHelper. For example:
-#
-# describe AttendancesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       helper.concat_strings("this","that").should == "this that"
-#     end
-#   end
-# end
 describe AttendancesHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+	let(:user) { Fabricate(:user) }
+	let(:f) { Object.new }
+	let(:meeting) { Fabricate(:meeting) }
+
+	describe '#user_attending_field' do
+		context "when user is attending the meeting" do
+			it "checks the 'attend' radio button as true" do
+				helper.stub(:user_attending?).and_return(true)
+				f.stub(:radio_button).and_return(true)
+				helper.user_attending_field(f, meeting).should be_true
+			end
+		end
+
+		context "when user is not attending the meeting" do
+			it "checks the attend radio button as false" do
+				helper.stub(:user_attending?).and_return(false)
+				f.stub(:radio_button).and_return(false)
+				helper.user_attending_field(f, meeting).should be_false
+			end
+		end
+	end
 end
