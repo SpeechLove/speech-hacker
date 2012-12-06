@@ -1,0 +1,17 @@
+<h2>Meeting Summary</h2>
+
+<h3> Roles </h3>
+
+<% @meeting_attendances.each do |attendance| %>
+  <% next if attendance.id == nil %>
+  <% if !attendance.meeting_role.attendee? %>
+    <strong> <%= attendance.meeting_role.title %></strong> :
+    <%= attendance.user.name%><br/>
+  <% end %>
+<%end%>
+
+<h3> Attendees </h3>
+
+<% @meeting_attendances.each do |attendance| %>
+  <%= attendance.user.name %><br />
+<% end %>

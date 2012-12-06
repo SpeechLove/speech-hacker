@@ -26,7 +26,7 @@ class Meeting < ActiveRecord::Base
 
   def roles_taken
     self.attendances.reduce(Hash.new{ |hash, key| hash[key] = [] }) do |roles, attendance|
-      roles[attendance.meeting_role_id] << attendance.user.name
+      roles[attendance.meeting_role_id] << attendance.user.id
       roles
     end
   end

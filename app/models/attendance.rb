@@ -35,3 +35,8 @@ class Attendance < ActiveRecord::Base
     attend
   end
 end
+
+  def attendee?
+    self.meeting_role == MeetingRole.attendee
+  end
+end

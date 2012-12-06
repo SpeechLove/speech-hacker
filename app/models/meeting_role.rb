@@ -33,5 +33,6 @@ class MeetingRole < ActiveRecord::Base
     all.sort_by do |meeting_role|
       meeting_role.id
     end
+
   end
 end

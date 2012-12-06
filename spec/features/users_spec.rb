@@ -16,13 +16,10 @@ describe "Users", :js => true do
         visit users_path
         page.should have_content("You are not authorized to access this page.")
       end
-
       it "forbids them from accessing another user's page " do
         visit user_path(user2)
         page.should have_content("You are not authorized to access this page.")
       end
-
-
       it "has an 'Edit Profile' link" do
         visit users_path
         page.should have_link("Edit Profile", :href => edit_user_registration_path)
@@ -35,6 +32,7 @@ describe "Users", :js => true do
         login_as speech.user
         visit user_path(speech.user)
       end
+
       it "has the title Progress for current_user" do
         page.should have_content("Progress for #{speech.user.name}")
       end

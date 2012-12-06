@@ -8,4 +8,10 @@ class Manual < ActiveRecord::Base
 	# 	speeches.collect { |speech| speech.user_id == user.id }.count
 	# end
 
+
+  # def self.projects
+  #   projects = Hash.new
+  #   Manual.all.each { |m| projects[m] = m.projects }
+  #   projects
+  # end
 end

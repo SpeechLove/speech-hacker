@@ -8,10 +8,17 @@
   <% if @meeting.description %>
     <dt>Description</dt>
     <dd>
-      <%= @meeting.description.capitalize %>
+      @meeting.description.capitalize %>
     </dd>
   <% end %>
 </dl>
 
-<%= render 'attendances/form', :attendance => @meeting.attendance_for(current_user),
-                               :meeting => @meeting %>
+<% if @meeting.meeting_date < DateTime.now and can? :manage, Meeting %>
+  <%= render 'attendances/post_meeting_update' %>
+<% elsif @meeting.meeting_date < DateTime.now %>
+  <%= render 'attendances/post_meeting_members_show'%>
+<% else %>
+  <%= render 'attendances/form', :attendance => @meeting.attendance_for(current_user),
+                                :meeting => @meeting %>
+<% end %>
+

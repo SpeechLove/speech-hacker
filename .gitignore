@@ -16,3 +16,4 @@
 logfile
 *.DS_Store
 /coverage
+.DS_Store

@@ -5,7 +5,6 @@ describe MeetingRole do
 
   it { should validate_presence_of :title }
   it { should validate_presence_of :description }
-
   it { should validate_uniqueness_of :title }
 
   describe "absentee" do
@@ -23,6 +22,12 @@ describe MeetingRole do
   describe "absentee?" do
     it "should evaluate whether or not the role is Absentee" do
       Fabricate(:meeting_role).absentee?.should be_false
+    end
+  end
+
+  describe "absentee?" do
+    it "should evaluate whether or not the role is Absentee" do
+      Fabricate(:attendee).attendee?.should be_true
     end
   end
 

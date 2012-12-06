@@ -20,6 +20,13 @@ describe "Navigation", :js => true do
       page.should_not have_link("Create Meeting", :href => new_meeting_path)
     end
 
+    it "does not have Edit Users in the navigation bar" do
+      page.should_not have_link("Members", :href => users_path)
+    end
+
+    it "does not have the Meeting Roles on the navigation bar" do
+      page.should_not have_link("Meeting Roles", :href => meeting_roles_path)
+    end
   end
 
   context "when member is logged in" do
@@ -34,9 +41,7 @@ describe "Navigation", :js => true do
     end
 
     it "has a link with the member's name on it" do
-      within('#user-menu') do
-        page.should have_link "#{@user.name}"
-      end
+      page.should have_link "#{@user.name}"
     end
 
     it "shows My Progress in the dropdown menu" do
@@ -75,7 +80,6 @@ describe "Navigation", :js => true do
       click_link "Create Meeting"
       page.should have_content("Meeting date")
     end
-
 
     it "shows Members in navigation bar" do
       click_link "Manage"

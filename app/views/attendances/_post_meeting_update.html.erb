@@ -1,0 +1,82 @@
+
+<h2>Update Past Meeting</h2>
+
+<div class="alert alert-success notice-box"></div>
+<div class="alert alert-error alert-box"></div>
+
+<%= hidden_field_tag :meeting_id, @meeting.id %>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span8">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Meeting Role</th>
+              <th>Members</th>
+              <th>Add New Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @meeting_roles.each_with_index do |role, index| %>
+              <tr>
+                <% next if role.attendee? %>
+                <td>
+                    <%= role.title %>
+                </td>
+                <td class="span5">
+                    <div class="role-title-id"><%= role.id %></div>
+                    <% # If no one has taken the role, let admins be able to choose one %>
+                    <% if @roles_taken[role.id].count == 0 %>
+                      <select class="attendance-role-select" id="attendance_role_select_<%= index %>">
+                        <option value="" selected="selected">Select a member...</option>
+                        <% User.all.each do |user| %>
+                            <option value="<%= user.id %>"><%= user.name %></option>
+                        <% end %>
+                      </select>
+                    <% else %>
+                      <% # The role has been taken by one or more members. Let admins be able to change members. %>
+
+                      <% @roles_taken[role.id].each do |role_user_id| %>
+                        <select class="attendance-role-select" id="attendance_role_select_<%= index %>">
+                          <option value="" selected="selected">Select a member...</option>
+                          <% User.all.each do |user| %>
+                            <% if user.id == role_user_id %>
+                              <option value="<%= user.id %>" selected="selected">
+                            <% else %>
+                              <option value="<%= user.id %>">
+                            <% end %>
+                                <%= user.name %>
+                              </option>
+                          <% end %>
+                        </select>
+                        &nbsp;<%= link_to "Remove", "#", :class => "remove-meeting-role" %>
+                      <% end %>
+                    <% end %>
+                </td>
+                <td>
+                  <%= button_to "Add Role", "#",
+                                :class => "btn btn-inverse",
+                                :method => :get %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+    <div class="span3 offset1">
+      <h4>Attendees without Roles</h4>
+      <ul id="attendee_list">
+      <% @meeting.attendances.each do |attendance| %>
+        <% if attendance.meeting_role and attendance.meeting_role.attendee? %>
+          <li id="attendee_id_<%= attendance.user.id %>">
+            <%= attendance.user.name %> <%= link_to "Delete", '#' %>
+          </li>
+        <% end %>
+      <% end %>
+      </ul>
+       <%= button_to "Add", "#", :class => "btn btn-small btn-success" %>
+    </div>
+  </div>
+</div>
+

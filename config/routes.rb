@@ -5,12 +5,14 @@ SpeechHacker::Application.routes.draw do
   devise_for :users
   resources :meeting_roles
   resources :users do
-  	resources :manuals
+    resources :manuals
   end
   resources :speeches, :only => [:index]
   resources :projects, :only => [:index]
 
-  get "/manuals/:id/projects" => "projects#projects_by_manual"
-  
+  post "/manuals/:id/projects" => "projects#projects_by_manual"
   post '/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin_user'
+
+  post '/meetings/:id/attendances' => 'attendances#update_role'
+  delete '/meetings/:id/attendances' => 'attendances#delete_role'
 end
