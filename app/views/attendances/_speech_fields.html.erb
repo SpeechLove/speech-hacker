@@ -3,8 +3,9 @@
   Speech Title: <%= speech_fields.text_field :title, :class => "speech-title span5" %>
 
   <br />
-  Manual: <%= collection_select :manual, :manual_id, Manual.all, :id, :name,
-                                {}, :class => "manual-select" %>
+
+  Manual: <%= collection_select :manual, :id, Manual.all, :id, :name,
+                                { :selected => manual_select(meeting).id }, :class => "manual-select" %>
 
   Project: <%= speech_fields.collection_select :project_id,
                                                project_select(meeting),

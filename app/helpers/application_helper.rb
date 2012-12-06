@@ -15,6 +15,10 @@ module ApplicationHelper
     Project.find_all_by_manual_id(current_manual(meeting).id)
   end
 
+  def manual_select(meeting)
+    Manual.find(current_manual(meeting).id)
+  end
+
   def attendee_meeting_roles
     MeetingRole.attendee_roles
   end
