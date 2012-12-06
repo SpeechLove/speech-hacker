@@ -1,3 +1,9 @@
+$('#role_errors').html("");
 $('form.new_meeting_role').hide();
 $('#new_role_button').show();
 $('#meeting_roles_table tr:last').after('<%= j render @meeting_role %>');
+
+// Display role creation success
+var close = '<a class="close" data-dismiss="alert">&#215;</a>';
+$('.create-role-success').html(close + '\nRole has been successfully added!');
+$('.create-role-success').fadeIn('fast');

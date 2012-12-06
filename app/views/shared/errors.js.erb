@@ -1,1 +1,2 @@
-$('h1').after('<%= j render :partial => "shared/errors", :locals => { :current_object => current_object } %>');
+$('#role_errors').html("");
+$('#role_errors').append('<%= j render :partial => "shared/errors", :locals => { :current_object => current_object } %>');

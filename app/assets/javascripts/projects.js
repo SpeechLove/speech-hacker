@@ -17,11 +17,7 @@ $(document).ready(function() {
   });
 
   $('.manual-select').change(function(){
-    console.log("this val:" + $(this).val());
-
     var params = "manual_id="+$(this).val();
-
-    console.log("params: " + params);
 
     $.ajax({
       type: 'get',
@@ -29,7 +25,6 @@ $(document).ready(function() {
       dataType: 'json',
       data: params,
         success: function(data, status, xhr) {
-          console.log("ajax success");
           replace_projects(data["projects"]);
         },
         error: function(xhr, status, error) {

@@ -1,5 +1,6 @@
 $(document).ready(function() {
   hide_success_box();
+  hide_errors_box();
 
   $('.make-admin-option').on('click', function(e) {
     e.preventDefault();
@@ -12,18 +13,27 @@ $(document).ready(function() {
       dataType: 'json',
       data: params,
         success: function(data, status, xhr) {
+          var close_box = '<a class="close" data-dismiss="alert">&#215;</a>';
+
           if ($self.attr('checked')) {
             $self.prop('checked', false);
 
-            $('.success-box').text('Admin privilege removed!');
+            var icon_minus = '<i class="icon-minus"></i>';
+            $('.success-box').html(close_box + icon_minus + '\nAdmin privilege <strong>removed</strong>!');
           } else {
             $self.prop('checked', true);
-            $('.success-box').text('Admin privilege added!');
+
+            var icon_plus = '<i class="icon-plus"></i>';
+            $('.success-box').html(close_box + icon_plus + '\nAdmin privilege <strong>added</strong>!');
           }
-          $('.success-box').show();
+          $('.errors-box').hide();
+          $('.success-box').fadeIn('fast');
         },
         error: function(xhr, status, error) {
-
+          var close_box = '<a class="close" data-dismiss="alert">&#215;</a>';
+          $('.success-box').hide();
+          $('.errors-box').html(close_box + '\nAn error has occured.');
+          $('.errors-box').fadeIn('fast');
         }
     }); // ajax
   }); // on make_admin_option
@@ -32,4 +42,7 @@ $(document).ready(function() {
     $('.success-box').hide();
   }
 
+  function hide_errors_box() {
+    $('.errors-box').hide();
+  }
 });
