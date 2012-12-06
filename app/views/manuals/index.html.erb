@@ -19,3 +19,10 @@
     <%= button_to('Create New Manual', new_user_manual_path(@user), :class => 'btn btn-primary', :method => :get, :remote => true) %>
   <% end %>
 </div>
+
+<!-- code to be added --> 
+<h3>Manuals</h3>
+<%= collection_select :manual, :manual_id, Manual.all, :id, :name, {}, :class => "manual-projects-select", :remote => true %>
+
+<br/><br/>
+<div id="projects"></div>

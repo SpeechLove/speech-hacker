@@ -1,0 +1,17 @@
+<% manual.projects.each do |project| %>
+  <div class="accordion accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_<%= manual.id %>" >
+        <%= project.project_number %>)
+        <%= project.name.ljust(20) %>
+      </a>
+    </div>
+      <div id="collapse_<%= project.id %>" class="accordion-body collapse out">
+        <div class="accordion-inner">
+          <div class="indentation">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

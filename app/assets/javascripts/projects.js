@@ -33,6 +33,21 @@ $(document).ready(function() {
     }); // ajax
   });
 
+  $('.manual-projects-select').change(function(e) {
+    var manual_id = $(this).val();
+    var deferred = $.ajax({
+      url: '/projects',
+      type: 'GET',
+      dataType: 'JSON',
+      data: {manual_id: manual_id},
+    });
+
+    deferred.complete(function(data){
+      $('#projects').html(data.responseText);
+    })
+
+  });
+
   function replace_projects(projects) {
     var $select_elem = $(".project-select");
     $select_elem.empty(); // remove old options
