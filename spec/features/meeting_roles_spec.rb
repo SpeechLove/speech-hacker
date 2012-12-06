@@ -93,6 +93,9 @@ describe "MeetingRole", :js => true do
 
       it "allows the user to destroy a meeting role" do
         click_link("Destroy")
+
+        # A confirmation box is expected, so accept the warning.
+        page.driver.browser.switch_to.alert.accept
         page.should_not have_content(meeting_role.title)
       end
     end

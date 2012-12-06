@@ -17,11 +17,7 @@ $(document).ready(function() {
   });
 
   $('.manual-select').change(function(){
-    console.log("this val:" + $(this).val());
-
     var params = "manual_id="+$(this).val();
-
-    console.log("params: " + params);
 
     $.ajax({
       type: 'get',

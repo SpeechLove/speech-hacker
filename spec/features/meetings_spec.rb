@@ -6,32 +6,52 @@ describe "Meeting", :js => true do
   let!(:meeting) { Fabricate(:meeting) }
 
   context "when user is not an admin" do
-    before(:each) { visit meetings_path }
+    let!(:user) { Fabricate(:user)}
+    before(:each) { 
+      login_as user, :scope => :user
+    } 
 
     describe "meetings#index" do
       it "shows the meeting date for each meeting" do
+        visit meetings_path
         page.should have_link meeting.formatted_full_date
       end
 
       it "shows the start time for each meeting" do
+        visit meetings_path
         page.should have_content meeting.meeting_time
       end
 
-      it "shows the description for each meeting" do
-        page.should have_content meeting.description
-      end
-
       it "shows a blank space if the description is nil" do
+        visit meetings_path
         meeting.description = nil
         page.should have_content ""
       end
 
       it "hides the edit meeting column" do
+        visit meetings_path    
         page.should_not have_link("Edit", :href => edit_meeting_path(meeting))
       end
 
       it "hides the cancel meeting column" do
-        page.should_not have_link("Cancel", :href => meeting_path(meeting))
+        visit meetings_path
+        page.should_not have_button("Cancel")
+      end
+
+      it "has a button to sign up for a role if the meeting is in the future" do
+        meeting_future = Meeting.create(  :meeting_date => (Date.today + 5),
+                                          :meeting_time => "12:00",
+                                          :location => "Singapore")
+        visit meetings_path
+         page.should have_button("Sign up for a role")
+      end
+
+      it "has view agenda button if the meeting is in the past" do
+        Meeting.create( :meeting_date => (Date.today - 5),
+                        :meeting_time => "12:00",
+                        :location => "Singapore")
+        visit meetings_path
+        page.should have_button("View agenda")
       end
     end
   end
@@ -50,13 +70,39 @@ describe "Meeting", :js => true do
 
       it "shows the cancel meeting column" do
         visit meetings_path
-        page.should have_link("Cancel", :href => meeting_path(meeting))
+        page.should have_button("Cancel")
       end
 
       it "destroys the meeting if the user clicks on 'Cancel'" do
         visit meetings_path
-        click_link("Cancel")
+        click_button("Cancel")
+
+        # A confirmation box is expected, so accept the warning.
+        page.driver.browser.switch_to.alert.accept
         page.should_not have_content(meeting.description)
+      end
+
+      it "has a button to sign up for a role if the meeting is in the future" do
+        meeting_future = Meeting.create(  :meeting_date => (Date.today + 5),
+                                          :meeting_time => "12:00",
+                                          :location => "Singapore")
+        visit meetings_path
+         page.should have_button("Sign up for a role")
+      end
+
+      it "has view agenda button if the meeting is in the past" do
+        Meeting.create( :meeting_date => (Date.today - 5),
+                        :meeting_time => "12:00",
+                        :location => "Singapore")
+        visit meetings_path
+        page.should have_button("View agenda")
+      end
+    end
+
+    describe "meetings#show" do
+      it "shows the description for a meeting in show" do
+        visit meeting_path(meeting)
+        page.should have_content meeting.description
       end
     end
 

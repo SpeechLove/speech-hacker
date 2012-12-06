@@ -2,16 +2,16 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 # meeting roles
-MeetingRole.create(:title => "Toastmaster", :description => "oversees meeting")
-MeetingRole.create(:title => "Grammarian", :description => "checks grammar")
-MeetingRole.create(:title => "Timer", :description => "keeps time")
-MeetingRole.create(:title => "Ah Counter", :description => "counts ahs")
-MeetingRole.create(:title => "General Evaluator", :description => "provides general evaluation")
-MeetingRole.create(:title => "Evaluator", :description => "evaluates speaker")
-MeetingRole.create(:title => "Speaker", :description => "gives speech")
-MeetingRole.create(:title => "Table Topics Master", :description => "oversees impromptu speeches")
-MeetingRole.create(:title => "Attendee", :description => "attends meeting")
-MeetingRole.create(:title => "Absentee", :description => "skips meeting")
+MeetingRole.create(:title => "Toastmaster", :description => "Facilitates meeting")
+MeetingRole.create(:title => "Grammarian", :description => "Checks correct grammar usage")
+MeetingRole.create(:title => "Timer", :description => "Measures time of speeches")
+MeetingRole.create(:title => "Ah Counter", :description => "Counts filler words such as ahs and ums")
+MeetingRole.create(:title => "General Evaluator", :description => "Provides general evaluation and evaluate evaluators")
+MeetingRole.create(:title => "Evaluator", :description => "Evaluates speakers")
+MeetingRole.create(:title => "Speaker", :description => "Gives speech")
+MeetingRole.create(:title => "Table Topics Master", :description => "Facilitates impromptu speeches")
+MeetingRole.create(:title => "Attendee", :description => "Attends meeting. This role cannot be deleted.")
+MeetingRole.create(:title => "Absentee", :description => "Skips meeting. This role cannot be deleted.")
 
 # manuals
 

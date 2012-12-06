@@ -3,7 +3,7 @@ class MeetingRolesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @meeting_roles = MeetingRole.all
+    @meeting_roles = MeetingRole.all_ordered
     @meeting_role  = MeetingRole.new
   end
 

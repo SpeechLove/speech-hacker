@@ -1,6 +1,14 @@
 <tr id="meeting_role_<%= meeting_role.id %>">
-  <td class="role_title"><%= meeting_role.title %></td>
-  <td class="role_description"><%= meeting_role.description %></td>
-  <td class="role_edit"><%= link_to "Edit", edit_meeting_role_path(meeting_role), :remote => true %></td>
-  <td class="role_destroy"><%= link_to "Destroy", meeting_role_path(meeting_role), :method => :delete, :remote => true %></td>
+  <td class="role_title">
+    <%= meeting_role.title %>
+  </td>
+  <td class="role_description">
+    <%= meeting_role.description %>
+  </td>
+  <td class="role_edit">
+    <%= edit_meeting_role_link(meeting_role) %>
+  </td>
+  <td class="role_destroy">
+    <%= delete_meeting_role_link(meeting_role) %>
+  </td>
 </tr>

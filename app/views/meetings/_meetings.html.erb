@@ -22,7 +22,8 @@
     <% @meetings.each do |meeting| %>
     <tr>
       <td>
-        <%= link_to meeting.formatted_full_date, meeting_path(meeting) %>
+        <%= link_to meeting.formatted_full_date, meeting_path(meeting), :rel => "tooltip",
+                    :class => "meeting-#{meeting.id}", :title => "#{meeting.description}" %>
       </td>
 
       <td>
@@ -53,7 +54,7 @@
         </td>
 
         <td>
-          <%= cancel_meeting_link(meeting) %>
+          <%= cancel_meeting_button(meeting) %>
         </td>
       <% end %>
     </tr>

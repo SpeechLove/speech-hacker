@@ -2,6 +2,8 @@
   <h1>Meeting Roles</h1>
 </div>
 
+<div class="alert alert-success create-role-success"></div>
+
 <table class="table table-hover" id="meeting_roles_table">
   <thead>
     <tr>
@@ -21,6 +23,9 @@
   </tbody>
 </table>
 
+<div id="role_errors"></div>
+
 <div id="new_role_button">
-  <%= button_to('Create New Role', new_meeting_role_path, :class => 'btn btn-primary', :method => :get, :remote => true) %>
+  <%= button_to 'Create New Role', new_meeting_role_path, :class => 'btn btn-primary',
+                :method => :get, :remote => true %>
 </div>
