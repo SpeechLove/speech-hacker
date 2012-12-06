@@ -7,7 +7,8 @@ module MeetingRolesHelper
 
   def delete_meeting_role_link(meeting_role)
     unless meeting_role.required_role?
-      link_to "Destroy", meeting_role_path(meeting_role), :method => :delete, :remote => true
+      link_to "Destroy", meeting_role_path(meeting_role), :method => :delete, :remote => true,
+                         :confirm => "Are you sure you want to delete this role?"
     end
   end
 end
