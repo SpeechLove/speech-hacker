@@ -41,12 +41,12 @@ td {
 }
 
 .indentation {
-	margin-left: 2em;
+  margin-left: 2em;
 }
 
 .progress-indent {
-	padding-left: 2em;
-	padding-right: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
 
 }
 
@@ -104,10 +104,14 @@ td {
 }
 
 .right {
-	float: right;
-	margin-right: 5em;
+  float: right;
+  margin-right: 5em;
 }
 
 .hero-unit {
   padding: 30px 50px 30px 50px;
+}
+
+.sign-up {
+  font-weight: bold;
 }

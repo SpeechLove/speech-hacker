@@ -16,17 +16,10 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= show_user_link(user) %></td>
         <td><%= user.email %></td>
-        <td><%= link_to "Edit member", edit_user_path(user.id) %></td>
-        <% if current_user.super_admin? %>
-          <% if !user.super_admin? %>
-            <% is_admin = (user.admin? or user.super_admin?) %>
-            <td><%= check_box_tag 'make_admin', user.id, is_admin, :class => "make-admin-option" %></td>
-          <% else%>
-            <td></td>
-          <% end %>
-        <% end %>
+        <td><%= edit_user_link(user) %></td>
+        <td><%= make_user_admin(user) %></td>
       </tr>
     <% end %>
   </tbody>
