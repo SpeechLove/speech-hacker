@@ -1,17 +1,25 @@
-<div class="page-header">
+<!-- <div class="page-header">
   <h2>Meeting on <%= @meeting.meeting_date %> at <%= @meeting.meeting_time%></h2>
+</div> -->
+
+<div class="dark-wrapper">
+
+  <dl class="dl-horizontal">
+    <dt>Time:</dt>
+    <dd><%= "#{@meeting.meeting_date}, at #{@meeting.meeting_time}"%>
+    <dt>Location:</dt>
+    <dd><%= @meeting.location %></dd>
+    <% if @meeting.description %>
+      <dt>Description:</dt>
+      <dd>
+        <%= @meeting.description.capitalize %>
+      </dd>
+    <% end %>
+  </dl>
+
+  <div class="list-wrapper">
+    <%= render 'attendances/form', :attendance => @meeting.attendance_for(current_user),
+                                   :meeting => @meeting %>
+  </div>
+
 </div>
-
-<dl class="dl-horizontal">
-  <dt>Meeting Location</dt>
-  <dd><%= @meeting.location %></dd>
-  <% if @meeting.description %>
-    <dt>Description</dt>
-    <dd>
-      <%= @meeting.description.capitalize %>
-    </dd>
-  <% end %>
-</dl>
-
-<%= render 'attendances/form', :attendance => @meeting.attendance_for(current_user),
-                               :meeting => @meeting %>

@@ -119,7 +119,6 @@
 
 
                 ){
-
                     elem.parent('div:first').find('#day_' + i)
                     .removeClass("day")
                     .addClass('holiday')
