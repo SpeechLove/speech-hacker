@@ -4,6 +4,24 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    if(params[:id])
+      authorize! :assign_roles, current_user
+      @user = User.find(params[:id])
+      should_be_admin = @user.set_admin(params[:make_admin])
+
+      respond_to do |format|
+        format.json do
+          if should_be_admin == @user.has_role?(:admin)
+            render :json => { :success => true }
+          else
+            render :json => {
+                              :errors => @user.errors.full_messages.join(', '),
+                              :status => :unprocessable_entity
+                            }
+          end
+        end
+      end
+    end
   end
 
   def show
@@ -33,28 +51,9 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def make_admin
-    authorize! :assign_roles, current_user
-    @user = User.find(params[:id])
-    should_be_admin = @user.set_admin(params[:make_admin])
+  # private
 
-    respond_to do |format|
-      format.json do
-        if should_be_admin == @user.has_role?(:admin)
-          render :json => { :success => true }
-        else
-          render :json => {
-                            :errors => @user.errors.full_messages.join(', '),
-                            :status => :unprocessable_entity
-                          }
-        end
-      end
-    end
-  end
-
-  private
-
-  def assigning_roles?
-    params[:user].has_key?(:roles)
-  end
+  # def assigning_roles?
+  #   params[:user].has_key?(:roles)
+  # end
 end
