@@ -31,10 +31,4 @@ module MeetingsHelper
                                                  :confirm => "Are you sure you want to cancel this meeting?"
     end
   end
-
-  def meeting_description(meeting)
-    if meeting.description
-      meeting.description.capitalize
-    end
-  end
 end
