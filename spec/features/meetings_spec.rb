@@ -115,6 +115,13 @@ describe "Meeting", :js => true do
         click_button "Create Meeting"
         page.should have_content meeting.meeting_time
       end
+
+      it "raises an error if a user tries to create a meeting with invalid info" do
+        visit new_meeting_path
+        #fill_in 'meeting_meeting_time', :with => ""
+        click_button "Create Meeting"
+        page.should have_content "Meeting date format should be YYYY-MM-DD"
+      end
     end
 
     describe "meetings#edit" do
@@ -123,6 +130,13 @@ describe "Meeting", :js => true do
         fill_in 'meeting_meeting_time', :with => "19:00"
         click_button "Update Meeting"
         page.should have_content "19:00"
+      end
+
+      it "raises an error if a user tries to update a meeting with invalid info" do
+        visit edit_meeting_path(meeting.id)
+        fill_in 'meeting_meeting_time', :with => ""
+        click_button "Update Meeting"
+        page.should have_content "Meeting time can't be blank"
       end
     end
   end

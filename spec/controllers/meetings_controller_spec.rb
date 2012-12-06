@@ -76,5 +76,16 @@ describe MeetingsController do
       assigns(:meeting).should be_a(Meeting)
       assigns(:meeting).meeting_date.to_s.should eq "1988-11-22"
     end
+
+    it "raises an error if a user tries to update a meeting with invalid info" do
+      within_table('meeting_roles_table') do
+        click_link("Edit")
+      end        
+      fill_in 'meeting_role_title', :with => ""
+      fill_in 'meeting_role_description', :with => "Roo"
+      click_button("Update Meeting role")
+      page.should have_content("Title can't be blank")
+    end
+
   end
 end
