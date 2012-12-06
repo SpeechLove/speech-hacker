@@ -33,32 +33,27 @@ describe "Navigation", :js => true do
       page.should have_link("Current Meetings", :href => meetings_path)
     end
 
-    it "shows Member on menu" do
+    it "has a link with the member's name on it" do
       within('#user-menu') do
-        page.find(:xpath, "//a[@href='#']").click
+        page.should have_link "#{@user.name}"
       end
-      page.should have_content(@user.name)
     end
 
-    it "shows My Progress on menu" do
+    it "shows My Progress in the dropdown menu" do
       click_link "#{@user.name}"
       click_link "My Progress"
       page.should have_content("Progress for #{@user.name}")
     end
 
-    it "shows Edit Profile on menu" do
-      within('#user-menu') do
-        page.find(:xpath, "//a[@href='#']").click
-        page.find(:xpath, "//a[@href='/users/edit']").click
-      end
+    it "shows Edit Profile in dropdown menu" do
+      click_link "#{@user.name}"
+      click_link "Edit Profile"
       page.should have_content("Cancel my account")
     end
 
     it "shows Sign Out on menu" do
-      within('#user-menu') do
-        page.find(:xpath, "//a[@href='#']").click
-        page.find(:xpath, "//a[@href='/users/sign_out']").click
-      end
+      click_link "#{@user.name}"
+      click_link "Sign Out"
       page.should have_content("Signed out successfully.")
     end
 
@@ -83,10 +78,8 @@ describe "Navigation", :js => true do
 
 
     it "shows Members in navigation bar" do
-      # within('#admin-menu') do
       click_link "Manage"
       page.should have_link("Members", :href => users_path)
-      # end
       click_link "Members"
       page.should have_content("Member Name")
     end
@@ -104,11 +97,9 @@ describe "Navigation", :js => true do
     end
 
     it "shows Meeting Roles on the navigation bar" do
-      # within('#admin-menu') do
-        click_link "Manage" 
-        page.should have_link("Meeting Roles", :href => meeting_roles_path)
-        click_link "Meeting Roles"
-      # end
+      click_link "Manage" 
+      page.should have_link("Meeting Roles", :href => meeting_roles_path)
+      click_link "Meeting Roles"
       page.should have_button("Create New Role")
     end
   end
