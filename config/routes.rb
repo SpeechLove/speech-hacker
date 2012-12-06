@@ -4,9 +4,8 @@ SpeechHacker::Application.routes.draw do
   resources :attendances, :only => [:create, :update]
   devise_for :users
   resources :meeting_roles
-  resources :users do
-  	resources :manuals
-  end
+  resources :users
+  resources :manuals
   resources :speeches, :only => [:index]
   resources :projects, :only => [:index]
 
