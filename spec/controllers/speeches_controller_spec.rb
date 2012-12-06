@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe SpeechesController do
-  let!(:user) {Fabricate(:user)}
-  let!(:speech) { Fabricate(:speech, :user_id => user.id) }
-  before(:each) { sign_in user }
+
   describe "#index" do
+    let!(:speech) {Fabricate(:speech)}
     it "assigns speeches of the current user" do
-      get(:index, :user_id => user.id)
+      sign_in speech.user
+      get(:index)
       assigns(:speeches).should eq [speech]
     end
   end

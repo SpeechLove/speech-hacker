@@ -1,0 +1,15 @@
+<div class="alert alert-success success-box"></div>
+
+<% if notice %>
+  <div class="alert alert-info notice-box">
+    <a class="close" data-dismiss="alert">&#215;</a>
+    <%= notice %>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-error alert-box">
+    <a class="close" data-dismiss="alert">&#215;</a>
+    <%= alert %>
+  </div>
+<% end %>

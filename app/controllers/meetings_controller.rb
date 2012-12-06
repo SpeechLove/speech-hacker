@@ -1,11 +1,13 @@
 class MeetingsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
-  before_filter :admin_only, :only => [:destroy, :edit, :new, :create]
+  load_and_authorize_resource
+  #skip_before_filter :authenticate_user!, :only => [:index]
 
   def index
     @meetings = Meeting.all
     #@meetings = Meeting.for_month(params[:month])
     @attendance = Attendance.all
+
     json_meetings = Meeting.to_json(@meetings, current_user)
 
     respond_to do |format|
@@ -13,6 +15,7 @@ class MeetingsController < ApplicationController
       format.json { render :json => { :meetings => json_meetings} }
       #format.js { render 'index.js.erb', :locals => { :meetings => @meetings } }
     end
+
   end
 
   def new
@@ -31,10 +34,6 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
-    @projects = Manual.first.projects.collect {|p| [ p.name, p.id ] }
-    @attendance = @meeting.attendances.find_or_initialize_by_user_id(current_user.id)
-    @meeting_roles = MeetingRole.attendee_roles
-    @user_attending = current_user.attending?(@meeting)
   end
 
   def destroy
@@ -56,10 +55,5 @@ class MeetingsController < ApplicationController
     else
       render action: "edit"
     end
-  end
-
-  private
-  def admin_only
-    current_user.admin?
   end
 end

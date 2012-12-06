@@ -1,11 +1,39 @@
+
 <h1> Calendar </h1>
 <!-- <div class="span6" id="test_calendar"><%= link_to("blah", meetings_path(:month => "January"), :remote => true) %></div>
 <div id="new_stuff"></div> -->
-<div class="full-wrapper">
+
+
+
+
+
+
+<!-- <div class="full-wrapper">
 <div class="span6" id="calendar"></div>
 
 <div class="span4 list-wrapper" id="meeting-list">
   <div>
   </div>
 </div>
+</div> -->
+
+
+
+
+<div class="page-header">
+  <h3>Current Meetings</h3>
 </div>
+
+<% if @meetings.count > 0 %>
+  <%= render 'meetings' %>
+<% else %>
+  <div class="alert alert-info">
+    There are no meetings.
+    <% if can? :manage, Meeting %>
+      <a href="<%= new_meeting_path %>">Create a meeting</a> to get started.
+    <% end %>
+  </div>
+<% end %>
+
+<%= create_meeting_button %>
+

@@ -1,16 +1,15 @@
-  <h5><%= @manual.name %></h5>
+<h5><%= @manual.name %></h5>
+
 <% @speeches.each do |speech| %>
   <div>
     <%= speech.project.name.ljust(20) + ": " + speech.title %></br>
   </div>
-  <% end %>
-  <%= "Progress: " + @speeches.count.to_s + "/" + @manual.projects.count.to_s %></br></br>
-  <% percent_done = (@speeches.count * 100.0) / @manual.projects.count %>
-  <div class="progress_bar">
-    <div class="progress progress-info">
-      <div class="bar" style="width: <%= percent_done.to_s %>%"></div>
-    </div>
+<% end %>
+
+<%= "Progress: " + @speeches.count.to_s + "/" + @manual.projects.count.to_s %></br></br>
+<% percent_done = (@speeches.count * 100.0) / @manual.projects.count %>
+<div class="progress_bar">
+  <div class="progress progress-info">
+    <div class="bar" style="width: <%= percent_done.to_s %>%"></div>
   </div>
-
-
-
+</div>

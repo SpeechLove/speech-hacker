@@ -1,7 +1,7 @@
 Fabricator(:speech) do
-  title         { Faker::Lorem.sentence }
-  user
-  project
+  title     { Faker::Lorem.sentence }
+  user_id		{ Fabricate(:user).id }
+  project_id	{ Fabricate(:project).id }
   evaluator { Fabricate(:user) }
-  meeting
+  meeting	{ Fabricate(:meeting) }
 end

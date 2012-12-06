@@ -1,0 +1,4 @@
+$("form.edit_meeting_role").remove();
+$("form.new_meeting_role").remove();
+$('#new_role_button').hide();
+$('#meeting_roles_table').after('<%= j render("create") %>');

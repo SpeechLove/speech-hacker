@@ -5,16 +5,39 @@ class Meeting < ActiveRecord::Base
   has_many :users, :through => :attendances
   has_many :speeches
 
-  before_save :verify_date
+  before_validation :verify_date
 
   validates :meeting_time, :presence => true,
             :format => { :with => /\d{2}\:\d{2}/,
                          :message => "format should be HH:MM" }
-  validates_presence_of :meeting_date, :location
+  validates_presence_of :location
   validates_length_of :description, :maximum => 255, :allow_blank => true
   validates_length_of :location, :maximum => 255, :allow_blank => false
 
-  accepts_nested_attributes_for :speeches
+  accepts_nested_attributes_for :speeches, :reject_if => proc { |attributes| attributes['title'].blank? }
+
+  def happened?
+    meeting_date < DateTime.now
+  end
+
+  def roles_taken
+    self.attendances.reduce(Hash.new{ |hash, key| hash[key] = [] }) do |roles, attendance|
+      roles[attendance.meeting_role_id] << attendance.user.name
+      roles
+    end
+  end
+
+  def attendance_for(user)
+    self.attendances.find_or_initialize_by_user_id(user.id)
+  end
+
+  def formatted_full_date
+    meeting_date.strftime("%A, %B %e, %Y")
+  end
+
+  def formatted_short_date
+    meeting_date.strftime("%b %-d, %Y")
+  end
 
 
   def to_hash(user)
@@ -49,6 +72,7 @@ class Meeting < ActiveRecord::Base
   # end
 
   private
+
   def verify_date
     if (self.meeting_date.to_s =~ /\d{4}-\d{2}-\d{2}/) == nil
       self.errors.add :meeting_date,

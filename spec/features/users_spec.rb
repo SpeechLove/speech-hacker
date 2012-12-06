@@ -15,17 +15,18 @@ describe "Users", :js => true do
         page.should have_content("You are not authorized to access this page.")
       end
 
-      it "has a 'My Speeches' link" do
-        visit users_path
-        page.should have_link("My Speeches", :href => speeches_path)
-      end
+#       it "has a 'My Speeches' link" do
+#         visit users_path
+#         page.should have_link("My Speeches", :href => speeches_path)
+#       end
 
       it "has an 'Edit Profile' link" do
         visit users_path
         page.should have_link("Edit Profile", :href => edit_user_registration_path)
       end
-
+      #link was removed need to check at merge
       it "has an 'Edit Profile' link" do
+        pending
         visit users_path
         page.should have_link("My Progress", :href => user_progress_path(@user))
       end
@@ -49,7 +50,7 @@ describe "Users", :js => true do
       end
 
       it "has an 'Edit Users' link" do
-        page.should have_link("Edit Users", :href => users_path)
+        page.should have_link("Members", :href => users_path)
       end
 
       it "should not have the Make Admin column" do

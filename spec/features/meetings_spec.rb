@@ -10,7 +10,7 @@ describe "Meeting", :js => true do
 
     describe "meetings#index" do
       it "shows the meeting date for each meeting" do
-        page.should have_link meeting.meeting_date.to_s
+        page.should have_link meeting.formatted_full_date
       end
 
       it "shows the start time for each meeting" do
@@ -27,21 +27,36 @@ describe "Meeting", :js => true do
       end
 
       it "hides the edit meeting column" do
-        page.should_not have_link("Edit Meeting", :href => edit_meeting_path(meeting))
+        page.should_not have_link("Edit", :href => edit_meeting_path(meeting))
+      end
+
+      it "hides the cancel meeting column" do
+        page.should_not have_link("Cancel", :href => meeting_path(meeting))
       end
     end
   end
 
   context "when user is an admin" do
+    let!(:user_admin){Fabricate(:user_admin)}
     before(:each) do
-      @user = Fabricate(:user_admin)
-      login_as @user, :scope => :user
+      login_as user_admin, :scope => :user
     end
 
     describe "meetings#index" do
       it "shows the edit meeting column" do
         visit meetings_path
-        page.should have_link("Edit Meeting", :href => edit_meeting_path(meeting))
+        page.should have_link("Edit", :href => edit_meeting_path(meeting))
+      end
+
+      it "shows the cancel meeting column" do
+        visit meetings_path
+        page.should have_link("Cancel", :href => meeting_path(meeting))
+      end
+
+      it "destroys the meeting if the user clicks on 'Cancel'" do
+        visit meetings_path
+        click_link("Cancel")
+        page.should_not have_content(meeting.description)
       end
     end
 
@@ -50,6 +65,7 @@ describe "Meeting", :js => true do
         visit new_meeting_path
         fill_in 'meeting_meeting_date', :with => meeting.meeting_date
         fill_in 'meeting_meeting_time', :with => meeting.meeting_time
+        fill_in 'meeting_location', :with => meeting.location
         click_button "Create Meeting"
         page.should have_content meeting.meeting_time
       end

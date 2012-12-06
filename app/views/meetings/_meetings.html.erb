@@ -1,0 +1,62 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Meeting</th>
+      <th>Start time</th>
+      <th>Location</th>
+      <% if user_signed_in? and (can? :update, @meeting) %>
+        <th>
+          <%="Edit"%>
+        </th>
+        <% end %>
+      <% if user_signed_in? %>
+        <th>Attending?</th>
+        <th>Meeting Role</th>
+        <th>Action</th>
+        <th><%= cancel_meeting_header(@meeting) %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meetings.each do |meeting| %>
+    <tr>
+      <td>
+        <%= link_to meeting.formatted_full_date, meeting_path(meeting) %>
+      </td>
+
+      <td>
+        <%= meeting.meeting_time %>
+      </td>
+
+      <td>
+        <%= meeting.location %>
+      </td>
+
+      <% if user_signed_in? and (can? :update, @meeting) %>
+      <td>
+        <%= link_to "Edit", edit_meeting_path(meeting) %>
+      </td>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <td>
+          <%= current_user.attending?(meeting) ? "Yes" : "No" %>
+        </td>
+
+        <td>
+          <%= current_user.meeting_role(meeting).title if current_user.responded_to?(meeting) %>
+        </td>
+
+        <td>
+          <%= meeting_index_action(meeting) %>
+        </td>
+
+        <td>
+          <%= cancel_meeting_link(meeting) %>
+        </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -51,4 +51,16 @@ class User < ActiveRecord::Base
     attendances.find_by_meeting_id(meeting.id)
   end
 
+  def meeting_speech(meeting)
+    self.speeches.where(:meeting_id => meeting.id).first
+  end
+
+  def self.count
+    User.all.count
+  end
+
+  def speeches_for_manual(manual)
+    speeches.for_manual(manual)
+  end
+
 end

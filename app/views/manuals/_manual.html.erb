@@ -1,0 +1,44 @@
+<div class="accordion accordion-group">
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_<%= manual.id %>">
+      <%= manual.name.ljust(40)%> (<%= @user.speeches_for_manual(manual).count.to_s + "/" + manual.projects.count.to_s %>)
+    </a>
+  </div>
+  <div id="collapse_<%= manual.id %>" class="accordion-body collapse out">
+    <div class="accordion-inner">
+      <div class="indentation">
+        <strong>Project title</strong>
+        <span class="right"><strong>Completed Date</strong></span>
+      </div>
+    </div>
+
+    <% manual.projects.each do |project| %>
+      <div class="accordion-inner">
+        <div class="indentation">
+          <%= project.project_number %>)
+          <%= project.name.ljust(20) %>
+          <% @user.speeches.each do |speech| %>
+            <% if speech.project_id == project.id %>
+              <%= ": " + speech.title %>
+              <span class="right"><%= project_completed_date(speech) %></span>
+              <br />
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @user.speeches_for_manual(manual).count > 0 %>
+    <div class="accordion-inner">
+    </div>
+    <div class="progress-indent">
+      <% percent_done = (@user.speeches_for_manual(manual).count * 100.0) / manual.projects.count %>
+      <div class="progress_bar">
+        <div class="progress progress-info progress-striped">
+          <div class="bar" style="width: <%= percent_done.to_s %>%"></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<div class="control-group">
+  <%= f.label "Will you attend this meeting?", nil, :class => 'control-label' %>
+  <div class="controls">
+    <label class="radio">
+      <%= user_attending_field(f, meeting) %>
+      <%= f.label :attend_true, 'Yes' %>
+    </label>
+    <label class="radio">
+      <%= user_not_attending_field(f, meeting) %>
+      <%= f.label :attend_false, 'No' %>
+    </label>
+  </div>
+</div>

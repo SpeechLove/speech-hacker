@@ -1,14 +1,17 @@
-<h1> Meeting on <%= @meeting.meeting_date %> at
-     <%= @meeting.meeting_time%></h1>
+<div class="page-header">
+  <h2>Meeting on <%= @meeting.meeting_date %> at <%= @meeting.meeting_time%></h2>
+</div>
 
-<p>
-	<%= @meeting.location %>
-</p>
-
-<p>
+<dl class="dl-horizontal">
+  <dt>Meeting Location</dt>
+  <dd><%= @meeting.location %></dd>
   <% if @meeting.description %>
-    <%= @meeting.description.capitalize %>
+    <dt>Description</dt>
+    <dd>
+      <%= @meeting.description.capitalize %>
+    </dd>
   <% end %>
-</p>
+</dl>
 
-<%= render 'attendances/form' %>
+<%= render 'attendances/form', :attendance => @meeting.attendance_for(current_user),
+                               :meeting => @meeting %>

@@ -9,23 +9,31 @@
       <a class="brand" href="<%= root_path %>">SpeechHacker</a>
       <div class="container nav-collapse">
         <% if user_signed_in? %>
-
           <ul class="nav pull-right">
             <li><%= link_to "Current Meetings", meetings_path  %></li>
-              <% if can? :manage, Meeting %>
-            <li><%= link_to "Create Meeting", new_meeting_path  %></li>
-            <% end %>
-            <% if can? :manage, User %>
-            <li><%= link_to "Edit Users", users_path  %></li>
-            <% end  %>
+             <li><%= create_meeting_link %></li>
 
-            <li id="fat-menu" class="dropdown">
+
+            <% if can? :manage, :all %>
+              <li id="admin-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= "Manage" %> <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= manage_users_link %></li>
+                  <li><%= manage_meeting_roles_link %></li>
+<!--                   <li><%#= link_to "Manuals", user_path(@user) %></li>
+                  <li><%#= link_to "Projects", "#" %></li>
+ -->                </ul>
+              </li>
+            <% end %>
+
+            <li id="user-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <%= current_user.name %> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "My Speeches", speeches_path %></li>
-                <li><%= link_to "My Progress", user_manuals_path(current_user) %></li>
+                <li><%= link_to "My Progress", user_path(current_user) %></li>
                 <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
                 <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
               </ul>

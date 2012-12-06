@@ -7,6 +7,7 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 gem 'thin'
+gem 'pry-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,7 +23,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'pg'
   gem 'rspec-rails'
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
@@ -40,6 +41,10 @@ group :test do
   gem 'guard-jasmine'
   gem 'database_cleaner'
   gem 'debugger'
+end
+
+group :production do
+  gem 'pg'
 end
 
 gem 'jquery-rails'
