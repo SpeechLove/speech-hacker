@@ -3,8 +3,10 @@
 
   <div class="control-group">
     <%= f.label :meeting_date %>
-    <div class="controls">
-      <%= f.text_field :meeting_date, :class => "span4" %>
+    <div class="controls input-append">
+      <%= f.text_field :meeting_date, :class => "span4",
+                       :data => { :behaviour => "datepicker" } %>
+      <!-- <span class="add-on meeting-create-calendar-icon"><i class="icon-calendar"></i></span> -->
     </div>
     <i>Format: YYYY-MM-DD</i>
   </div>
